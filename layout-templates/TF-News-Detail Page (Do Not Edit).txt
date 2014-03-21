@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"[]>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com">
+  <head>
+    <rei:template id="370" name="TF-Base-URL" />
+    <rei:template id="341" name="TF-Title" />
+    <rei:template id="340" name="TF-Meta" />
+    <rei:template id="338" name="TF-Stylesheets" />
+    <rei:template id="349" name="TF-Javascript (Do Not Edit)" />
+    <script type="text/javascript" src="res/js/listing.js"></script> 
+    <script type="text/javascript" src="res/js/url-util.js"></script>
+
+
+    
+    <!-- Added 12.2011 to "light" the right sidebar item as selected (match "nid") to current page id -->
+<script language="javascript" type="text/javascript">
+   function setSelected() {
+  
+          var nid = get_url_parameter();
+          var itemArray;
+          var itemURL;
+          var id;
+          var selected;
+
+          itemArray = document.getElementsByTagName('a');
+     
+
+           // loop and match
+           for (itemURL in itemArray) {
+           
+             id = itemArray[itemURL].toString();
+
+              if (id.indexOf("nid=") != -1) {
+
+                // If URL has an nid and it matches, set attribute to selected
+                if (id.substring(id.indexOf("nid=")+4) == nid) {
+                  selected = document.getElementById(nid);
+                  selected.setAttribute("class", "selected");
+                }
+             }
+           }
+
+   }
+</script>
+   
+                
+    <meta http-equiv="imagetoolbar" content="no" xmlns="" /><meta name="MSSmartTagsPreventParsing" content="TRUE" xmlns="" /><meta name="generator" content="REIgnition CMS Core 2.1.0.5" xmlns="" /><meta name="copyright" content="H. John Heinz III College" xmlns="" /><meta name="classification" content="Education" xmlns="" />
+
+<!-- Quantcast template included added 04.03.2013 -->
+<rei:template id="486" name="Quantcast Script" />
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7109555-1']);
+  _gaq.push(['_setDomainName', '.heinz.cmu.edu']);
+  _gaq.push(['_trackPageview']);
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+    <body class="listing blue" onload="setSelected();">
+      <div class="page" style="padding-bottom:60px;">
+       <!--
+        <rei:template id="330" name="TF-Masthead" />
+        <rei:template id="349" name="TF-Javascript (Do Not Edit)" />
+       -->
+       <!--******************BEGIN MASTHEAD******************-->
+       <rei:template id="405" name="TF-Masthead (Do Not Edit)" />
+       <!--*******************END MASTHEAD******************-->
+
+       <!--*****************BEGIN MAIN CONTENT******************--> 
+        <div class="body">
+          <div class="contents">
+            <div class="outer">
+              <div class="breadcrumbs">&nbsp;</div>
+              <div class="subject">
+                <div class="titlebar">
+                </div>
+<rei:template id="129" name="Level - ShareThis Button" /><br /><br />
+                <rei:template id="396" name="TF-News-Details (Do Not Edit)" />
+              </div>
+            </div>
+            <div class="sidebar">
+              <rei:template id="395" name="TF-Listing-News (Do Not Edit)" />
+            </div>
+          </div>
+          <rei:template id="342" name="TF-Feeds" />
+        </div>
+      </div>
+      <rei:template id="337" name="TF-Footer" />
+    </body>
+</html>
+

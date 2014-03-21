@@ -1,0 +1,1 @@
+<rei:template id="2" xmlns:rei="http://r-effects.com" name="Events - Details" />

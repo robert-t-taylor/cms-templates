@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" indent="yes" />
+    <xsl:param name="CurrentPageId" />
+    
+    <xsl:template match="/">
+  <link href="/css/screen_sitemap.css" rel="stylesheet" type="text/css" media="screen" />
+	<script src="/js/jq.treeview.js" type="text/javascript" language="JavaScript">//</script>
+    <script type="text/javascript" language="JavaScript">
+		//
+		$(document).ready(function(){
+		$("#sitemap .sitemap").treeview({
+			persist: "location",
+			collapsed: true
+		});
+		});
+		//
+    </script>
+    <div id="sitemap">
+        <ul>
+        <xsl:if test="$CurrentPageId != 508">
+        	<xsl:attribute name="class">sitemap</xsl:attribute>
+        </xsl:if>
+            <xsl:choose>
+                <xsl:when test="$CurrentPageId = 508">
+                    <li><a href="/index.aspx" title="CMU Heinz Homepage">CMU Heinz Homepage</a>
+                        <ul class="sitemap">
+                            <xsl:for-each select="siteMap/siteMapNode/siteMapNode[@appearsInSitemap='true' and @resourceKey != '517']">
+                                <xsl:call-template name="homePage" />
+                            </xsl:for-each>
+                        </ul>
+                    </li>
+                </xsl:when>
+                <xsl:when test="$CurrentPageId = 627">
+                    <xsl:for-each select="siteMap/siteMapNode/siteMapNode[@appearsInSitemap='true' and @resourceKey = '517']">
+                        <xsl:call-template name="homePageAus" />
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:for-each select="siteMap/siteMapNode/siteMapNode[@appearsInSitemap='true' and @resourceKey != '517']">
+                        <xsl:call-template name="homePage" />
+                    </xsl:for-each>
+                </xsl:otherwise>
+            </xsl:choose>
+        </ul>
+    </div>
+    </xsl:template>
+    
+    <xsl:template name="homePage">
+        <xsl:choose>
+            <xsl:when test="siteMapNode[@appearsInSitemap='true']">
+                <li title="Expand or collapse this section of the site map">
+                    <a href="{@url}" title="Access the {@title} page">
+                        <xsl:if test="@redirectNewWindow = 'true'">
+                            <xsl:attribute name="target">_blank</xsl:attribute>
+                        </xsl:if>
+                        <xsl:value-of select="@title" />
+                    </a>
+                    <ul>
+                        <xsl:for-each select="siteMapNode[@appearsInSitemap='true']">
+                            <xsl:call-template name="make_page" />
+                        </xsl:for-each>
+                    </ul>
+                </li>
+            </xsl:when>
+            <xsl:otherwise>
+                <li title="Expand or collapse this section of the site map">
+                    <a href="{@url}" title="Access the {@title} page">
+                        <xsl:if test="@redirectNewWindow = 'true'">
+                            <xsl:attribute name="target">_blank</xsl:attribute>
+                        </xsl:if>
+                        <xsl:value-of select="@title" />
+                    </a>
+                </li>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="homePageAus">
+        <xsl:choose>
+            <xsl:when test="siteMapNode[@appearsInSitemap='true']">
+                <li class="open" title="Expand or collapse this section of the site map">
+                    <a href="{@url}" title="Access the {@title} page">
+                        <xsl:if test="@redirectNewWindow = 'true'">
+                            <xsl:attribute name="target">_blank</xsl:attribute>
+                        </xsl:if>
+                        <xsl:value-of select="@title" />
+                    </a>
+                    <ul>
+                        <xsl:for-each select="siteMapNode[@appearsInSitemap='true']">
+                            <xsl:call-template name="make_page" />
+                        </xsl:for-each>
+                    </ul>
+                </li>
+            </xsl:when>
+            <xsl:otherwise>
+                <li class="open" title="Expand or collapse this section of the site map">
+                    <a href="{@url}" title="Access the {@title} page">
+                        <xsl:if test="@redirectNewWindow = 'true'">
+                            <xsl:attribute name="target">_blank</xsl:attribute>
+                        </xsl:if>
+                        <xsl:value-of select="@title" />
+                    </a>
+                </li>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="make_page">
+        <xsl:choose>
+            <xsl:when test="siteMapNode[@appearsInSitemap='true']">
+                <li>
+                    <a href="{@url}" title="Access the {@title} page">
+                        <xsl:if test="@redirectNewWindow = 'true'">
+                            <xsl:attribute name="target">_blank</xsl:attribute>
+                        </xsl:if>
+                        <xsl:value-of select="@title" />
+                    </a>
+                    <ul>
+                        <xsl:for-each select="siteMapNode[@appearsInSitemap='true']">
+                            <xsl:call-template name="make_page" />
+                        </xsl:for-each>
+                    </ul>
+                </li>
+            </xsl:when>
+            <xsl:otherwise>
+                <li>
+                    <a href="{@url}" title="Access the {@title} page">
+                        <xsl:if test="@redirectNewWindow = 'true'">
+                            <xsl:attribute name="target">_blank</xsl:attribute>
+                        </xsl:if>
+                        <xsl:value-of select="@title" />
+                    </a>
+                </li>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+</xsl:stylesheet>

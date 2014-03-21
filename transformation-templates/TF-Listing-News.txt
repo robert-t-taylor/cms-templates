@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xsl:stylesheet[<!ENTITY nbsp   "&#160;">]>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="/">
+<xsl:text disable-output-escaping="yes"><![CDATA[
+  <div class="section">
+    <div class="header">
+      <h4>News</h4>
+    </div>
+  </div>
+
+  <div class="floats section">
+    <form id="category">
+      <select>
+        <option class="first" value="all">Select a category </option>
+        <option value="one">Category One </option>
+        <option value="two">Category Two </option>
+      </select>
+      <div class="submit nofont" onclick="$('#category').submit();">&nbsp;</div>
+    </form>
+  </div>
+
+    <ul class="list">
+      <li>
+        <a class="selected" href="#">
+          President Obama visits Carnegie Mellon
+          <span class="date">Jul 12, 2011</span>
+        </a>
+    </li>
+    <li>
+      <a class="" href="#">
+        Strategic Human Capital Management
+        <span class="date">Jul 11, 2011</span>
+      </a>
+    </li>
+    <li>
+      <a class="" href="#">
+        CED Fellows and Faculty Welcome Delegation from Northern Ireland and the Republic of Ireland to Pittsburgh
+        <span class="date">Jul 05, 2011</span>
+       </a>
+      </li>
+      <li>
+        <a class="" href="#">
+          MAM/GIOCA Students Prepare for a Summer of Cultural Sustainability Research
+          <span class="date">Jun 29, 2011</span>
+        </a>
+      </li>
+      <li>
+        <a class="" href="#">
+          PNC Awards $25,000 to Sponsor Landmarks Fellowship Program at Carnegie Mellon University's Heinz College
+          <span class="date">Jun 28, 2011</span>
+        </a>
+      </li>
+      <li>
+        <a class="" href="#">
+          Vietnamese Collaboration
+          <span class="date">Jun 28, 2011</span>
+        </a>
+      </li>
+      <li>
+        <a class="" href="#">
+          Students Investigate Opportunities for Bus Rapid Transit in Pittsburgh
+          <span class="date">Jun 23, 2011</span>
+        </a>
+      </li>
+      <li>
+        <a class="" href="#">
+          Rescuing the U.S. from Fiscal Crisis
+          <span class="date">Jun 20, 2011</span>
+        </a>
+      </li>
+      <li>
+        <a class="" href="#">
+          MEDIA STATEMENT: UNIVERSITY ENROLMENTS STRONG
+          <span class="date">Jun 19, 2011</span>
+        </a>
+      </li>
+      <li>
+        <a class="" href="#">
+          The Digital Economy
+          <span class="date">Jun 17, 2011</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="pager">
+        <ul>
+            <li class="previous"><a href="#">&nbsp;</a></li>
+            <li class="selected"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li class="last"><a href="#">6</a></li>
+            <li class="end"><a href="#">…13</a></li>
+            <li class="next"><a href="#">&nbsp;</a></li>
+        </ul>
+    </div>
+
+]]></xsl:text>
+</xsl:template>
+</xsl:stylesheet>

@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><rei:variable type="Page Title" xmlns:rei="http://r-effects.com" /></title>
+        <!-- stylesheets here -->
+        <link rel="stylesheet" href="../../res/css/html.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="../../res/css/layout.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="../../res/css/sixteen.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="../../res/css/tags/pages.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="../../res/css/tags/sections/breadcrumbs.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="../../res/css/tags/sections/feeds.css" type="text/css" charset="utf-8" />        
+        <link rel="stylesheet" href="../../res/css/tags/sections/footer.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="../../res/css/tags/sections/masthead.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="../../res/css/tags/sections/menu.css" type="text/css" charset="utf-8" />        
+        <link rel="stylesheet" href="../../res/css/tags/sections/sidebar.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="../../res/lib/mediaplayer/mediaplayer.css" type="text/css" charset="utf-8" />
+
+        <!-- javascript here -->
+        <script type="text/javascript" src="../../res/js/jquery/jQuery-1.6.2.js"></script>
+        <script type="text/javascript" src="../../res/js/jquery/carhartl-jquery-cookie-575a419/jquery.cookie.js"></script>
+        <script type="text/javascript" src="../../res/js/pageutils.js"></script> 
+        <script type="text/javascript" src="../../res/js/menu.js"></script> 
+        <script type="text/javascript" src="../../res/js/feeds.js"></script>        
+        <script type="text/javascript" src="../../res/js/carousel.js"></script> 
+        <script type="text/javascript" src="../../res/lib/swfobject/swfobject.js"></script>
+        <script type="text/javascript" src="../../res/lib/mediaplayer/mediaplayer.js"></script>
+        <script type="text/javascript" src="../../res/js/initialize.js"></script>
+    <meta http-equiv="imagetoolbar" content="no" xmlns="" /><meta name="MSSmartTagsPreventParsing" content="TRUE" xmlns="" /><meta name="generator" content="REIgnition CMS Core 2.1.0.5" xmlns="" /><meta name="copyright" content="H. John Heinz III College" xmlns="" /><meta name="classification" content="Education" xmlns="" /></head>
+    <body class="">
+        <div class="page">
+            page
+        </div>
+        <div class="footer">
+            footer
+        </div>
+    </body>
+</html>

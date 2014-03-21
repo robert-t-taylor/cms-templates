@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE xsl:stylesheet[<!ENTITY nbsp   "&#160;">]>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+  <xsl:template match="/">
+    <div class="stories">
+        <h2>Student Stories</h2><a href="/news/index.aspx?category=160" class="all">All</a>
+        <div class="slider" data-slide-count="{position()-1}" id="story-slider">
+           <!-- NOTE: Get ONLY those News nodes that are of category 160!!! -->
+           <xsl:apply-templates select="//News[descendant::*[text() = '160']]" />
+           <div class="controls">&nbsp;</div><!-- NOTE: must have explicit &nbsp; -->
+        </div>&nbsp;<!-- end slider --><!-- NOTE: must have explicit &nbsp; -->
+    </div><!-- end stories-->
+  </xsl:template>
+  <xsl:template match="News">
+     <xsl:if test="//Categories//NameValuePair[contains(Name,'160')]"> 
+        <!-- return 3 items only, if category=160 -->
+        <xsl:if test="position() &lt; 4">
+            <xsl:choose>
+              <xsl:when test="position() = 1">
+                <li class="slide active" id="storySlider" ontouchstart="touchStart(event,'storySlider');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
+                  <!-- Test if there is an image associated with the news item and if so display-->
+               <a href="/news/news-detail/index.aspx?nid={ID}" title="More information on the {Title} news item">
+               <!-- NOTE: if image height is greater than image width (hence, portrait mode), show default image -->
+               <xsl:if test="(ImageID) != 0">
+                  <!-- append position to image name so it can be targeted by jQuery later -->
+                  <img src="image.aspx?id={ImageID}" alt="Image associated with the {Title} news item" id="storyimg{position()}" />
+               </xsl:if>
+               <xsl:if test="(ImageID) = 0">
+                  <!-- no image for news item, show default image -->
+                  <img src="../../res/img/news/one.jpg" alt="Heinz College News Story Image" id="storyimg" />
+               </xsl:if>
+               </a>
+                  <p>
+                   <xsl:value-of select="Title" />
+                  </p>
+              </li>
+              </xsl:when>
+              <xsl:otherwise>
+                <li class="slide">
+                    <!-- Test if there is an image associated with the news item and if so display-->
+               <a href="/news/news-detail/index.aspx?nid={ID}" title="More information on the {Title} news item">
+               <!-- NOTE: if image height is greater than image width (hence, portrait mode), show default image -->
+               <xsl:if test="(ImageID) != 0">
+                  <!-- append position to image name so it can be targeted by jQuery later -->
+                  <img src="image.aspx?id={ImageID}" alt="Image associated with the {Title} news item" id="storyimg{position()}" />
+               </xsl:if>
+               <xsl:if test="(ImageID) = 0">
+                  <!-- no image for news item, show default image -->
+                  <img src="../../res/img/news/one.jpg" alt="Heinz College News Story Image" id="storyimg" />
+               </xsl:if>
+               </a>
+                  <p>
+                   <xsl:value-of select="Title" />
+                  </p>
+              </li>
+              </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
+     </xsl:if>
+  </xsl:template>
+</xsl:stylesheet>

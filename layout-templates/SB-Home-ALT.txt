@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<rei:template id="464" name="SB-Head" /> 
+<!-- BODY HERE -->
+  <body>
+   <div class="page-wrapper">
+    <div id="sizeTest"></div>
+    <!-- AUDIENCE NAV HERE -->
+    <!-- <rei:template id="465" name="SB-Header-Audience" /> -->
+    <rei:template id="466" name="SB-Header-No-Audience" />
+
+    <!-- PRIMARY NAVIGATION IS IN FOOTER -->
+    <div class="wrapper">
+      <section id="main" class="content">
+        <div class="main-content">
+          <rei:template id="487" name="SB-Big-Idea-Slider" />
+        </div>
+      <aside class="news-sidebar">
+
+      <!-- NEWS SIDEBAR HERE -->
+      <rei:template id="476" name="SB-Sidebar-Carousel-News" />
+
+      <!-- STUDENT STORIES SIDEBAR HERE -->
+      <rei:template id="477" name="SB-Sidebar-Carousel-Students" />
+
+      <!-- EVENTS SIDEBAR HERE -->
+      <rei:template id="478" name="SB-Sidebar-Carousel-Events" />
+
+      </aside>
+
+      <!-- SOCIAL SIDEBAR HERE -->
+      <rei:template id="469" name="SB-Social-Sidebar" />
+
+      </section>    
+      <!-- NAVIGATION ELEMENTS HERE-->   
+      <rei:template id="586" name="SB-Footer-ALT" />
+      
+      </div><!-- end wrapper -->
+
+      <!-- POST RENDER SCRIPTS HERE -->
+      <rei:template id="490" name="SB-Footer-Scripts" /> 
+
+</div><!-- end page-wrapper -->
+</body>
+</html>

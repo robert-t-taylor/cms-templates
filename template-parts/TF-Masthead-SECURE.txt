@@ -1,0 +1,275 @@
+<div class="feedback_button"><a href="https://heinzcollege.wufoo.com/forms/m7q5s5/" onclick="window.open(this.href,  null, 'height=578, width=680, toolbar=0, location=0, status=1, scrollbars=1, resizable=1'); return false"><img src="https://heinz.cmu.edu/images/feedback-button.png" height="120" /></a></div>
+<div class="masthead">
+    <!-- 590 width of submenu -->
+    <table class="menu">
+        <tr>
+            <td colspan="5" class="branding">
+                <a href="https://heinz.cmu.edu/index.aspx">
+                <img src="https://heinz.cmu.edu/res/img/identity.png" alt="Heinz College" />
+                </a>
+                <ul>
+                    <li class="first"><a href="https://heinz.cmu.edu/about-heinz/contact-us/index.aspx">Contact Us</a></li>
+                    <li><a href="https://heinz.cmu.edu/directories/index.aspx">Directories</a></li>
+                    <li><a href="https://heinz.cmu.edu/sitemap/index.aspx">Site Map</a></li>
+                    <li><a href="https://heinz.cmu.edu/privacy-policy/index.aspx">Privacy Policy</a></li>
+                </ul>
+                <div class="clear"></div>
+            </td>
+            <td rowspan="2" class="sidebar">
+                <h4 class="noinit">What’s Happening?</h4>
+                <p class="noinit"><a href="https://heinz.cmu.edu/news/index.aspx">News</a></p>
+                <p class="noinit"><a href="https://heinz.cmu.edu/news/index.aspx?category=160">Student Stories</a></p>
+                <p class="noinit"><a href="https://heinz.cmu.edu/events/index.aspx">Events</a></p>
+            </td> 
+            <td class="feeds">
+                <form action="https://heinz.cmu.edu/search-results/index.aspx" method="post" name="keywordform" id="keywordform">
+                  <input type="hidden" name="pageindex" value="0" />
+                  <input type="hidden" name="pagesize" value="15" />
+                  <input id="keywords" name="keywords" type="text" value="Search this site..." onfocus="if (this.value=='Search this site...') this.value='';" onblur="if (this.value == '') this.value ='Search this site...';" />
+                  <div class="submit" onclick="$('#keywordform').submit();"> </div>
+               </form>
+            </td>
+        </tr>
+              <tr class="bottom">
+            <td class="submenu " style="width:118px;">
+                <div class="label">
+                    <a href="https://heinz.cmu.edu/about-heinz/index.aspx">About Heinz</a>
+                </div>        
+                <div class="list">
+                    <div class="eventbuffer">
+                        <ul style="width:119px;">           
+                            <li class="item first">
+                                <a href="https://heinz.cmu.edu/about-heinz/deans-welcome/index.aspx">Dean’s Welcome</a>
+                            </li>                 
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/about-heinz/rankings-reputation/index.aspx">Rankings &amp; Reputation</a>
+                            </li>   
+<!--<li class="item ">
+                                <a href="https://heinz.cmu.edu/about-heinz/deans-advisory-council/index.aspx">Dean's Advisory Council</a>
+                            </li>  -->                   
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/faculty-and-research/faculty-profiles/index.aspx">Faculty</a>
+                            </li>              
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/about-heinz/contact-us/index.aspx">Contact Us</a>
+                            </li>               
+                            <li class="item ">
+                                <a href="about-heinz/connect/index.aspx">Social Media Directory</a>
+                            </li>            
+                            <li class="item last">
+                                <a href="https://heinz.cmu.edu/about-heinz/heinz-wallpaper/index.aspx">Wallpaper</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </td>
+            <td class="submenu " style="width:118px;">
+                <div class="label">
+                    <a href="https://heinz.cmu.edu/programs/index.aspx">Programs</a>
+                </div>        
+                <div class="list">
+                    <div class="eventbuffer">
+                        <div class="spacer" style="width:119px;"> </div>
+                        <div class="columns" style="width:238px;">
+                            <ul style="width:119px;">
+                                <li class="item selected-item" style="padding-bottom:6px;">
+                                    <a href="https://heinz.cmu.edu/school-of-information-systems-and-management/index.aspx">School of Information Systems &amp; Management</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-information-systems-and-management/information-systems-management-mism/index.aspx">Information Systems Management</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-information-systems-and-management/information-security-policy-management-msispm/index.aspx">Information Security Policy and Management</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-information-systems-and-management/information-technology-msit/index.aspx">Information Technology</a>
+                                </li>
+<li class="item ">
+                                    <a href="http://www.australia.cmu.edu/study/information-technology-programs">Information Technology - Australia</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-information-systems-and-management/cio-institute/index.aspx">CIO Institute</a>
+                                </li>
+<li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-information-systems-and-management/chief-information-security-officer-executive-education-and-certification-program/index.aspx">CISO Certification</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-information-systems-and-management/doctoral-program/index.aspx">Doctoral Program</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-information-systems-and-management/part-time/index.aspx">Part-Time Programs</a>
+                                </li>
+                                <li class="item last">
+                                    <a href="http://www.ischools.org/site/about/">iSchools Caucus</a>
+                                </li>
+                            </ul>
+                            <ul style="width:118px;margin-left:1px;">
+                                <li class="item selected-item" style="padding-bottom:6px;">
+                                    <a href="https://heinz.cmu.edu/school-of-public-policy-management/index.aspx">School of Public Policy &amp; Management<br /> </a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-public-policy-management/public-policy-management-msppm/index.aspx">Public Policy &amp; Management</a>
+                                </li>
+<li class="item ">
+                                    <a href="http://www.australia.cmu.edu/study/public-policy-and-management-programs">Public Policy &amp; Management - Australia</a>
+                                </li>
+<li class="item ">
+                                    <a href="https://heinz.cmu.edu/dc/index.aspx">Public Policy &amp; Management - DC</a>
+                                </li>
+
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-public-policy-management/public-management-mpm/index.aspx">Public Management</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-public-policy-management/arts-management-mam/index.aspx">Arts Management</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-public-policy-management/entertainment-industry-management-meim/index.aspx">Entertainment Industry Management</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-public-policy-management/healthcare-policy-management-hcpm/index.aspx">Health Care Policy and Management</a>
+                                </li>                          
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-public-policy-management/biotechnology-management-msbtm/index.aspx">Biotechnology and Management</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-public-policy-management/medical-management-mmm/index.aspx">Medical Management</a>
+                                </li>
+<li class="item ">
+                                    <a href="https://heinz.cmu.edu/heinz-college-negotiation-academy-for-women/index.aspx">Negotiation Academy for Women</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-public-policy-management/doctoral-program/index.aspx">Doctoral Program</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-public-policy-management/part-time/index.aspx">Part-Time Program</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="https://heinz.cmu.edu/school-of-public-policy-management/certificate-programs/index.aspx">Certificate Programs</a>
+                                </li>                                       
+                                <li class="item last">
+                                    <a href="https://heinz.cmu.edu/school-of-public-policy-management/ppia/index.aspx">PPIA Junior Summer Institute</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="submenu " style="width:118px;">
+                <div class="label">
+                    <a href="https://heinz.cmu.edu/global-heinz/index.aspx">Global Heinz</a>
+                </div>        
+                <div class="list">
+                    <div class="eventbuffer">
+                        <ul style="width:119px;">
+                            <li class="item first">
+                                <a href="https://heinz.cmu.edu/australia/index.aspx">Adelaide, Australia</a>
+                            </li>
+                           
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/global-heinz/index.aspx#bologna">Bologna, Italy</a>
+                            </li>
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/global-heinz/index.aspx#delft">Delft, The Netherlands</a>
+                            </li>
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/global-heinz/index.aspx#london">London, England</a>
+                            </li>
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/global-heinz/index.aspx#lisbon">Libson, Portugal</a>
+                            </li>
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/global-heinz/index.aspx#la">Los Angeles, California, U.S.</a>
+                            </li>
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/global-heinz/index.aspx#ludwigsburg">Ludwigsburg, Germany</a>
+                            </li>
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/global-heinz/index.aspx#monterrey">Monterrey, Mexico</a>
+                            </li>
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/global-heinz/index.aspx#queretaro">Queretaro, Mexico</a>
+                            </li>
+                            <li class="item">
+                                <a href="https://heinz.cmu.edu/dc/index.aspx#dc">Washington D.C., U.S.</a>
+                            </li>
+<li class="item">
+                                <a href="https://heinz.cmu.edu/global-heinz/partnerships-in-latin-america/index.aspx">Partnerships in Latin America</a>
+                            </li>
+<li class="item last">
+                                <a href="https://heinz.cmu.edu/global-heinz/ambassador-map/index.aspx">Connect with Students &amp; Alumni</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </td>
+            <td class="submenu " style="width:118px;">
+                <div class="label">
+                    <a href="https://heinz.cmu.edu/admissions/index.aspx">Admissions &amp; Financial Aid</a>
+                </div>        
+                <div class="list">
+                    <div class="eventbuffer">
+                        <ul style="width:119px;"> 
+                            <li class="item first">
+                                <a href="https://heinz.cmu.edu/admissions/application-process/index.aspx">Application Process</a>
+                            </li>   
+ <li class="item">
+                                <a href="https://heinz.cmu.edu/financial-aid/index.aspx">Financial Aid</a>
+                            </li>                
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/global-heinz/ambassador-map/index.aspx">Admissions Ambassador Program</a>
+                            </li>               
+                            <li class="item ">
+                              
+                                <a href="http://cmuspp.askadmissions.net/emtinterestpage.aspx?ip=heinzpittsburghlongform" target="_blank" onclick="javascript: pageTracker._trackPageview('/admissions/prospective-students.html');" title="Contact Heinz College Admissions">Request Information</a>
+                           
+                            </li>        
+                            <li class="item last">
+                                <a href="https://heinz.cmu.edu/visit-heinz-college/index.aspx">Visit Heinz</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </td>
+            <td class="submenu " style="width:118px;">
+                <div class="label">
+                    <a href="https://heinz.cmu.edu/faculty-and-research/index.aspx">Research</a>
+                </div>        
+                <div class="list">
+                    <div class="eventbuffer">
+                        <ul style="width:118px;">            
+                            <li class="item first">
+                                <a href="https://heinz.cmu.edu/faculty-and-research/research/index.aspx">Research Papers</a>
+                            </li>     
+<li class="item">
+                                <a href="https://heinz.cmu.edu/directories/faculty-directory/index.aspx">Faculty Profiles</a>
+                            </li>          
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/faculty-and-research/faculty-research-seminar-series/index.aspx">Faculty Research Seminars</a>
+                            </li>              
+                            <li class="item ">
+                                <a href="https://heinz.cmu.edu/faculty-and-research/research-centers/index.aspx">Research Centers</a>
+                            </li>            
+                            <li class="item ">
+                                <a href="http://journal.heinz.cmu.edu/">Heinz Journal</a>
+                            </li>         
+                            <li class="item last">
+                                <a href="https://heinz.cmu.edu/faculty-and-research/research-partnerships/index.aspx">Research Partners</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </td>
+
+            <td class="feeds">
+                <div id="date" class="date">
+     <!-- <img src="https://heinz.cmu.edu/res/img/date/110922.png" alt="Today's date" /> -->
+               <!-- These DIVs will be replaced with image digits, corresponding to the current date. For the BIG Date on homepage -->
+<div id="month1"> </div><div id="month2"> </div><div class="decimal"> </div><div id="day1"> </div><div id="day2"> </div><div class="decimal"> </div><div id="year1"> </div><div id="year2"> </div>
+
+<script type="text/javascript" src="https://heinz.cmu.edu/res/js/bigdate.js"></script>
+</div>
+            </td>         
+        </tr>
+    </table>
+</div>

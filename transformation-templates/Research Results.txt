@@ -1,0 +1,825 @@
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:param name="sort" />
+<xsl:param name="keywords" />
+<xsl:param name="research_type_id" />
+<xsl:param name="discipline_id" />
+<xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+
+
+<xsl:template match="/">
+    <div id="research_search">
+            <script type="text/javascript">
+                function MM_jumpMenu(targ,selObj,restore){ //v3.0
+                  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+                  if (restore) selObj.selectedIndex=0;
+                }
+            </script>
+            <div class="researchCourseInput" style="width:160px">
+                <form method="get" name="research_filter">
+                    <h3><label for="discipline_id">Find by subject:</label></h3>
+                    <select name="discipline_id" id="discipline_id" title="Search the research directory by discipline" onchange="MM_jumpMenu('parent',this,0)">
+                    <option value="http://www.heinz.cmu.edu/faculty-and-research/research/index.aspx">All</option>
+                    <option value="http://www.heinz.cmu.edu/faculty-and-research/research/index.aspx?discipline_id=2">Health Care</option>
+                    <option value="http://www.heinz.cmu.edu/faculty-and-research/research/index.aspx?discipline_id=3">Information Systems and Technology</option>
+                    <option value="http://www.heinz.cmu.edu/faculty-and-research/research/index.aspx?discipline_id=4">Management</option>
+                    <option value="http://www.heinz.cmu.edu/faculty-and-research/research/index.aspx?discipline_id=5">Public Policy</option>
+                    <option value="http://www.heinz.cmu.edu/faculty-and-research/research/index.aspx?discipline_id=6">Social Welfare</option>
+                    </select>
+                </form>
+            </div>
+            <div class="researchCourseInput" style="width:180px">
+                <form method="get" name="research_filter2">
+                    <h3><label for="research_type_id">Find by publication type:</label></h3>
+                    <select name="research_type_id" id="research_type_id" title="Search the research directory by publication" onchange="MM_jumpMenu('parent',this,0)">
+                        <option value="http://www.heinz.cmu.edu/faculty-and-research/research/index.aspx?research_type_id=0">All</option>
+                        <option value="http://www.heinz.cmu.edu/faculty-and-research/research/index.aspx?research_type_id=1">Working Paper</option>
+                        <option value="http://www.heinz.cmu.edu/faculty-and-research/research/index.aspx?research_type_id=2">Book</option>
+                        <option value="http://www.heinz.cmu.edu/faculty-and-research/research/index.aspx?research_type_id=3">Presentation</option>
+                        <option value="http://www.heinz.cmu.edu/faculty-and-research/research/index.aspx?research_type_id=4">Article</option>
+                    </select>
+                </form>
+            </div>
+            <div class="researchCourseInput" style="width:200px">
+                <form action="http://www.heinz.cmu.edu/faculty-and-research/research/index.aspx" method="get" name="research_filter3">
+                    <h3><label for="keyword_type">Find by keyword and year:</label></h3>
+                    <table width="300" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="158" align="left" valign="top">
+                                <input style="margin-left:-5px;" type="text" name="keywords" id="keyword_type" maxlength="100" size="20" value="" onfocus="this.value='';" title="Enter keywords to search the faculty research directory" />
+                            </td>
+                            <td align="left" valign="top" width="100">
+                            <select name="pubYear" id="date_type" title="Choose a year from the dropdown to search the faculty research directory">
+                            	<option value="">All</option>
+                                <option value="2009">2009</option>
+                                <option value="2008">2008</option>
+                                <option value="2007">2007</option>
+                                <option value="2006">2006</option>
+                                <option value="2005">2005</option>
+                                <option value="2004">2004</option>
+                                <option value="2003">2003</option>
+                                <option value="2002">2002</option>
+                                <option value="2001">2001</option>
+                                <option value="2000">2000</option>
+                                <option value="1999">1999</option>
+                                <option value="1998">1998</option>
+                                <option value="1997">1997</option>
+                                <option value="1996">1996</option>
+                                <option value="1995">1995</option>
+                              <option value="1994">1994</option>
+                            </select>
+                            </td>
+                            <td align="left" valign="top">
+                                <input type="image" src="/images/goSubmit.jpg" value="Search" class="button" title="Search Research Directory" />
+                            </td>
+                        </tr>
+                    </table>
+
+                    <input type="hidden" name="sort" id="sort" value="{$sort}" />
+                </form>
+            </div>
+    </div>
+
+    
+    <xsl:choose>
+        <xsl:when test="count(ArrayOfResearch/Research)= 0">
+            <p><strong>No search results were found.</strong></p>
+            <p>Search Tips:</p>
+            <ul>
+                <li>Check the spelling of the keyword.</li>
+                <li>Try to search using a different keyword.</li>
+                <li>Try to search using more than one keyword. You will broaden your search if you use more than one keyword because the search will return research that contain at least one instance of any of the keywords.</li>
+                <li>Search by only research type to view all research within that type.</li>
+            </ul>
+        </xsl:when>
+        <xsl:otherwise>
+				<table cellspacing="0" cellpadding="0" border="3" id="specialtbl" summary="This table lists research by CMU Heinz University faculty. Each row of the table lists a particular research item and includes its title, its &#xD;&#xA;				, and its research type. If author names are links, they point to more detailed information about the author. The Title, Author(s)/Editor(s), and Year headings will sort the research list. The first time a link is clicked, the list is sorted in ascending order. The second time a link is clicked, the list is sorted in descending order.">
+					<tr>
+                        <xsl:choose>
+                            <!--WHEN SORTED BY TITLE ASCENDING--> 
+                            <xsl:when test="($sort = 'title_ascend')">
+                                <th width="347px;" nowrap="true" title="Sort the Research Directory by Title"><img src="/images/sortarrow_up.gif" alt="" /><strong><a href="index.aspx?sort=title_descend&amp;research_type_id={$research_type_id}&amp;keywords={$keywords}">Title</a></strong></th>
+                            </xsl:when>
+                            <!--WHEN SORTED BY TITLE DESCENDING-->
+                            <xsl:when test="($sort = 'title_descend')">
+                                <th width="347px;" nowrap="true" title="Sort the Research Directory by Title"><img src="/images/sortarrow_down.gif" alt="" /><strong><a href="index.aspx?sort=title_ascend&amp;research_type_id={$research_type_id}&amp;keywords={$keywords}">Title</a></strong></th>
+                            </xsl:when>
+                            <!--NO SORT ORDER PASSED-->
+                            <xsl:when test="($sort = '')">
+                                <th width="347px;" nowrap="true" title="Sort the Research Directory by Title"><strong><a href="index.aspx?sort=title_ascend&amp;research_type_id={$research_type_id}&amp;keywords={$keywords}">Title</a></strong></th>
+                            </xsl:when>
+                            <!--CATCH ALL-->
+                            <xsl:otherwise>
+                                <th width="347px;" nowrap="true" title="Sort the Research Directory by Title"><strong><a href="index.aspx?sort=title_ascend&amp;research_type_id={$research_type_id}&amp;keywords={$keywords}">Title</a></strong></th>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        
+                        <xsl:choose>
+			 <!--WHEN SORTED BY AUTHOR ASCENDING--> 
+                            <xsl:when test="($sort = 'author_ascend')">
+                                <th nowrap="true"><img src="/images/sortarrow_up.gif" alt="" /><strong>Author</strong></th>
+                            </xsl:when>
+                            <!--WHEN SORTED BY AUTHOR DESCENDING-->
+                            <xsl:when test="($sort = 'author_descend')">
+                                <th nowrap="true"><img src="/images/sortarrow_down.gif" alt="" /><strong>Author</strong></th>
+                            </xsl:when>
+                            <!--NO SORT ORDER PASSED-->
+                            <xsl:when test="($sort = '')">
+                                <th nowrap="true"><strong>Author</strong></th></xsl:when>
+                            <!--CATCH ALL-->
+                            <xsl:otherwise>
+                                <th nowrap="true"><strong>Author</strong></th>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        
+                        <th nowrap="true" title="Research Type"><strong>Type</strong></th>
+                                                
+                        <xsl:choose>
+                            <!--WHEN SORTED BY YEAR ASCENDING--> 
+                            <xsl:when test="($sort = 'year_ascend')">
+                                <th nowrap="true" title="Sort the Research Directory by Year"><img src="/images/sortarrow_up.gif" alt="" /><strong><a href="index.aspx?sort=year_descend&amp;research_type_id={$research_type_id}&amp;keywords={$keywords}">Year</a></strong></th>
+                            </xsl:when>
+                            <!--WHEN SORTED BY YEAR DESCENDING-->
+                            <xsl:when test="($sort = 'year_descend')">
+                                <th nowrap="true" title="Sort the Research Directory by Year"><img src="/images/sortarrow_down.gif" alt="" /><strong><a href="index.aspx?sort=year_ascend&amp;research_type_id={$research_type_id}&amp;keywords={$keywords}">Year</a></strong></th>
+                            </xsl:when>
+                            <!--NO SORT ORDER PASSED-->
+                            <xsl:when test="($sort = '')">
+                                <th nowrap="true" title="Sort the Research Directory by Year"><strong><a href="index.aspx?sort=year_ascend&amp;research_type_id={$research_type_id}&amp;keywords={$keywords}">Year</a></strong></th>
+                            </xsl:when>
+                            <!--CATCH ALL-->
+                            <xsl:otherwise>
+                                <th nowrap="true" title="Sort the Research Directory by Year"><strong><a href="index.aspx?sort=year_ascend&amp;research_type_id={$research_type_id}&amp;keywords={$keywords}">Year</a></strong></th>
+                            </xsl:otherwise>
+                        </xsl:choose>
+					</tr>
+					<xsl:apply-templates select="//ArrayOfResearch" />
+				</table>
+            <p><strong><a href="#top" title="Back to Top">Back to Top...</a></strong></p>
+            <br />
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+
+<xsl:template match="ArrayOfResearch">
+    <!-- sorting begin -->
+    <xsl:choose>
+        <xsl:when test="$sort = 'title_ascend'">
+            <xsl:for-each select="Research">
+                <xsl:sort select="Title" order="ascending" />
+                <xsl:if test="PublicAccess = 'true'">
+                    <tr>
+                    	<xsl:attribute name="class">
+                        	<xsl:choose>
+                            	<xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                                <xsl:otherwise>rowB</xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                        <td width="347px;" valign="top"><xsl:choose>
+                                <xsl:when test="CDATACitation != ''">
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a><br />
+                                    <xsl:value-of select="CDATACitation" disable-output-escaping="yes" />
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </td>
+                        <td valign="top" nowrap="true">
+                        	<!-- Modified 11.17.2011 by R. Taylor -->
+                        <xsl:for-each select="Authors/NameValuePair">
+                           <xsl:if test="Name != ''">
+                             <xsl:choose>
+                            	<xsl:when test="Value != ''">
+	                              <a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile">
+		                             <!-- get (very) last name -->
+		                             <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>,
+									 
+									 <!-- get complete first name(s) -->
+		                             <xsl:call-template name="substring-before-last">
+									   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="substr">
+									     <!-- call with last name as value of substr, the key to getting the entire first name -->
+										 <xsl:call-template name="substring-after-last">
+										   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+										   <xsl:with-param name="delimiter" select="' '" />
+										 </xsl:call-template>
+									   </xsl:with-param>
+									 </xsl:call-template>
+	                              </a>
+                             </xsl:when>
+                             <xsl:otherwise>
+                                    <!-- get (very) last name -->
+	                             <xsl:call-template name="substring-after-last">
+								   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="delimiter" select="' '" />
+								 </xsl:call-template>,
+								 
+								 <!-- get complete first name(s) -->
+	                             <xsl:call-template name="substring-before-last">
+								   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="substr">
+								     <!-- call with last name as value of substr, the key to getting the entire first name -->
+									 <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>
+								   </xsl:with-param>
+								 </xsl:call-template>
+                                </xsl:otherwise>
+                            </xsl:choose> 
+                              <br /> 
+                              		  
+                           </xsl:if>
+                        </xsl:for-each>
+                     <!-- end Modified 11.17.2011 -->
+                        </td>
+                        <td valign="top"><xsl:value-of select="ResearchTypeObj/TypeName" /></td>
+                        <td nowrap="true" valign="top" align="center"><xsl:value-of select="PublicationYear" /></td>
+                    </tr>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:when>
+        <xsl:when test="$sort = 'title_descend'">
+            <xsl:for-each select="Research">
+                <xsl:sort select="Title" order="descending" />
+                <xsl:if test="PublicAccess = 'true'">
+                    <tr>
+                    	<xsl:attribute name="class">
+                        	<xsl:choose>
+                            	<xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                                <xsl:otherwise>rowB</xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                        <td valign="top"><xsl:choose>
+                                <xsl:when test="CDATACitation != ''">
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a><br />
+                                    <xsl:value-of select="CDATACitation" disable-output-escaping="yes" />
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </td>
+                        <td valign="top" nowrap="true">
+                        	<!-- Modified 03.05.2009 by R. Taylor -->
+                        <xsl:for-each select="Authors/NameValuePair">
+                           <xsl:if test="Name != ''">
+                             <xsl:choose>
+                            	<xsl:when test="Value != ''">
+	                              <a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile">
+		                             <!-- get (very) last name -->
+		                             <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>,
+									 
+									 <!-- get complete first name(s) -->
+		                             <xsl:call-template name="substring-before-last">
+									   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="substr">
+									     <!-- call with last name as value of substr, the key to getting the entire first name -->
+										 <xsl:call-template name="substring-after-last">
+										   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+										   <xsl:with-param name="delimiter" select="' '" />
+										 </xsl:call-template>
+									   </xsl:with-param>
+									 </xsl:call-template>
+	                              </a>
+                             </xsl:when>
+                             <xsl:otherwise>
+                                    <!-- get (very) last name -->
+	                             <xsl:call-template name="substring-after-last">
+								   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="delimiter" select="' '" />
+								 </xsl:call-template>,
+								 
+								 <!-- get complete first name(s) -->
+	                             <xsl:call-template name="substring-before-last">
+								   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="substr">
+								     <!-- call with last name as value of substr, the key to getting the entire first name -->
+									 <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>
+								   </xsl:with-param>
+								 </xsl:call-template>
+                                </xsl:otherwise>
+                            </xsl:choose> 
+                              <br /> 
+                              		  
+                           </xsl:if>
+                        </xsl:for-each>
+                     <!-- end Modified 03.05.2009 -->
+                        </td>
+                        <td valign="top"><xsl:value-of select="ResearchTypeObj/TypeName" /></td>
+
+                        <td nowrap="true" valign="top" align="center"><xsl:value-of select="PublicationYear" /></td>
+                    </tr>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:when>
+        <xsl:when test="$sort = 'author_ascend'">
+            <xsl:for-each select="Research">
+                <xsl:sort select="AuthorLastName" order="ascending" />
+                <xsl:sort select="PublicationYear" order="descending" />
+                <xsl:if test="PublicAccess = 'true'">
+                    <tr>
+                    	<xsl:attribute name="class">
+                        	<xsl:choose>
+                            	<xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                                <xsl:otherwise>rowB</xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                        <td valign="top"><xsl:choose>
+                                <xsl:when test="CDATACitation != ''">
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a><br />
+                                    <xsl:value-of select="CDATACitation" disable-output-escaping="yes" />
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </td>
+                        <td valign="top" nowrap="true">
+                        	<!-- Modified 03.05.2009 by R. Taylor -->
+                        <xsl:for-each select="Authors/NameValuePair">
+                           <xsl:if test="Name != ''">
+                             <xsl:choose>
+                            	<xsl:when test="Value != ''">
+	                              <a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile">
+		                             <!-- get (very) last name -->
+		                             <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>,
+									 
+									 <!-- get complete first name(s) -->
+		                             <xsl:call-template name="substring-before-last">
+									   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="substr">
+									     <!-- call with last name as value of substr, the key to getting the entire first name -->
+										 <xsl:call-template name="substring-after-last">
+										   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+										   <xsl:with-param name="delimiter" select="' '" />
+										 </xsl:call-template>
+									   </xsl:with-param>
+									 </xsl:call-template>
+	                              </a>
+                             </xsl:when>
+                             <xsl:otherwise>
+                                    <!-- get (very) last name -->
+	                             <xsl:call-template name="substring-after-last">
+								   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="delimiter" select="' '" />
+								 </xsl:call-template>,
+								 
+								 <!-- get complete first name(s) -->
+	                             <xsl:call-template name="substring-before-last">
+								   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="substr">
+								     <!-- call with last name as value of substr, the key to getting the entire first name -->
+									 <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>
+								   </xsl:with-param>
+								 </xsl:call-template>
+                                </xsl:otherwise>
+                            </xsl:choose> 
+                              <br /> 
+                              		  
+                           </xsl:if>
+                        </xsl:for-each>
+                     <!-- end Modified 03.05.2009 -->
+                        </td>
+                        <td valign="top"><xsl:value-of select="ResearchTypeObj/TypeName" /></td>
+                        <td nowrap="true" valign="top" align="center"><xsl:value-of select="PublicationYear" /></td>
+                    </tr>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:when>
+        <xsl:when test="$sort = 'author_descend'">
+            <xsl:for-each select="Research">
+                <xsl:sort select="AuthorLastName" order="descending" />
+                <xsl:sort select="PublicationYear" order="descending" />
+                <xsl:if test="PublicAccess = 'true'">
+                    <tr>
+                    	<xsl:attribute name="class">
+                        	<xsl:choose>
+                            	<xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                                <xsl:otherwise>rowB</xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                        <td valign="top"><xsl:choose>
+                                <xsl:when test="CDATACitation != ''">
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a><br />
+                                    <xsl:value-of select="CDATACitation" disable-output-escaping="yes" />
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </td>
+                        <td valign="top" nowrap="true">
+                        	<!-- Modified 03.05.2009 by R. Taylor -->
+                        <xsl:for-each select="Authors/NameValuePair">
+                           <xsl:if test="Name != ''">
+                             <xsl:choose>
+                            	<xsl:when test="Value != ''">
+	                              <a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile">
+		                             <!-- get (very) last name -->
+		                             <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>,
+									 
+									 <!-- get complete first name(s) -->
+		                             <xsl:call-template name="substring-before-last">
+									   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="substr">
+									     <!-- call with last name as value of substr, the key to getting the entire first name -->
+										 <xsl:call-template name="substring-after-last">
+										   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+										   <xsl:with-param name="delimiter" select="' '" />
+										 </xsl:call-template>
+									   </xsl:with-param>
+									 </xsl:call-template>
+	                              </a>
+                             </xsl:when>
+                             <xsl:otherwise>
+                                    <!-- get (very) last name -->
+	                             <xsl:call-template name="substring-after-last">
+								   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="delimiter" select="' '" />
+								 </xsl:call-template>,
+								 
+								 <!-- get complete first name(s) -->
+	                             <xsl:call-template name="substring-before-last">
+								   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="substr">
+								     <!-- call with last name as value of substr, the key to getting the entire first name -->
+									 <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>
+								   </xsl:with-param>
+								 </xsl:call-template>
+                                </xsl:otherwise>
+                            </xsl:choose> 
+                              <br /> 
+                              		  
+                           </xsl:if>
+                        </xsl:for-each>
+                     <!-- end Modified 03.05.2009 -->
+                        </td>
+                        <td valign="top"><xsl:value-of select="ResearchTypeObj/TypeName" /></td>
+                        <td nowrap="true" valign="top" align="center"><xsl:value-of select="PublicationYear" /></td>
+                    </tr>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:when>
+        <xsl:when test="$sort = 'year_ascend'">
+            <xsl:for-each select="Research">
+                <xsl:sort select="PublicationYear" order="ascending" />
+                <xsl:sort select="AuthorLastName" order="ascending" />
+                <xsl:if test="PublicAccess = 'true'">
+                    <tr>
+                    	<xsl:attribute name="class">
+                        	<xsl:choose>
+                            	<xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                                <xsl:otherwise>rowB</xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                        <td valign="top"><xsl:choose>
+                                <xsl:when test="CDATACitation != ''">
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a><br />
+                                    <xsl:value-of select="CDATACitation" disable-output-escaping="yes" />
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </td>
+                        <td valign="top" nowrap="true">
+                        	<!-- Modified 03.05.2009 by R. Taylor -->
+                        <xsl:for-each select="Authors/NameValuePair">
+                           <xsl:if test="Name != ''">
+                             <xsl:choose>
+                            	<xsl:when test="Value != ''">
+	                              <a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile">
+		                             <!-- get (very) last name -->
+		                             <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>,
+									 
+									 <!-- get complete first name(s) -->
+		                             <xsl:call-template name="substring-before-last">
+									   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="substr">
+									     <!-- call with last name as value of substr, the key to getting the entire first name -->
+										 <xsl:call-template name="substring-after-last">
+										   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+										   <xsl:with-param name="delimiter" select="' '" />
+										 </xsl:call-template>
+									   </xsl:with-param>
+									 </xsl:call-template>
+	                              </a>
+                             </xsl:when>
+                             <xsl:otherwise>
+                                    <!-- get (very) last name -->
+	                             <xsl:call-template name="substring-after-last">
+								   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="delimiter" select="' '" />
+								 </xsl:call-template>,
+								 
+								 <!-- get complete first name(s) -->
+	                             <xsl:call-template name="substring-before-last">
+								   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="substr">
+								     <!-- call with last name as value of substr, the key to getting the entire first name -->
+									 <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>
+								   </xsl:with-param>
+								 </xsl:call-template>
+                                </xsl:otherwise>
+                            </xsl:choose> 
+                              <br /> 
+                              		  
+                           </xsl:if>
+                        </xsl:for-each>
+                     <!-- end Modified 03.05.2009 -->
+                        </td>
+                        <td valign="top"><xsl:value-of select="ResearchTypeObj/TypeName" /></td>
+                        <td nowrap="true" valign="top" align="center"><xsl:value-of select="PublicationYear" /></td>
+                    </tr>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:when>
+        <xsl:when test="$sort = 'year_descend'">
+            <xsl:for-each select="Research">
+                <xsl:sort select="PublicationYear" order="descending" />
+                <xsl:sort select="AuthorLastName" order="ascending" />
+                <xsl:if test="PublicAccess = 'true'">
+                    <tr>
+                    	<xsl:attribute name="class">
+                        	<xsl:choose>
+                            	<xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                                <xsl:otherwise>rowB</xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                        <td valign="top"><xsl:choose>
+                                <xsl:when test="CDATACitation != ''">
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a><br />
+                                    <xsl:value-of select="CDATACitation" disable-output-escaping="yes" />
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </td>
+                        <td valign="top" nowrap="true">
+                        <!-- Modified 07.22.2013 by R. Taylor to not show external author -->
+                        <xsl:for-each select="Authors/NameValuePair">
+                           <xsl:if test="Name != '' and string(number(Value))!='NaN'">
+                             <xsl:choose>
+                            	<xsl:when test="Value != ''">
+	                              <a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile">
+		                             <!-- get (very) last name -->
+		                             <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>,
+									 
+									 <!-- get complete first name(s) -->
+		                             <xsl:call-template name="substring-before-last">
+									   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="substr">
+									     <!-- call with last name as value of substr, the key to getting the entire first name -->
+										 <xsl:call-template name="substring-after-last">
+										   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+										   <xsl:with-param name="delimiter" select="' '" />
+										 </xsl:call-template>
+									   </xsl:with-param>
+									 </xsl:call-template>
+	                              </a>
+                             </xsl:when>
+                             <xsl:otherwise>
+                                    <!-- get (very) last name -->
+	                             <xsl:call-template name="substring-after-last">
+								   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="delimiter" select="' '" />
+								 </xsl:call-template>,
+								 
+								 <!-- get complete first name(s) -->
+	                             <xsl:call-template name="substring-before-last">
+								   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="substr">
+								     <!-- call with last name as value of substr, the key to getting the entire first name -->
+									 <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>
+								   </xsl:with-param>
+								 </xsl:call-template>
+                                </xsl:otherwise>
+                            </xsl:choose> 
+                               <br /> 
+                           </xsl:if>
+                           <!-- Modified 07.22.2013 by R. Taylor to link external author to external URL -->
+                           <xsl:if test="Name != '' and string(number(Value))='NaN'">
+                             <xsl:choose>
+                            	<xsl:when test="Value != ''">
+	                              <a href="{Value}" title="View {Name}'s site" target="_blank">
+		                             <!-- get (very) last name -->
+		                             <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>,
+									 
+									 <!-- get complete first name(s) -->
+		                             <xsl:call-template name="substring-before-last">
+									   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="substr">
+									     <!-- call with last name as value of substr, the key to getting the entire first name -->
+										 <xsl:call-template name="substring-after-last">
+										   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+										   <xsl:with-param name="delimiter" select="' '" />
+										 </xsl:call-template>
+									   </xsl:with-param>
+									 </xsl:call-template>
+	                              </a>
+                             </xsl:when>
+                             <xsl:otherwise>
+                                    <!-- get (very) last name -->
+	                             <xsl:call-template name="substring-after-last">
+								   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="delimiter" select="' '" />
+								 </xsl:call-template>,
+								 
+								 <!-- get complete first name(s) -->
+	                             <xsl:call-template name="substring-before-last">
+								   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="substr">
+								     <!-- call with last name as value of substr, the key to getting the entire first name -->
+									 <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>
+								   </xsl:with-param>
+								 </xsl:call-template>
+                                </xsl:otherwise>
+                            </xsl:choose> 
+                              <br /> 
+                              		  
+                           </xsl:if>
+                        </xsl:for-each>
+                     <!-- end Modified 03.05.2009 -->
+                        </td>
+                        <td valign="top"><xsl:value-of select="ResearchTypeObj/TypeName" /></td>
+                        <td nowrap="true" valign="top" align="center"><xsl:value-of select="PublicationYear" /></td>
+                    </tr>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:for-each select="Research">
+                <xsl:sort select="PublicationYear" order="descending" />
+                <xsl:sort select="AuthorLastName" order="ascending" />
+                <xsl:if test="PublicAccess = 'true'">
+                    <tr>
+                    	<xsl:attribute name="class">
+                        	<xsl:choose>
+                            	<xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                                <xsl:otherwise>rowB</xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                        <td valign="top">
+                            <xsl:choose>
+                                <xsl:when test="CDATACitation != ''">
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a><br />
+                                	<xsl:value-of select="CDATACitation" disable-output-escaping="yes" />
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <a href="/faculty-and-research/research/research-details/index.aspx?rid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </td>
+                        <td valign="top" nowrap="true">
+                    
+                        <xsl:for-each select="Authors/NameValuePair">
+                           <xsl:if test="Name != ''">
+                             <xsl:choose>
+                                <!-- not null AND numeric -->
+                            	<xsl:when test="(Value != '')">
+	                              <a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile">
+		                             <!-- get (very) last name -->
+		                             <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>,
+									 
+									 <!-- get complete first name(s) -->
+		                             <xsl:call-template name="substring-before-last">
+									   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="substr">
+									     <!-- call with last name as value of substr, the key to getting the entire first name -->
+										 <xsl:call-template name="substring-after-last">
+										   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+										   <xsl:with-param name="delimiter" select="' '" />
+										 </xsl:call-template>
+									   </xsl:with-param>
+									 </xsl:call-template>
+	                              </a>
+                             </xsl:when>
+                             
+                             <xsl:otherwise>
+                                    <!-- get (very) last name -->
+	                             <xsl:call-template name="substring-after-last">
+								   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="delimiter" select="' '" />
+								 </xsl:call-template>,
+								 
+								 <!-- get complete first name(s) -->
+	                             <xsl:call-template name="substring-before-last">
+								   <xsl:with-param name="input"><xsl:value-of select="Name" /></xsl:with-param>
+								   <xsl:with-param name="substr">
+								     <!-- call with last name as value of substr, the key to getting the entire first name -->
+									 <xsl:call-template name="substring-after-last">
+									   <xsl:with-param name="string"><xsl:value-of select="Name" /></xsl:with-param>
+									   <xsl:with-param name="delimiter" select="' '" />
+									 </xsl:call-template>
+								   </xsl:with-param>
+								 </xsl:call-template>
+                                </xsl:otherwise>
+                            </xsl:choose> 
+                              <br /> 
+                              		  
+                           </xsl:if>
+                        </xsl:for-each>
+                     <!-- end Modified 03.02.2009 -->
+                        </td>
+                        <td valign="top"><xsl:value-of select="ResearchTypeObj/TypeName" /></td>
+                        <td nowrap="true" valign="top" align="center"><xsl:value-of select="PublicationYear" /></td>
+                    </tr>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+<!-- Added 03.03.2009 by R. Taylor to get first name(s)-->
+<xsl:template name="first-name">
+  <xsl:param name="FullName" />
+  <xsl:variable name="last" select="substring-after($FullName, ' ')" />
+  <xsl:variable name="first" select="substring-before($FullName, ' ')" />
+  <id><xsl:value-of select="$first" /></id>
+  <!-- recursive section -->
+  <xsl:if test="$last">
+    <xsl:call-template name="first-name">
+      <xsl:with-param name="FullName" select="$last" />
+    </xsl:call-template>
+  </xsl:if>
+</xsl:template>
+
+<!-- Added 03.03.2009 by R. Taylor to get first name(s)-->
+<xsl:template name="substring-before-last">
+  <xsl:param name="input" />
+  <xsl:param name="substr" />
+  <xsl:if test="$substr and contains($input, $substr)">
+    <xsl:variable name="temp" select="substring-after($input, $substr)" />
+    <xsl:value-of select="substring-before($input, $substr)" />
+    <xsl:if test="contains($temp, $substr)">
+      <xsl:value-of select="$substr" />
+      <xsl:call-template name="substring-before-last">
+        <xsl:with-param name="input" select="$temp" />
+        <xsl:with-param name="substr" select="$substr" />
+      </xsl:call-template>
+    </xsl:if>
+  </xsl:if>
+</xsl:template>
+
+<!-- Added 03.03.2009 by R. Taylor to get the last name -->
+<xsl:template name="substring-after-last">
+  <xsl:param name="string" />
+  <xsl:param name="delimiter" />
+  <xsl:choose>
+    <xsl:when test="contains($string, $delimiter)">
+      <xsl:call-template name="substring-after-last">
+        <xsl:with-param name="string" select="substring-after($string, $delimiter)" />
+        <xsl:with-param name="delimiter" select="$delimiter" />
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise><xsl:value-of select="$string" /></xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
+</xsl:stylesheet>

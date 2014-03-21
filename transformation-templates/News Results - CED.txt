@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE xsl:stylesheet[<!ENTITY nbsp   "&#160;">]>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <!-- SET UP PARAMS -->
+	<xsl:param name="recordCount" />
+	<xsl:param name="keywords" />
+	<xsl:param name="categoryID" />
+	<xsl:param name="startDate" />
+	<xsl:param name="endDate" />
+	<xsl:param name="pageIndex" />
+	<xsl:param name="pageSize" />
+	<xsl:param name="pageCount" />
+
+
+<!--===============================================
+ 1. PRIMARY TEMPLATE
+================================================-->	
+	<xsl:template match="/">
+         
+        <xsl:choose>
+        	
+        	<!--no results returned-->
+            <xsl:when test="count(//News) = 0">
+                <p style="font-weight:bold;margin-bottom:6px;">We are sorry, no results were returned. Please use the form above to search again.<br /><br /><br /><br /><br /></p>
+            </xsl:when>
+            
+            <!--results-->
+            <xsl:otherwise>
+                <div id="results">
+                   <h2>Recent CED News</h2>
+                    <xsl:apply-templates select="//News" />
+                </div>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+    </xsl:template>
+    
+<!--===============================================
+ 2. NEWS LOOP
+================================================-->
+    <xsl:template match="//News">
+     <xsl:if test="position() &lt; 7">
+        <p style="overflow:auto;">
+          <!-- If CED category, then show -->
+          <!--<xsl:if test="Categories/NameValuePair/Value[text()='111']">-->
+
+            <xsl:attribute name="class">
+                <xsl:choose>
+                    <xsl:when test="position() mod 2 = 1">result odd</xsl:when>
+                    <xsl:otherwise>result</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <a href="/news/news-detail/index.aspx?nid={ID}" title="More information on the {Title} news item">
+                <xsl:value-of select="Title" />
+            </a><br />
+            <span><strong>Release Date: </strong><xsl:value-of select="FormattedReleaseDateTime" /></span><br />
+
+            <!-- Added 11.29.2011 Test if there is an image associated with the news item and if so display
+            <xsl:if test="(ImageID) != 0">
+             <img src="image.aspx?id={ImageID}" alt="Image associated with the {Title} news item" style="float: right;  vertical-align: middle; border: 0px; margin:10px 10px 10px 10px; height: 150px;" /><br /><br />
+            </xsl:if>
+            -->
+            <!-- Added 11.29.2011 If HTML content exists display, otherwise use description as fallback. -->
+                  <!-- limit description to 500 chars -->
+                  <xsl:value-of select="substring(Description, 1, 500)" />...<br />
+                  <a href="http://www.heinz.cmu.edu/news/news-detail/index.aspx?nid={ID}">read more...</a><br /><br /> 
+
+         <!--</xsl:if>-->
+        </p>
+     </xsl:if>
+    </xsl:template>
+
+     <xsl:template match="node()|@*" name="identity">
+      <xsl:copy>
+       <xsl:apply-templates select="node()|@*" />
+      </xsl:copy>
+     </xsl:template>
+
+</xsl:stylesheet>

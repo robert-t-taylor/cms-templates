@@ -1,0 +1,97 @@
+   <header id="top">   
+     <nav class="audience">
+        <h1>For</h1>
+        <ul>
+          <li class="parent"><a href="#">Prospective Students</a>
+            <div class="sub-nav">
+              <ul>
+                <li class="item"><a href="/admissions/application-process/index.aspx">Application Process</a></li>
+                <li class="item"><a href="/financial-aid/index.aspx">Financial Aid</a></li>
+                <li class="item"><a href="http://cmuspp.askadmissions.net/emtinterestpage.aspx?ip=heinzpittsburghlongform" target="_blank" title="Contact Heinz College Admissions">Contact Admissions</a></li>
+                <li class="item "><a href="/visit-heinz-college/index.aspx">Visit Heinz</a></li>
+                <li class="item"><a href="/academic-resources/lectures-presentations/index.aspx">Guest Speakers</a></li>
+                <li class="item"><a href="/prospective-students/salary-placement-statistics/index.aspx">Salary/ Employment Statistics</a></li>
+                <li class="item last"><a href="/prospective-students/innovation-opportunities/index.aspx">Innovation &amp; Outreach Opportunities</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="parent"><a href="#">Recruiters</a>
+            <div class="sub-nav">
+              <ul>
+                <li class="item first"><a href="/Recruiters/JobDescriptionForm.aspx">Submit a Job Description</a></li><li class="item "><a href="/recruiters/federal-community-service-work-study/index.aspx">Federal Community Service Work Study</a></li><li class="item "><a href="/recruiters/traveling-to-campus/index.aspx">Traveling to Campus</a></li><li class="item last"><a href="/recruiters/hiring-international-students/index.aspx">Hiring International Students</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="parent"><a href="#">Corporate &amp; Institutional Partners</a>
+            <div class="sub-nav">
+              <ul>
+                <li class="item first"><a href="/partnerships/internships/index.aspx">Internships</a></li>
+                <li class="item "><a href="/partnerships/dc-la-immersion/index.aspx">DC/LA Immersion Experiences</a></li>
+                <li class="item "><a href="/partnerships/student-projects/index.aspx">Student Capstone Projects</a></li>
+                <li class="item "><a href="/partnerships/research-centers/index.aspx">Research Centers</a></li>
+                <li class="item "><a href="/partnerships/corporate-foundation-support/index.aspx">Corporate &amp; Foundation Support</a></li>
+                <li class="item "><a href="/partnerships/exec-ed/index.aspx">Executive Education</a></li>
+                <li class="item last"><a href="/partnerships/org-based-incentives/index.aspx">Incentive Programs</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="parent"><a href="#">Current Students</a>
+            <div class="sub-nav">
+              <ul>
+                <li class="item first"><a href="/academic-resources/index.aspx">Academic Resources</a></li>
+                <li class="item "><a href="/student-activities/index.aspx">Student Activities</a></li>
+                <li class="item "><a href="/financial-aid/index.aspx">Financial Aid</a></li>
+                <li class="item "><a href="/jobs-and-internships/students/index.aspx">Career Services</a></li>
+                <li class="item "><a href="/computing-services/index.aspx">Computing Services</a></li>
+                <li class="item "><a href="/university-resources/index.aspx">University Resources</a></li>
+                <li class="item"><a href="/admissions/admissions-ambassador-program/index.aspx">Admissions Ambassador Program</a></li>
+                <li class="item"><a href="/current-students/connect/index.aspx">Social Media Directory</a></li>
+                <li class="item last"><a href="/news/share-a-story/index.aspx">Share a Heinz Story</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="parent"><a href="#">Faculty &amp; Staff</a>
+            <div class="sub-nav">
+              <ul>
+                <li class="item first"><a href="/faculty-and-staff/computing-services/index.aspx">Computing Services</a></li>
+                <li class="item "><a href="/faculty-and-staff/accounting-documentation/index.aspx">Fiscal Management</a></li>
+                <li class="item "><a href="/faculty-and-staff/room-reservations/index.aspx">Room Reservations</a></li>
+                <li class="item "><a href="/faculty-and-staff/policies/index.aspx">Policies</a></li>
+                <li class="item"><a href="http://www.cmu.edu/hr/">Human Resources</a></li>
+                <li class="item"><a href="/directories/faculty-directory/index.aspx">Faculty Profiles</a></li>
+                <li class="item"><a href="/directories/staff-directory/index.aspx">Staff Directory</a></li>
+                <li class="item last"><a href="/faculty-and-staff/cmu-staff-council/index.aspx">CMU Staff Council</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="parent"><a href="#">Alumni</a>
+            <div class="sub-nav">
+              <ul>
+                <li class="item first"><a href="/alumni/2009-alumni-survey-results/index.aspx">2009 Alumni Survey Results</a></li>
+                <li class="item "><a href="/alumni/connect-with-fellow-alumni/index.aspx">Connect with Fellow Alumni</a></li>
+                <li class="item "><a href="/alumni/advance-your-career/index.aspx">Advance Your Career</a></li>
+                <li class="item "><a href="/alumni/support-heinz-college/index.aspx">Support Heinz College</a></li>
+                <li class="item "><a href="/alumni/alumni-events/index.aspx">Alumni Events</a></li>
+                <li class="item "><a href="/alumni/be-a-mentor/index.aspx">Become a Mentor</a></li>
+                <li class="item "><a href="/admissions/admissions-ambassador-program/index.aspx">Admissions Ambassador Program</a></li>
+                <li class="item "><a href="/alumni/alumni-association-board/index.aspx">Alumni Association Board</a></li>
+                <li class="item "><a href="/forms/alumni/update.html">Update Your Profile</a></li>
+                <li class="item "><a href="/alumni/financial-aid-alumni/index.aspx">Financial Aid for Alumni</a></li>
+                <li class="item"><a href="/alumni/connect/index.aspx">Social Media Directory</a></li>
+                <li class="item last"><a href="/alumni/contact-us/index.aspx">Contact Us</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="more"><a href="#audience-links">More</a></li>
+        </ul>
+      </nav>
+      <nav class="sub-container"></nav>
+   <div class="top-wrapper">
+        <h1 class="logo"><a href="/">Heinz College Home</a></h1>
+        <!-- seach was here -->
+        <a href="#footer-nav" class="menu-icon">
+          <span aria-hidden="true" data-icon="?">Menu</span>
+          <span class="screen-reader-text">Menu</span>
+        </a>
+      </div>
+    </header>

@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"[]>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <head>
+        <rei:template id="370" name="TF-Base-URL" />
+        <rei:template id="341" name="TF-Title" />
+        <rei:template id="340" name="TF-Meta" />
+        <rei:template id="350" name="TF-Stylesheets (Do Not Edit)" />
+        <rei:template id="349" name="TF-Javascript (Do Not Edit)" />
+                
+    <meta http-equiv="imagetoolbar" content="no" xmlns="" /><meta name="MSSmartTagsPreventParsing" content="TRUE" xmlns="" /><meta name="generator" content="REIgnition CMS Core 2.1.0.5" xmlns="" /><meta name="copyright" content="H. John Heinz III College" xmlns="" /><meta name="classification" content="Education" xmlns="" />
+
+<!-- Quantcast Pixle added 09.06.2013 for POC -->
+<!-- Start Quantcast Tag -->
+<script type="text/javascript"> 
+var _qevents = _qevents || [];
+
+(function() {
+var elem = document.createElement('script');
+elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+elem.async = true;
+elem.type = "text/javascript";
+var scpt = document.getElementsByTagName('script')[0];
+scpt.parentNode.insertBefore(elem, scpt);
+})();
+
+_qevents.push(
+{qacct:"p-wJp41pQ967f3P",labels:"_fp.event.Heinz Homepage"}
+);
+</script>
+<noscript>
+<img src="//pixel.quantserve.com/pixel/p-wJp41pQ967f3P.gif?labels=_fp.event.Heinz+Homepage" style="display: none;" border="0" height="1" width="1" alt="Quantcast" />
+</noscript>
+<!-- End Quantcast tag -->
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7109555-1']);
+  _gaq.push(['_setDomainName', '.heinz.cmu.edu']);
+  _gaq.push(['_trackPageview']);
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<meta name="msvalidate.01" content="7212AACEE31EB875321AA1071D695264" />
+
+</head>
+    <body class="home blue ">
+        <div class="page">
+        <rei:template id="406" name="TF-Masthead-Home (Do Not Edit)" />
+            
+        <div class="body">
+            <div class="contents">
+                
+                <div class="subject">
+                    <div class="splash">
+                        <div id="images" class="carousel">
+                            <div class="controls"></div>
+                            <div class="items">
+                                <div class="item" style="display:none;">
+                                    <img src="res/img/splash/BigIdeas-01.jpg" alt="Professor to you. Expert to the world." />
+                                </div>
+                                <div class="item" style="display:none;">
+                                    <img src="res/img/splash/BigIdeas-02.jpg" alt="Research that changes everything." />
+                                </div>
+                                <div class="item" style="display:none;">
+                                    <img src="res/img/splash/BigIdeas-03.jpg" alt="Innovation every day." />
+                                </div>
+                                <div class="item" style="display:none;">
+                                    <img src="res/img/splash/BigIdeas-04.jpg" alt="Big data leads to big answers." />
+                                </div>
+                                <div class="item" style="display:none;">
+                                    <img src="res/img/splash/BigIdeas-05.jpg" alt="A world of ideas." />
+                                </div>
+                                <div class="item" style="display:none;">
+                                    <img src="res/img/splash/BigIdeas-06.jpg" alt="The intersection of management, policy, and technology" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="sidebar">
+                    <rei:template id="355" name="TF-Sidebar-Carousel-News (Do Not Edit)" /> 
+                    <rei:template id="514" name="TF-Sidebar-Carousel-Students-Dynamic" />
+                    <rei:template id="412" name="TF-Sidebar-Events (Do Not Edit)" />
+                </div>
+            </div>
+           <rei:template id="434" name="TF-Feeds-iFrame" />
+        </div>
+        </div>
+        <rei:template id="337" name="TF-Footer" />
+    </body>
+</html>
+

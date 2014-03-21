@@ -1,0 +1,112 @@
+<noscript>
+<p class="noscript">A browser that supports JavaScript is required to view certain sections of the site.</p>
+</noscript>
+<script type="text/javascript">
+
+<!-- Begin
+
+function computeTotals()
+{ 
+    var qtd, result, subval = 0.00, tax = 0.00, gift = 0.00, total = 0.00, shipping = 0.00, price;
+	subtotal = document.getElementById('subtotal');
+	shipping = document.getElementById('shipping');
+	total = document.getElementById('total');
+
+        if(document.forms[1].gift && document.forms[1].gift.value != null) 
+        {
+          gift = document.getElementById('gift').value;
+        }
+	
+	// loop
+	for (var j=0; j < document.forms[1].elements.length; j++) {
+
+	  if (document.forms[1].elements[j].name.substring(0,4) == "qty_") {
+        var prefix = document.forms[1].elements[j].name.substring(4);
+		qtd = parseInt(document.getElementById('qty_' + prefix).value);
+		result = document.getElementById('item_total_' + prefix);
+		
+		price = parseFloat(document.getElementById('price_' + prefix).value);
+	
+		if (qtd >= 0) {
+			result.value = round_it((price * qtd), 2);
+			subval += price * qtd;
+		}
+	  }
+	  
+	}
+	
+	subtotal.value = round_it(subval, 2);
+ 
+	
+        // if pickup option selected, set shipping.value to 0
+// no shipping 
+//	if (document.getElementById('delivery_1').checked) {
+//		shipping.value = round_it((subval * .15), 2);
+		//document.getElementById('shipping_row').style.visibility='visible';
+//	}
+//	else {
+//		shipping.value = round_it((0), 2);
+		//document.getElementById('shipping_row').style.visibility='hidden';
+//	}
+
+//	total.value = round_it(parseFloat(subtotal.value) + // parseFloat(tax.value) + parseFloat(shipping.value), 2);
+	
+//      total.value = round_it(parseFloat(subtotal.value) + parseFloat(tax.value), 2);
+
+        total.value = round_it( parseFloat(subtotal.value) + parseFloat(gift.value), 2);
+}
+
+function round_it(original_number, decimals) {
+    var result1 = original_number * Math.pow(10, decimals)
+    var result2 = Math.round(result1)
+    var result3 = result2 / Math.pow(10, decimals)
+    return pad_it(result3, decimals)
+}
+
+function pad_it(rounded_value, decimal_places) {
+
+    // Convert the number to a string
+    var value_string = rounded_value.toString()
+    
+    // Locate the decimal point
+    var decimal_location = value_string.indexOf(".")
+
+    // Is there a decimal point?
+    if (decimal_location == -1) {
+        
+        // If no, then all decimal places will be padded with 0s
+        decimal_part_length = 0
+        
+        // If decimal_places is greater than zero, tack on a decimal point
+        value_string += decimal_places > 0 ? "." : ""
+    }
+    else {
+
+        // If yes, then only the extra decimal places will be padded with 0s
+        decimal_part_length = value_string.length - decimal_location - 1
+    }
+    
+    // Calculate the number of decimal places that need to be padded with 0s
+    var pad_total = decimal_places - decimal_part_length
+    
+    if (pad_total > 0) {
+        
+        // Pad the string with 0s
+        for (var counter = 1; counter <= pad_total; counter++) 
+            value_string += "0"
+        }
+    return value_string
+}
+
+function popUp(URL)
+
+{
+
+	day = new Date();
+
+	id = day.getTime();
+
+	eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=500,left = 50,top = 50');");
+
+}// End -->
+</script>

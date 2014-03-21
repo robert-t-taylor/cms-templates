@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xsl:stylesheet[<!ENTITY nbsp   "&#160;">]>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<!--===============================================
+ 1. PRIMARY TEMPLATE
+================================================-->
+    <xsl:template match="/">
+      <div class="events">
+	   <h2>Events</h2><a href="/events/index.aspx" class="all">All</a>
+	        <xsl:choose>
+	            <xsl:when test="count(//Event) = 0">
+	                <p>We are sorry, there are no upcoming events to display.</p>
+	            </xsl:when>
+	            <xsl:otherwise> 
+	                <xsl:apply-templates select="//Event" />
+	            </xsl:otherwise>
+	        </xsl:choose>
+	</div>
+    </xsl:template>
+    
+        
+<!--===============================================
+ 2. LOOP
+================================================-->
+    <xsl:template match="//Event">
+       <!-- return 5 items only -->
+        <xsl:if test="position() &lt; 6">
+	   <div class="single-event">
+	     <h2>
+                <a href="/events/event-detail/index.aspx?eid={ID}" title="More information on the {Title} event"><xsl:value-of select="Title" /></a>
+             </h2>
+	     <p class="category"><xsl:apply-templates select="Occurrences//Occurrence" /></p>
+           </div>
+        </xsl:if>
+    </xsl:template>
+
+<!--===============================================
+ 3. OCCURRENCES
+================================================-->
+
+	<xsl:template match="Occurrence">
+	  <xsl:if test="HasExpired != 'true'">
+		<xsl:choose>
+            <!-- Start and End Dates are different and AllDay Event checked -->
+            <xsl:when test="(FormattedStartDate != FormattedEndDate) and (AllDayEvent = 'true')">
+                <xsl:value-of select="FormattedStartDate" /> to <xsl:value-of select="FormattedEndDate" /><xsl:text> - This is an all day, multi-day event.</xsl:text><br />
+            </xsl:when>
+            <!-- Start and End Dates are the same and AllDay Event checked -->
+            <xsl:when test="(FormattedStartDate = FormattedEndDate) and (AllDayEvent = 'true')">
+                (<xsl:value-of select="FormattedStartDate" /><xsl:text> - This is an all day event.</xsl:text>)	<br />
+            </xsl:when>
+            <!-- Start and End Dates are different and Start/End times are the same-->
+            <xsl:when test="(FormattedStartDate) != (FormattedEndDate) and (FormattedStartTime = FormattedEndTime)">
+                <xsl:value-of select="FormattedStartDate" /> at <xsl:value-of select="FormattedStartTime" /> to <xsl:value-of select="FormattedEndDate" /> at <xsl:value-of select="FormattedEndTime" /><br />
+            </xsl:when>
+            <!-- Start and End Dates are different and Start/End times are different-->
+            <xsl:when test="(FormattedStartDate) != (FormattedEndDate) and (FormattedStartTime != FormattedEndTime)">
+                <xsl:value-of select="FormattedStartDate" /> at <xsl:value-of select="FormattedStartTime" /> to <xsl:value-of select="FormattedEndDate" /> at <xsl:value-of select="FormattedEndTime" /><br />
+            </xsl:when>
+            <!-- Start and End Dates are the same and Start and End times are different -->
+            <xsl:when test="(FormattedStartDate) = (FormattedEndDate) and (FormattedStartTime != FormattedEndTime)">
+                <xsl:value-of select="FormattedStartDate" /> from <xsl:value-of select="FormattedStartTime" /> to <xsl:value-of select="FormattedEndTime" /><br />
+            </xsl:when>
+            <!-- Start/End Dates are the same and Start/End times are same -->
+            <xsl:when test="(FormattedStartDate) = (FormattedEndDate) and (FormattedStartTime = FormattedEndTime)">
+                <xsl:value-of select="FormattedStartDate" /> at <xsl:value-of select="FormattedStartTime" /><br />
+            </xsl:when>
+        </xsl:choose>
+	  </xsl:if>
+	</xsl:template>
+
+</xsl:stylesheet>

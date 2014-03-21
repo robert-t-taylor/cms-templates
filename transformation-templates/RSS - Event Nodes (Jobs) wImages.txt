@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+  <xsl:template match="/">
+    <xsl:apply-templates select="//Event[Categories/NameValuePair/Value='166']" /> 
+  </xsl:template>
+
+  <xsl:template match="Event">
+    <item>
+      <title>
+        <xsl:value-of select="Title" />
+      </title>
+      <link>http://www.heinz.cmu.edu/events/event-detail/index.aspx?eid=<xsl:value-of select="ID" /></link>
+     
+      <!--if image exists, display-->
+      <xsl:if test="(ImageID) != 0">
+	<img src="http://www.heinz.cmu.edu/image.aspx?id={ImageID}" alt="Image associated with the {Title} event" style="float:right;margin:0px 0px 8px 8px;border:1px solid #666;" />
+      </xsl:if>
+
+      <description>
+Location: <xsl:value-of select="Occurrences/Occurrence/Location/Name" /> - 
+        Description: <xsl:value-of select="Description" />
+      </description>
+      <pubDate>
+           <!-- <xsl:value-of select="Occurrences/Occurrence/StartDate" /> -->
+           <xsl:element name="newdate">
+	     <xsl:call-template name="FormatDate">
+	         <xsl:with-param name="DateTime" select="Occurrences/Occurrence/StartDate" />
+	     </xsl:call-template>
+           </xsl:element>
+      </pubDate>
+    </item>
+  </xsl:template>
+
+<!-- converts FROM 2010-3-91T17:30:00 
+TO new format Wed 9 March 2010
+-->
+<xsl:template name="FormatDate">
+<xsl:param name="DateTime" />
+<xsl:variable name="year">
+<xsl:value-of select="substring($DateTime,1,4)" />
+</xsl:variable>
+<xsl:variable name="month-temp">
+<xsl:value-of select="substring-after($DateTime,'-')" />
+</xsl:variable>
+<xsl:variable name="month">
+<xsl:value-of select="substring-before($month-temp,'-')" />
+</xsl:variable>
+<xsl:variable name="day-temp">
+<xsl:value-of select="substring-after($month-temp,'-')" />
+</xsl:variable>
+<xsl:variable name="day">
+<xsl:value-of select="substring($day-temp,1,2)" />
+</xsl:variable>
+<xsl:variable name="time">
+<xsl:value-of select="substring-after($DateTime,'T')" />
+</xsl:variable>
+<xsl:variable name="hh">
+<xsl:value-of select="substring($time,1,2)" />
+</xsl:variable>
+<xsl:variable name="mm">
+<xsl:value-of select="substring($time,4,2)" />
+</xsl:variable>
+<xsl:variable name="ss">
+<xsl:value-of select="substring($time,7,2)" />
+</xsl:variable>
+
+<xsl:value-of select="$day" />
+<!--18 -->
+<xsl:value-of select="' '" />
+<xsl:choose>
+<xsl:when test="$month = '01'">Jan</xsl:when>
+<xsl:when test="$month = '02'">Feb</xsl:when>
+<xsl:when test="$month = '03'">Mar</xsl:when>
+<xsl:when test="$month = '04'">Apr</xsl:when>
+<xsl:when test="$month = '05'">May</xsl:when>
+<xsl:when test="$month = '06'">Jun</xsl:when>
+<xsl:when test="$month = '07'">Jul</xsl:when>
+<xsl:when test="$month = '08'">Aug</xsl:when>
+<xsl:when test="$month = '09'">Sep</xsl:when>
+<xsl:when test="$month = '10'">Oct</xsl:when>
+<xsl:when test="$month = '11'">Nov</xsl:when>
+<xsl:when test="$month = '12'">Dec</xsl:when>
+</xsl:choose>
+<xsl:value-of select="' '" />
+<!--18 Jan-->
+<xsl:value-of select="' '" />
+<xsl:value-of select="$year" />
+<xsl:value-of select="' '" />
+<!--18.03.1976 -->
+<xsl:value-of select="$hh" />
+<xsl:value-of select="':'" />
+<!--18.03.1976 13: -->
+<xsl:value-of select="$mm" />
+<xsl:value-of select="':'" />
+<!--18.03.1976 13:24 -->
+<xsl:value-of select="$ss" />
+<!--18.03.1976 13:24:55 -->
+
+-0400 GMT
+
+</xsl:template>
+</xsl:stylesheet>

@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<!-- DWXMLSource="test.xml" -->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <!--SET UP PARAMS-->
+  <xsl:param name="CurrentPageId" />
+  <xsl:param name="parent" select="." />
+  <xsl:param name="style" select=" 'category' " /> 
+
+  <!--BEGIN NAVIGATION-->
+  <xsl:template match="/">
+   <!-- beginning of entire sidenav -->
+   <!-- <aside class="section-nav> 
+        <a href="#" class="more-toggle">More pages in this section<span aria-hidden="true" data-icon="?"></span></a>-->
+        <nav>
+          <ul class="none">
+      <xsl:attribute name="class"><!--<xsl:value-of select="$style" />--></xsl:attribute>
+      <!-- match all pages 
+      <xsl:for-each select="siteMap/siteMapNode/siteMapNode"> -->
+<!-- Match top-level pages for now -->
+       <xsl:for-each select="siteMap/siteMapNode/siteMapNode">
+        <xsl:choose>
+          <xsl:when test="(.//siteMapNode/@resourceKey = $CurrentPageId or ./@resourceKey = $CurrentPageId)">
+          <!-- do not call if page is About Heinz College -->
+           <!-- <xsl:if test="$CurrentPageId != '38'"> -->
+            <xsl:call-template name="level_1">
+              <xsl:with-param name="parent" select="." />
+            </xsl:call-template>
+           <!-- </xsl:if> -->
+          </xsl:when>
+        </xsl:choose>
+      </xsl:for-each>
+    </ul>
+    </nav>
+   <!-- </aside> -->
+   <!-- end of entire sidenav -->
+  </xsl:template>
+
+  <!-- TOP LEVEL PARENT (Level 1) DO NOT SHOW -->
+  <xsl:template name="level_1">
+    <xsl:param name="parent" />
+
+     <!-- Show ISM School page, if this is PPM School page -->
+     <xsl:if test="./descendant-or-self::siteMapNode[@resourceKey = '2822']"> <!-- WAS 28 -->
+       <li class="parent title close-title">
+        <a href="http://www.heinz.cmu.edu/school-of-information-systems-and-management/index.aspx" class="top-off" title="School of Information Systems &amp; Management">School of Information Systems &amp; Management</a>
+       </li>
+     </xsl:if>
+     <!-- end Show ISM School page -->
+
+     <!-- do not render in side column, i.e. "Programs", etc.  -->
+            <li class="parent title">
+             <a href="{$parent/@url}" class="school" title="{$parent/@title}">
+               <xsl:if test="$parent/@redirectNewWindow = 'true'">
+               <xsl:attribute name="target">_blank</xsl:attribute>
+               </xsl:if>
+
+               <!-- CURRENT PAGE -->
+               <xsl:value-of select="$parent/@title" />
+               <span aria-hidden="true" data-icon="?" />
+             </a>
+               <xsl:call-template name="level_loop">
+                 <xsl:with-param name="parent" select="$parent" />
+                 <xsl:with-param name="style" select="'typical'" /> <!-- initial call to template -->
+               </xsl:call-template>             
+            </li>
+
+     <!-- Show PPM School page, if this is ISM School page -->
+     <xsl:if test="./descendant-or-self::siteMapNode[@resourceKey = '2677']"> <!-- WAS 27 -->
+       <li class="parent title close-title">
+        <a href="http://www.heinz.cmu.edu/school-of-public-policy-management/index.aspx" class="top-off" title="School of Public Policy &amp; Management">School of Public Policy &amp; Management
+        </a>
+       </li> 
+     </xsl:if>
+     <!-- end Show PPM School page -->
+
+  </xsl:template>
+
+
+      <!-- *****************************************************************************************************
+         The overall architecture of the side navigation is nested lists. It can be two or three levels deep.
+         There are two ways in which the top most list item can be displayed. If there is one list underneath 
+         a top level item (like in "About Heinz") the style of the list is set to "typical". If there are 
+         two lists underneath a top level item (like in "Programs") the style of the list is set to "category".
+
+         The following is a special case. The others are treated below...
+       ********************************************************************************************************* -->
+  <xsl:template name="level_loop">
+    <xsl:param name="parent" />
+    <xsl:choose>
+      <!-- *****************************************************************************************************
+          if a SCHOOL page (child of ID: 1 "HOME" page - SPECIAL CASE) NOTE: was 2306 "Programs" page
+      ********************************************************************************************************** -->
+      <xsl:when test="count(./descendant-or-self::siteMapNode[@resourceKey = '1'])">
+            <xsl:for-each select="$parent/siteMapNode[@appearsInNav='true']">
+              <xsl:if test="@resourceKey != '2306' and @resourceKey != '2042' and @resourceKey != '2046' and @resourceKey != '2047' and @resourceKey != '2048' and @resourceKey != '2056' and @resourceKey != '2057' and @resourceKey != '2058' and @resourceKey != '2059' and @resourceKey != '2060' and @resourceKey != '2069'">
+               <xsl:if test="count(./descendant-or-self::siteMapNode[@resourceKey = $CurrentPageId]) &gt; 0">
+                <li>
+                <!--
+                        The first node in the sublist has a special style applied. So if we're
+                        on the first item, set the style to "first".
+                -->
+                <xsl:if test="position() = 1">
+                   <xsl:attribute name="class">first</xsl:attribute>
+                </xsl:if>
+                <!--
+                        The last node in this list has a special style applied. So if we're
+                        on the last item, set the style to "last".
+                --> 
+                <xsl:if test="position()=last()">
+                   <xsl:attribute name="class">last</xsl:attribute>
+                </xsl:if> 
+                  <a href="{./@url}" title="{./@title}">
+                    <xsl:if test="(.//siteMapNode/@resourceKey = $CurrentPageId or ./@resourceKey = $CurrentPageId)">
+                      <xsl:attribute name="class">category selected</xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="./@redirectNewWindow = 'true'">
+                        <xsl:attribute name="target">_blank</xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="(./@resourceKey != '2036' and ./@resourceKey != '2042' and ./@resourceKey != '2045')">
+                       <xsl:value-of select="./@title" /> <!-- <xsl:value-of select="./@resourceKey" /> --><!-- SCHOOL PAGE! -->
+                    </xsl:if>
+                  </a>
+                  <!-- <xsl:if test="(.//siteMapNode/@resourceKey = $CurrentPageId or ./@resourceKey = $CurrentPageId)"> -->
+                  <xsl:if test="count(./descendant-or-self::siteMapNode[@resourceKey = $CurrentPageId]) &gt; 0">
+                    <xsl:call-template name="level_loop">
+                      <xsl:with-param name="parent" select="." />
+                      <!-- <xsl:with-param name="style" select="'subcat'" /> -->
+                    </xsl:call-template>
+                  </xsl:if>
+                </li>
+               </xsl:if> 
+              </xsl:if>
+            </xsl:for-each>
+      </xsl:when>
+      <xsl:otherwise>
+
+<!-- THIS IS WHERE THE MAGIC HAPPENS ;-) -->
+
+        <xsl:if test="count($parent/siteMapNode[@appearsInNav='true']) &gt; 0">
+<ul>
+              <xsl:if test="count(ancestor::*) = 3"> 
+                 <xsl:attribute name="class"><xsl:value-of select=" 'subcat' " /></xsl:attribute>
+               </xsl:if>
+                <xsl:if test="count(ancestor::*) = 2"> 
+                 <xsl:attribute name="class"><xsl:value-of select=" 'typical' " /></xsl:attribute>
+               </xsl:if>
+
+            <xsl:for-each select="$parent/siteMapNode[@appearsInNav='true']">
+
+              <li>
+                <!--
+                        The first node in the sublist has a special style applied. So if we're
+                        on the first item (or a sibling thereof), set the style to "first".
+                -->
+                <xsl:if test="position() = 1 or following-sibling::*">
+                   <xsl:attribute name="class">first</xsl:attribute>
+                </xsl:if>
+                <xsl:if test="(.//siteMapNode/@resourceKey = $CurrentPageId or ./@resourceKey = $CurrentPageId)">
+                    <xsl:attribute name="class">selected</xsl:attribute>
+                  </xsl:if>
+                <!--
+                        The last node in this list has a special style applied. So if we're
+                        on the last item, set the style to "last".
+                -->  
+                <xsl:if test="position()=last()">
+                   <xsl:attribute name="class">last</xsl:attribute>
+                </xsl:if> 
+                <a href="{./@url}" title="{./@title}">
+                  <xsl:if test="(.//siteMapNode/@resourceKey = $CurrentPageId or ./@resourceKey = $CurrentPageId)">
+                    <xsl:attribute name="class">selected</xsl:attribute>
+                  </xsl:if>
+                  <xsl:if test="./@redirectNewWindow = 'true'">
+                    <xsl:attribute name="target">_blank</xsl:attribute>
+                  </xsl:if>
+                  <xsl:value-of select="./@title" />
+                </a>
+
+              <!-- </li> -->
+                <xsl:if test="(.//siteMapNode/@resourceKey = $CurrentPageId or ./@resourceKey = $CurrentPageId)">
+                  <xsl:call-template name="level_loop">
+                    <xsl:with-param name="parent" select="." />
+                  </xsl:call-template>
+                </xsl:if>
+</li>
+          </xsl:for-each>
+</ul>
+        </xsl:if>
+
+<!-- schools were here -->
+
+      </xsl:otherwise>
+    </xsl:choose>
+
+  </xsl:template>
+
+
+</xsl:stylesheet>

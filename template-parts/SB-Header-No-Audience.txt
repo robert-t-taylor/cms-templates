@@ -1,0 +1,25 @@
+   <header id="top">   
+   <div class="top-wrapper">
+        <h1 class="logo"><a href="/">Heinz College Home</a></h1>
+        <a href="#search" class="search">Search</a>
+        <div class="top-search notation">
+          <!-- 
+          <fieldset>
+            <input class="searchForm" name="keywords" title="Quick Search" />
+            <input type="submit" class="searchButton" title="Search" value="Go" />
+          </fieldset>
+          -->
+          <!-- moved to SB-Footer-ORIG 
+           <form action="/search-results/index.aspx" method="post" name="keywordform" id="keywordform" class="searchForm">
+              <input type="hidden" name="pageindex" value="0" />
+              <input type="hidden" name="pagesize" value="15" />
+              <input id="keywords" name="keywords" type="text" value="Search this site.." onfocus="if (this.value=='Search this site...') this.value='';" onblur="if (this.value == '') this.value ='Search this site...';" /><span class="submit" onclick="$('#keywordform').submit();"> </span>
+            </form>
+        -->
+        </div>
+        <a href="#footer-nav" class="menu-icon">
+          <span aria-hidden="true" data-icon="?"></span>
+          <span class="screen-reader-text">menu</span>
+        </a>
+      </div>
+    </header>

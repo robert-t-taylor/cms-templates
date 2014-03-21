@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!DOCTYPE xsl:stylesheet[<!ENTITY nbsp   "&#160;">]>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <!-- SET UP PARAMS -->
+	<xsl:param name="recordCount" />
+	<xsl:param name="keywords" />
+	<xsl:param name="categoryID" />
+	<xsl:param name="startDate" />
+	<xsl:param name="endDate" />
+	<xsl:param name="pageIndex" />
+	<xsl:param name="pageSize" />
+	<xsl:param name="pageCount" />
+
+
+<!--===============================================
+ 1. PRIMARY TEMPLATE
+================================================-->	
+	<xsl:template match="/">
+    	<!--
+        <link href="/css/ui.datepicker.css" rel="stylesheet" type="text/css" media="screen" />
+		<script type="text/javascript" language="javascript" src="/js/jq.ui.datepicker-3.4.js">//</script>
+        <script type="text/javascript" language="javascript">
+		//<![CDATA[
+			$(document).ready(function() {
+				// I'm not sure what this block of javascript was here. It looks like it was left over from the Event Calendar. I left it just in case it was necessary for something that was going to be done later. 
+				$("#start_date").datepicker({showOn: 'both', buttonImageOnly: true, buttonImage: '/images/icon_calendar.gif', buttonText: 'Calendar'});
+				$("#end_date").datepicker({showOn: 'both', buttonImageOnly: true, buttonImage: '/images/icon_calendar.gif', buttonText: 'Calendar'});
+			});
+		//]]>
+        </script>
+        <noscript><p style="color:#ff0000;">Your browser does not support JavaScript, so the calendar utility is not displayed. Enter the start and end dates directly into the form using this format: month/day/year. For example: 2/28/2008. Also, sorting the results list by the Title column will not be functional.</p></noscript>
+        -->
+		<script type="text/javascript">
+            function MM_jumpMenu(targ,selObj,restore){ //v3.0
+              eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+              if (restore) selObj.selectedIndex=0;
+            }
+        </script>
+        
+        <xsl:choose>
+        	
+       
+        	<!--no results returned-->
+            <xsl:when test="count(//News) = 0">
+                <p style="font-weight:bold;margin-bottom:6px;">We are sorry, no results were returned. Please use the form above to search again.<br /><br /><br /><br /><br /></p>
+            </xsl:when>
+            
+            <!--results-->
+            <xsl:otherwise>
+                <div id="results">
+                    <xsl:apply-templates select="//News" />
+                </div>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+    </xsl:template>
+    
+<!--===============================================
+ 2. NEWS LOOP
+================================================-->
+    <xsl:template match="//News">
+        <p style="overflow:auto;">
+            <xsl:attribute name="class">
+                <xsl:choose>
+                    <xsl:when test="position() mod 2 = 1">result odd</xsl:when>
+                    <xsl:otherwise>result</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <a href="/news/news-detail/index.aspx?nid={ID}" title="More information on the {Title} news item" id="{ID}">
+               <xsl:value-of select="Title" />
+            </a><br />
+            <span><strong>Release Date: </strong><xsl:value-of select="FormattedReleaseDateTime" /></span><br />
+
+            <!-- Added 11.29.2011 Test if there is an image associated with the news item and if so display-->
+            <xsl:if test="(ImageID) != 0">
+             <img src="image.aspx?id={ImageID}" alt="Image associated with the {Title} news item" style="float: right;  vertical-align: middle; border: 0px; margin:10px 10px 10px 10px; height: 150px;" /><br /><br />
+            </xsl:if>
+
+            <!-- Added 11.29.2011 If HTML content exists display, otherwise use description as fallback. -->
+<!--
+            <xsl:choose>
+              <xsl:when test="CDATAContent != ''">
+                 <xsl:value-of disable-output-escaping="yes" select="CDATAContent" />...<br />
+                 <a href="/news/news-detail/index.aspx?nid={ID}">read more...</a><br />
+              </xsl:when>
+              <xsl:otherwise>
+                  <xsl:value-of select="substring(Description, 1, 500)" />...<br />
+                  <a href="/news/news-detail/index.aspx?nid={ID}">read more...</a><br />
+              </xsl:otherwise>
+            </xsl:choose>
+-->
+                  <!-- limit description to 500 chars -->
+                  <xsl:value-of select="substring(Description, 1, 500)" />...<br />
+                  <a href="/news/news-detail/index.aspx?nid={ID}">read more...</a><br />
+        </p>
+    </xsl:template>
+    
+<!--===============================================
+ 3. PAGING
+================================================-->
+    <xsl:template name="paging">
+        <xsl:if test="$pageCount &gt; 1">
+        	<p class="paging">
+                <xsl:if test="$pageIndex != 0">
+                    <a href="/news/index.aspx?pageIndex={($pageIndex)-1}&amp;keywords={$keywords}&amp;pageSize={$pageSize}&amp;category={$categoryID}&amp;start_date={$startDate}&amp;end_date={$endDate}" title="Go to the previous page of the site search results">Previous Page</a> |
+                </xsl:if>
+                <xsl:call-template name="pagingloop" />
+                <xsl:if test="($pageIndex+1) != $pageCount">
+                    | <a href="/news/index.aspx?pageIndex={($pageIndex)+1}&amp;keywords={$keywords}&amp;pageSize={$pageSize}&amp;category={$categoryID}&amp;start_date={$startDate}&amp;end_date={$endDate}" title="Go to the next page of the site search results">Next Page</a>
+                </xsl:if>
+            </p>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="pagingloop">
+        <xsl:param name="count" select="1" />	
+        <xsl:choose>
+            <xsl:when test="($count)-1 = $pageIndex">
+                <xsl:value-of select="$count" />
+            </xsl:when>
+            <xsl:otherwise>
+                <a href="/news/index.aspx?pageIndex={($count)-1}&amp;keywords={$keywords}&amp;pageSize={$pageSize}&amp;category={$categoryID}&amp;start_date={$startDate}&amp;end_date={$endDate}" title="Go to page {$count} of the site search results"><xsl:value-of select="$count" /></a>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="$count &lt; $pageCount">
+            <xsl:text> | </xsl:text>
+
+            <xsl:call-template name="pagingloop">
+                <xsl:with-param name="count" select="$count + 1" />
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+
+</xsl:stylesheet>

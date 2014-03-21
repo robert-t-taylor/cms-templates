@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?><!-- DWXMLSource="test.xml" -->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="xsi">
+    <xsl:output method="html" encoding="iso-8859-1" />
+    
+    <!-- SET UP PARAMS -->
+    <xsl:param name="pageCount" />
+    <xsl:param name="pageIndex" />
+    <xsl:param name="recordCount" />
+    <xsl:param name="pageSize" />
+    <xsl:param name="Keywords" />
+    <xsl:param name="categoryIds" />   
+    <xsl:param name="type" />   
+    
+<!--===============================================
+ 1. PRIMARY TEMPLATE
+================================================-->
+    <xsl:template match="/">
+    	<xsl:call-template name="search_form" />
+        
+        <xsl:choose>
+            <xsl:when test="$recordCount != 0">
+                <h2 class="access">Search Results</h2>
+                <p>Your search for the keyword(s) <strong><xsl:value-of select="$Keywords" /> </strong> <xsl:if test="$type != ''"><xsl:text> </xsl:text> and type <strong><xsl:value-of select="$type" /></strong></xsl:if> returned <xsl:value-of select="$recordCount" /> result<xsl:if test="$recordCount !=1">s</xsl:if>.</p>
+                <div id="results">  
+                    <p class="paging">
+                        Displaying page <xsl:value-of select="$pageIndex+1" /> of <xsl:value-of select="$pageCount" /><br />
+                        <xsl:call-template name="paging" /> 
+                    </p>
+                    <xsl:apply-templates select="//siteMapNode" />
+                    <p class="paging" style="margin:6px 0 0;">
+                        Displaying page <xsl:value-of select="$pageIndex+1" /> of <xsl:value-of select="$pageCount" /><br />
+                        <xsl:call-template name="paging" /> 
+                    </p>
+                </div> 
+            </xsl:when>
+            <xsl:when test="$Keywords = ''"></xsl:when>
+            <xsl:otherwise>  
+                  <h2>Your search for the keyword(s) <xsl:value-of select="$Keywords" /> <xsl:if test="$type != ''"><xsl:text> </xsl:text> and type <xsl:value-of select="$type" /></xsl:if> did not return results.</h2>
+                 <h3>Search Tips:</h3>
+                 <ol>
+                     <li>Check the spelling of the keyword.</li>
+                     <li>Try to search using a different keyword.</li>
+                     <li>Try to search using more than one keyword. The search will return matching items that have at least one instance of any of the keywords.</li>
+                 </ol>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+<!--===============================================
+ 2. SEARCH FORM
+================================================-->
+    <xsl:template name="search_form">
+        <form action="/search-results/index.aspx" method="POST" name="sitesearch_advanced" id="sitesearch_advanced">
+            <input type="hidden" name="pageindex" value="0" />
+            <input type="hidden" name="pagesize" value="15" />
+            <div class="search_form">
+                <table cellpadding="6" cellspacing="0" border="0" summary="This table is used for the visual layout of the form used to search the Heinz College website by keyword and type. You must enter a keyword or the search will not submit.">
+                    <tr>
+                        <td><label for="keywords1">Keywords: </label><input type="text" name="keywords" id="keywords1" value="{$Keywords}" style="width:180px;" onfocus="this.value='';" onblur="if (this.value == '') this.value ='Search site again...';" /></td> <td><input type="image" src="/images/event_search.gif" title="Submit Site Search" alt="Submit Site Search" /></td>
+                    </tr>
+                </table>
+                <div id="loading"><xsl:text><!--//--> </xsl:text></div>
+            </div>
+
+        </form>
+    </xsl:template>
+  
+<!--===============================================
+ 3. RESULTS LOOP
+================================================-->
+    <xsl:template match="siteMapNode">
+
+      <!-- ***** Modified 03.12.2009 by R. Taylor; courses broken, so hide them! ***** -->
+      <xsl:if test="@type != 'Course'">
+       <!-- ***** Modified 04.10.2009 by R. Taylor; hide flash! ***** -->
+       <xsl:if test="not(contains(@url, 'flash-homepage-header'))">
+        <p>
+            <xsl:attribute name="class">
+                <xsl:choose>
+                    <xsl:when test="position() mod 2 = 1">result odd</xsl:when>
+                    <xsl:otherwise>result</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <a title="{@title}">
+                <xsl:attribute name="href">
+                    <xsl:choose>
+                        <xsl:when test="@type = 'Page'"><xsl:value-of select="@url" /></xsl:when>
+                        <xsl:when test="@type = 'Event'">/events/event-detail/index.aspx?eid=<xsl:value-of select="@url" /></xsl:when>
+                        <xsl:when test="@type = 'News'">/news/news-detail/index.aspx?nid=<xsl:value-of select="@url" /></xsl:when>
+                        <xsl:when test="@type = 'Program'">/find-and-apply-for-funding/find-funding/funding-detail/index.aspx?progId=<xsl:value-of select="@url" /></xsl:when>
+                        <xsl:when test="@type = 'File'"><xsl:value-of select="@url" /></xsl:when>
+                        <xsl:when test="@type = 'Faculty'">/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id=<xsl:value-of select="@url" /></xsl:when>
+                        <xsl:when test="@type = 'Course'">/course-detail/index.aspx?cid=<xsl:value-of select="@resourceKey" /></xsl:when>
+                        <xsl:when test="@type = 'Research'">/faculty-and-research/research/research-details/index.aspx?rid=<xsl:value-of select="@resourceKey" /></xsl:when>
+                    </xsl:choose>
+                </xsl:attribute>
+               <!-- <xsl:if test="contains(@title, '.pdf')">
+                    <xsl:attribute name="title"><xsl:value-of select="@title" /> (Link will open in a new browser window)</xsl:attribute>
+                    <xsl:attribute name="target">_blank</xsl:attribute>
+                </xsl:if>-->
+                <xsl:value-of select="@title" />
+                <!-- Added 01.2010 by R. Taylor (Australia Campus) HERE... -->
+                  <xsl:if test="contains(@url, '/australia/')"> (Australia Campus)</xsl:if>
+            </a><br />
+            <span class="info">
+                <strong>Type: </strong><xsl:value-of select="@type" />
+                <xsl:choose>
+                    <xsl:when test="(@type = 'Page') or (@type = 'File')">
+                        <xsl:text> </xsl:text>|<xsl:text> </xsl:text>
+                        <strong>Last Modified: </strong><xsl:value-of select="@displayDate" /><br />
+                    </xsl:when>
+                    <xsl:when test="@type = 'Event'">
+                        <xsl:text> </xsl:text>|<xsl:text> </xsl:text>
+                        <strong>Event Start Date: </strong><xsl:value-of select="@displayDate" /><br />
+                    </xsl:when>
+                    <xsl:when test="@type = 'News'">
+                        <xsl:text> </xsl:text>|<xsl:text> </xsl:text>
+                        <strong>Release Date: </strong><xsl:value-of select="@displayDate" /><br />
+                    </xsl:when>
+                </xsl:choose>
+                <xsl:if test="@isSiteSecure = 'True'"> | Secure Item</xsl:if>
+            </span>
+            <xsl:value-of select="@description" />
+        </p>
+       </xsl:if>
+      </xsl:if>
+    </xsl:template>
+    
+<!--===============================================
+ 4. PAGING
+================================================-->
+    <xsl:template name="paging">
+        <xsl:if test="$pageCount &gt; 1">
+            <xsl:if test="$pageIndex != 0">
+                <a href="/search-results/index.aspx?pageIndex={($pageIndex)-1}&amp;keywords={$Keywords}&amp;pageSize={$pageSize}" title="Go to the previous page of the site search results">Previous Page</a> |
+            </xsl:if>
+            <xsl:call-template name="pagingloop" />
+            <xsl:if test="($pageIndex+1) != $pageCount">
+                | <a href="/search-results/index.aspx?pageIndex={($pageIndex)+1}&amp;keywords={$Keywords}&amp;pageSize={$pageSize}" title="Go to the next page of the site search results">Next Page</a>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="pagingloop">
+        <xsl:param name="count" select="1" />	
+        <xsl:choose>
+            <xsl:when test="($count)-1 = $pageIndex">
+                <xsl:value-of select="$count" />
+            </xsl:when>
+            <xsl:otherwise>
+                <a href="/search-results/index.aspx?pageIndex={($count)-1}&amp;keywords={$Keywords}&amp;pageSize={$pageSize}" title="Go to page {$count} of the site search results"><xsl:value-of select="$count" /></a>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="$count &lt; $pageCount">
+            <xsl:text> | </xsl:text>
+
+            <xsl:call-template name="pagingloop">
+                <xsl:with-param name="count" select="$count + 1" />
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+ 
+</xsl:stylesheet>

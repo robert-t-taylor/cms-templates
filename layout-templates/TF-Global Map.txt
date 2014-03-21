@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"[]>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com">
+  <head>
+    <rei:template id="370" name="TF-Base-URL" />
+    <rei:template id="341" name="TF-Title" />
+    <rei:template id="340" name="TF-Meta" />
+    <rei:template id="338" name="TF-Stylesheets" />
+    <rei:template id="339" name="TF-Javascript" />
+<script type="text/javascript" language="javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="/js/global.js"></script>
+<script type="text/javascript" language="javascript" src="/js/jq.utabs.js"></script>
+<script type="text/javascript" language="javascript">
+		//MAP CLICK
+		$.fn.mapclick=function(tab){
+			return this
+			.click(function(){
+				$('#map_tabs').tabs('select', tab); 
+				$(this).siblings("li").removeClass("mapnum-selected");
+				$(this).addClass("mapnum-selected");
+				return false;
+			});
+		};	
+		//TAB CLICK
+		$.fn.tabclick=function(num){
+			return this
+			.click(function(){
+				$(num).siblings("li").removeClass("mapnum-selected");
+				$(num).addClass("mapnum-selected");
+				return false;
+			});
+		};			
+	$(document).ready(function() {
+		//keyword search form
+		$("#keywords").search();
+		$("#keywordform").validsearch(".tryagain", "#keywords");
+		//INIT TABS
+		$('#primary_nav li.top').dropdowns();
+		//INIT TABS
+		$("#map_tabs").tabs();
+		//SET DEFAULT ACTIVE AREA
+		$("#num_01").addClass("mapnum-selected");
+		
+		// MAP CLICK TAB CHANGE	
+		$('#num_01').mapclick(0);
+		$('#num_02').mapclick(1);
+		$('#num_03').mapclick(2);
+		$('#num_04').mapclick(3);
+		$('#num_05').mapclick(4);
+		$('#num_06').mapclick(5);
+		$('#num_07').mapclick(6);
+		$('#num_08').mapclick(7);
+		$('#num_09').mapclick(8);
+		$('#num_10').mapclick(9);
+		$('#num_11').mapclick(10);
+		$('#num_12').mapclick(11);
+		$('#num_13').mapclick(12);
+		
+		//TAB CLICK NUMBER HIGHLIGHT	
+		$('#tab_01 a').tabclick("#num_01");
+		$('#tab_02 a').tabclick("#num_02");
+		$('#tab_03 a').tabclick("#num_03");
+		$('#tab_04 a').tabclick("#num_04");
+		$('#tab_05 a').tabclick("#num_05");
+		$('#tab_06 a').tabclick("#num_06");
+		$('#tab_07 a').tabclick("#num_07");
+		$('#tab_08 a').tabclick("#num_08");
+		$('#tab_09 a').tabclick("#num_09");
+		$('#tab_10 a').tabclick("#num_10");
+		$('#tab_11 a').tabclick("#num_11");
+		$('#tab_12 a').tabclick("#num_12");
+		$('#tab_13 a').tabclick("#num_13");
+	});
+</script>
+<!--[if IE 6]>
+    <link href="/css/ie6.css" rel="stylesheet" type="text/css" media="screen" />
+<![endif]-->
+                
+    <meta http-equiv="imagetoolbar" content="no" xmlns="" /><meta name="MSSmartTagsPreventParsing" content="TRUE" xmlns="" /><meta name="generator" content="REIgnition CMS Core 2.1.0.5" xmlns="" /><meta name="copyright" content="H. John Heinz III College" xmlns="" /><meta name="classification" content="Education" xmlns="" />
+
+<!-- Quantcast template included added 04.03.2013 -->
+<rei:template id="486" name="Quantcast Script" />
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7109555-1']);
+  _gaq.push(['_setDomainName', '.heinz.cmu.edu']);
+  _gaq.push(['_trackPageview']);
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+    <body class="wide">
+      <div class="page">
+
+       <rei:template id="405" name="TF-Masthead (Do Not Edit)" />
+            
+        <div class="body">
+          <div class="contents">
+            <div class="full">
+              <div class="outer">
+
+               <rei:template id="357" name="TF-Breadcrumbs" />
+                <div class="inner">
+                  <rei:template id="389" name="TF-Navigation - Sub (Do Not Edit)" />
+
+                  <div class="subject">
+                    <div class="titlebar">
+                      <h1><rei:variable type="Page Title" xmlns:rei="http://r-effects.com" /></h1>
+                    </div>
+                    <rei:control type="HTMLElement" name="Page Body" id="624" />
+  <!--MAP AND NUMBERS-->
+                <div id="map_set">
+                    <div class="tabs_contain">
+                  		<img src="/images/global_map.jpg" alt="CMU Heinz Global Map" width="683" height="397" style="border:none;" />
+                    	<span></span>
+                        <ul id="map_numbers">
+                            <li id="num_01"><a href="#map_content1" title="1 - Pittsburgh, Pennsylvania">1 - Pittsburgh, Pennsylvania</a></li>
+                            <li id="num_02"><a href="#map_content2" title="2 - Adelaide, Australia">2 - Adelaide, Australia</a></li>
+                            <li id="num_03"><a href="#map_content3" title="3 - Washington, DC">3 - Washington, DC</a></li>
+                            <li id="num_04"><a href="#map_content4" title="4 - Los Angeles, California">4 - Los Angeles, California</a></li>
+                            <li id="num_05"><a href="#map_content5" title="5 - Monterrey, Mexico">5 - Monterrey, Mexico</a></li>
+                            <li id="num_06"><a href="#map_content6" title="6 - London, England">6 - London, England</a></li>
+                            <li id="num_07"><a href="#map_content7" title="7 - Querétaro, Mexico">7 - Querétaro, Mexico</a></li>
+                            <li id="num_08"><a href="#map_content8" title="8 - Delft, The Netherlands">8 - Delft, The Netherlands</a></li>
+                            <li id="num_09"><a href="#map_content9" title="9 - Ahmedabad, India">9 - Ahmedabad, India</a></li>
+                            <li id="num_10"><a href="#map_content10" title="10 - Bologna, Italy">10 - Bologna, Italy</a></li>
+                            <li id="num_11"><a href="#map_content11" title="11 - Ludwigsburg, Germany">11 - Ludwigsburg, Germany</a></li>
+                            <li id="num_12"><a href="#map_content12" title="12 - Lisbon, Portugal">12 - Lisbon, Portugal</a></li>
+                            
+                        </ul>
+                  	</div>
+                </div>
+                <!--END MAP AND NUMBERS-->
+                    
+                <!--TABS AND INFO DIVS-->
+                <div id="map_tab_set">
+                    <div class="tabs_contain">
+                        <span></span>
+                        <ul id="map_tabs">
+                            <li id="tab_01"><a href="#map_content1" title="1 - Pittsburgh, Pennsylvania">1 - Pittsburgh, Pennsylvania</a></li>
+                            <li id="tab_02"><a href="#map_content2" title="2 - Adelaide, Australia">2 - Adelaide, Australia</a></li>
+                            <li id="tab_03"><a href="#map_content3" title="3 - Washington, DC">3 - Washington, DC</a></li>
+                            <li id="tab_04"><a href="#map_content4" title="4 - Los Angeles, California">4 - Los Angeles, California</a></li>
+                            <li id="tab_05"><a href="#map_content5" title="5 - Monterrey, Mexico">5 - Monterrey, Mexico</a></li>
+                            <li id="tab_06"><a href="#map_content6" title="6 - London, England">6 - London, England</a></li>
+                            <li id="tab_07"><a href="#map_content7" title="7 - Querétaro, Mexico">7 - Querétaro, Mexico</a></li>
+                            <li id="tab_08"><a href="#map_content8" title="8 - Delft, The Netherlands">8 - Delft, The Netherlands</a></li>
+                            <li id="tab_09"><a href="#map_content9" title="9 - Ahmedabad, India">9 - Ahmedabad, India</a></li>
+                            <li id="tab_10"><a href="#map_content10" title="10 - Bologna, Italy">10 - Bologna, Italy</a></li>
+                            <li id="tab_11"><a href="#map_content11" title="11 - Ludwigsburg, Germany">11 - Ludwigsburg, Germany</a></li>
+                            <li id="tab_12"><a href="#map_content12" title="12 - Lisbon, Portugal">12 - Lisbon, Portugal</a></li>
+                         
+                         </ul>
+                    </div>
+                    <div id="map_content1" class="copy tabs-panel">
+                        <rei:control type="HTMLElement" name="City Control 01" id="625" />
+                    </div>
+                    <div id="map_content2" class="copy tabs-panel">
+                        <rei:control type="HTMLElement" name="City Control 02" id="626" />
+                    </div>
+                    <div id="map_content3" class="copy tabs-panel">
+                        <rei:control type="HTMLElement" name="City Control 03" id="627" />
+                    </div>
+                    <div id="map_content4" class="copy tabs-panel">
+                    <rei:control type="HTMLElement" name="City Control 04" id="628" />
+                    </div>
+                    <div id="map_content5" class="copy tabs-panel">
+                       <rei:control type="HTMLElement" name="City Control 05" id="629" />
+                    </div>
+                    <div id="map_content6" class="copy tabs-panel">
+                        <rei:control type="HTMLElement" name="City Control 06" id="630" />
+                    </div>
+                    <div id="map_content7" class="copy tabs-panel">
+                        <rei:control type="HTMLElement" name="City Control 07" id="631" />
+                    </div>
+                    <div id="map_content8" class="copy tabs-panel">
+                        <rei:control type="HTMLElement" name="City Control 08" id="632" />
+                    </div>
+                    <div id="map_content9" class="copy tabs-panel">
+                        <rei:control type="HTMLElement" name="City Control 09" id="633" />
+                    </div>
+                    <div id="map_content10" class="copy tabs-panel">
+                        <rei:control type="HTMLElement" name="City Control 10" id="634" />
+                    </div>
+                    <div id="map_content11" class="copy tabs-panel">
+                        <rei:control type="HTMLElement" name="City Control 11" id="635" />
+                    </div>
+                    <div id="map_content12" class="copy tabs-panel">
+                       <rei:control type="HTMLElement" name="City Control 12" id="636" />
+                    </div>
+                        
+                </div>
+            	<!--END TABS AND INFO DIVS-->
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+             <rei:template id="342" name="TF-Feeds" />
+          </div>
+      </div>
+      <rei:template id="337" name="TF-Footer" />
+    </body>
+</html>
+

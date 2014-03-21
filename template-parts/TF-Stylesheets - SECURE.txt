@@ -1,0 +1,76 @@
+<!-- stylesheets here -->
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/html.css" type="text/css" charset="utf-8" />
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/layout.css" type="text/css" charset="utf-8" />
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/sixteen.css" type="text/css" charset="utf-8" />
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/fonts.css" type="text/css" charset="utf-8" />
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/color.css" type="text/css" charset="utf-8" />
+<link href="https://www.heinz.cmu.edu/res/css/print_global.css" rel="stylesheet" type="text/css" media="print" />
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/tags/pages.css" type="text/css" charset="utf-8" />
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/tags/sections/breadcrumbs.css" type="text/css" charset="utf-8" />
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/tags/sections/feeds.css" type="text/css" charset="utf-8" />        
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/tags/sections/footer.css" type="text/css" charset="utf-8" />
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/tags/sections/masthead.css" type="text/css" charset="utf-8" />
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/tags/sections/menu.css" type="text/css" charset="utf-8" />        
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/tags/sections/sidebar.css" type="text/css" charset="utf-8" />
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/tags/sections/bigdate.css" type="text/css" charset="utf-8" />
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/tags/sections/sidenav.css" type="text/css" charset="utf-8" />
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/lib/mediaplayer/mediaplayer.css" type="text/css" charset="utf-8" />         
+<link rel="stylesheet" href="https://www.heinz.cmu.edu/res/css/tags/components/carousel.css" type="text/css" charset="utf-8" />
+
+<!-- Added 11.2012 for sitemap -->
+<link href="https://www.heinz.cmu.edu/res/css/screen_sitemap.css" rel="stylesheet" type="text/css" media="screen" />
+
+<!-- remove after style sheet update -->
+<style type="text/css">
+
+    .subject span.intro-image,
+    .subject span.intro-image p,
+    .subject span.intro-text{
+        margin:  0;
+        padding: 0;
+    }
+
+    .subject span.intro-image p,
+    .subject span.intro-text p{
+        margin-bottom: 0;
+    }
+
+    .subject .intro-text p{
+        font-family:    'Trebuchet MS', Verdana, sans-serif;
+        font-size:      19px;
+        line-height:    1.4em;
+        color:          #6d6e71;
+        padding-right:  10px;
+        margin:         -6px 0px 0px 0px;
+    }
+
+    .sidebar .caption p{
+        margin-top:             6px;
+        padding-top:            8px;
+        font-size:              10px;
+        line-height:            1.3em;
+        font-style:             italic;
+        color:                  #b41f24;
+        background-image:       url('../..https://www.heinz.cmu.edu/res/img/caption-arrow-left.png');
+        background-repeat:      no-repeat;
+        background-position:    8px 0px;
+    }
+
+.listing .sidebar ul.list li .date {
+    color: #000000;
+    display: block;
+    font-size: 11px;
+    padding-top: 4px;
+    float: none;
+    margin-right: 0;
+}
+
+.home .sidebar .events ul li p.date {
+    color: #000000;
+    font-size: 10px;
+    float: none;
+    margin-right: 0;
+}
+
+</style>
+<!-- end remove after style sheet update -->

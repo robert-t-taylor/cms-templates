@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com">
+
+<rei:template id="13" name="Global - Head/Meta" />
+
+<body>
+<script type="text/javascript" language="javascript" src="/js/swfobject.js"></script>
+<script type="text/javascript" language="javascript" src="/js/jq.utabs.js"></script>
+<script type="text/javascript" language="javascript">
+	$(document).ready(function() {
+		//tabs init
+		$("#tabs").tabs();
+	});
+</script>
+<rei:template id="14" name="Global - NoScript Message" />
+<div id="head_wrap">
+  <div id="head_wrap_in1">
+<rei:template id="16" name="Level - Logo" />   
+<rei:template id="15" name="Level - Accessibility Nav" /> 
+    <div id="searcharea">
+<rei:template id="17" name="Global - Header Links" />    
+<rei:template id="18" name="Global - Site Search" />
+<rei:template id="274" name="Global - Social Media" />
+
+    </div>
+    
+<rei:template id="19" name="Global - Primary Navigation" />
+    
+  </div>
+</div>
+
+<div id="main_content_wrap">
+
+	<div id="main_content">
+        <div id="left_col">
+<rei:template id="26" name="Navigation - Sub" /><rei:template id="25" name="Navigation - Secondary" />
+        </div>
+        <div id="right_content">
+
+        	<div id="right_content_media"><img src="image.aspx?id=1372" alt="traffic21" />
+<p>&nbsp;</p>
+</div>
+            <rei:template id="27" name="Navigation - Breadcrumbs" />
+            <h2 class="access" id="access_main_content">Main Content:</h2>
+        	<div id="sub_middle_col">
+<object width="414" height="263"><param name="movie" value="http://www.youtube.com/v/9VilddjvUjA?fs=1&amp;hl=en_US&amp;rel=0&amp;hd=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/9VilddjvUjA?fs=1&amp;hl=en_US&amp;rel=0&amp;hd=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="414" height="263"></embed></object>
+<br /><br />
+           	  <h1><rei:variable type="Page Title" /></h1>
+              <rei:control type="HTMLElement" name="Main Content" id="348" />
+               
+
+          	</div>
+            <div id="sub_right_col">
+<rei:template id="213" name="Traffic21 - Callout Links" />
+              <div class="right_callout">
+                 <div class="topic_list">
+                  <rei:control type="HTMLElement" name="Right Column Topic" id="349" />
+                 </div>
+             </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<rei:template id="20" name="Global - Footer" />
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+<!-- These DIVs will be replaced with image digits, corresponding to the current date. For the BIG Date on homepage -->
+<div id="month1"> </div><div id="month2"> </div><div class="decimal"> </div><div id="day1"> </div><div id="day2"> </div><div class="decimal"> </div><div id="year1"> </div><div id="year2"> </div>
+
+<script type="text/javascript" src="res/js/bigdate.js"></script>

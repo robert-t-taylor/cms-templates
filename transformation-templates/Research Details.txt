@@ -1,0 +1,44 @@
+
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+	<xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+	
+	<xsl:template match="/">
+		<xsl:apply-templates select="/Research" />
+		<script language="javascript" type="text/javascript">
+            document.write('<p><strong><a href="javascript:history.back();">Return to the previous page</a></strong></p>');
+        </script>
+	</xsl:template>
+	
+	<xsl:template match="Research">
+		<div id="researchDetails">
+            <h2><xsl:value-of select="Title" /></h2>
+            <p>
+                <xsl:if test="AuthorLastName != '' and AuthorFirstName != '' and Author_FacultyID != ''">
+                    <a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Author_FacultyID}" title="View {AuthorFirstName} {AuthorLastName}'s profile"> <xsl:value-of select="AuthorLastName" />, <xsl:value-of select="AuthorFirstName" /> </a>
+                </xsl:if>
+            </p>
+            <p>
+                <xsl:if test="CDATACitation != ''"><strong>Citation: </strong><xsl:value-of select="CDATACitation" disable-output-escaping="yes" /><br /></xsl:if>
+                <xsl:if test="PublicationYear !=''"><strong>Publication Year: </strong> <xsl:value-of select="PublicationYear" /><br /></xsl:if>
+                <xsl:if test="ResearchTypeObj/TypeName !=''"><strong>Type: </strong><xsl:value-of select="ResearchTypeObj/TypeName" /><br /></xsl:if>
+                <xsl:if test="Number !=''"><strong>Working Paper Number: </strong> <xsl:value-of select="Number" /><br /></xsl:if>
+                <!--<xsl:if test="RelatedLink !=''"><strong><a href="{RelatedLink}" title="View Social Science Research Network (SSRN) publication (this link opens in a new window)" target="_blank">View Publication</a></strong><br /></xsl:if>-->
+            </p>
+            
+            <!-- It seems like there should be an XML node that I can pull into this area for a description, though there isn't one. -->
+            
+            <xsl:if test="AbstractFile !='' or Filename !=''">
+                <ul>
+                    <xsl:if test="AbstractFile !=''"><li><a href="/research/{ID}abstract.pdf" title="Download Abstract File (.pdf format this link opens in a new window)" target="_blank">Abstract File</a> (.<acronym title="Adobe Portable Document Format">pdf)</acronym><xsl:text> </xsl:text></li></xsl:if>
+                    <xsl:if test="Filename !=''"><li><a href="/research/{ID}full.pdf" title="Download Full Text File (.pdf format, this link opens in a new window)" target="_blank">View Full Text</a> (.<acronym title="Adobe Portable Document Format">pdf)</acronym></li></xsl:if>
+                </ul>
+            </xsl:if>
+            
+            <xsl:if test="AbstractFile !='' or Filename !='' or RelatedLink !=''">
+                <p>Adobe .<acronym title="Adobe Portable Document Format">pdf</acronym> files require the Adobe Acrobat Reader.<br /><a href="http://www.adobe.com/products/acrobat/readstep2.html" title="Download and install the Adobe Acrobat Reader (this link opens in a new window)" target="_blank">Download and install the Adobe Acrobat Reader</a>.</p>
+            </xsl:if>
+		</div>
+	</xsl:template>
+	
+</xsl:stylesheet>

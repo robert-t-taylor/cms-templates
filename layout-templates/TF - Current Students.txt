@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com">
+
+<rei:template id="13" name="Global - Head/Meta" />
+
+<body>
+<script type="text/javascript" language="javascript" src="/js/swfobject.js"></script>
+<rei:template id="14" name="Global - NoScript Message" />
+<div id="head_wrap">
+  <div id="head_wrap_in1">
+<rei:template id="16" name="Level - Logo" />  
+<rei:template id="15" name="Level - Accessibility Nav" /> 
+    <div id="searcharea">
+<rei:template id="17" name="Global - Header Links" />
+<rei:template id="18" name="Global - Site Search" />
+<rei:template id="274" name="Global - Social Media" />
+
+    </div>
+    
+<rei:template id="19" name="Global - Primary Navigation" />
+    
+  </div>
+</div>
+<div id="main_content_wrap">
+	<div id="main_content">
+        <div id="left_col">
+<rei:template id="26" name="Navigation - Sub" />            
+<rei:template id="25" name="Navigation - Secondary" />
+        </div>
+        <div id="right_content">
+        <div id="right_content_media"><rei:control type="HTMLElement" name="Masthead (optional)" id="637" /></div>
+<rei:template id="27" name="Navigation - Breadcrumbs" />
+       <h2 class="access" id="access_main_content">Main Content:</h2>
+            <div id="sub_middle_col">
+           	  <h1><rei:variable type="Page Title" /></h1>
+				<rei:control type="HTMLElement" name="Main Content" id="638" />          
+<br />               
+  <rei:template id="129" name="Level - ShareThis Button" />
+            </div>
+          	<div id="sub_right_col">
+               
+                 <div class="right_callout">
+<rei:control type="HTMLElement" name="Right Column Topic" id="639" />
+<br />
+                 <p class="rss"><a href="/news/rss-feeds/all-events/index.aspx" title="Get RSS feed" target="_blank">Get RSS feed</a></p>
+
+               	  <h2>Upcoming Events</h2>
+                    <div class="item_list">
+<rei:control type="EventListElement" name="Right Column Events" id="640" />
+<br />
+<p><a href="/events/index.aspx" title="View All Events" class="readmore">View All Events</a></p>
+                  </div>
+                </div>
+
+        </div>
+        </div>
+    </div>
+    </div>
+<rei:template id="20" name="Global - Footer" />
+</body>
+</html>

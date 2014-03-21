@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com">
+<head>
+
+<title><rei:variable type="Page Title" /></title>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- SCRIPTS - MUST INCLUDE MODERNIZR -->
+  <link rel="stylesheet" href="/dist/stylesheets/base.css" />
+  <!--[if (lte IE 8)&(!IEMobile)]>
+  <link rel="stylesheet" href="/dist/stylesheets/ie.css" />
+  <![endif]-->
+  <!--[if lte IE 7]><script src=/js/libs/lte-ie7.js"></script>
+  <script src="/js/libs/json.js"></script>
+  <![endif]-->
+  <script type="text/javascript" src="//use.typekit.net/rlm4rmy.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<script src="/js/libs/modernizr-dev.js"></script>
+
+<meta http-equiv="imagetoolbar" content="no" xmlns="" /><meta name="MSSmartTagsPreventParsing" content="TRUE" xmlns="" /><meta name="generator" content="REIgnition CMS Core 2.1.0.5" xmlns="" /><meta name="copyright" content="H. John Heinz III College" xmlns="" /><meta name="classification" content="Education" xmlns="" />
+
+<link rel="stylesheet" href="/dist/stylesheets/offcanvas-minimal.css" />
+
+</head>
+<body>
+
+
+<div class="container">
+	
+	<div class="menu_container">
+		<a id="menu-toggle" class="anchor-link" href="#mobile-nav">MENU</a>
+	</div>
+	
+	<nav id="#mobile-nav" class="nav clearfix" role="navigation">
+             <rei:template id="574" name="SB-Navigation-Primary" />
+	</nav>
+	
+
+	<section class="main_content" role="main">
+
+<div class="page-wrapper">
+<div id="sizeTest"></div>
+<!-- AUDIENCE NAV HERE -->
+<rei:template id="465" name="SB-Header-Audience" />
+
+<!-- PRIMARY NAVIGATION IS IN FOOTER -->
+<rei:template id="574" name="SB-Navigation-Primary" />
+
+<div class="wrapper">
+
+           <!-- MAIN CONTENT -->
+      <section id="main" class="content">
+        <div class="main-content">
+          <rei:template id="487" name="SB-Big Idea Slider" />
+        </div>
+      <aside class="news-sidebar">
+
+      <!-- NEWS SIDEBAR HERE -->
+      <rei:template id="476" name="SB-Sidebar-Carousel-News" />
+
+      <!-- STUDENT STORIES SIDEBAR HERE -->
+      <rei:template id="477" name="SB-Sidebar-Carousel-Students" />
+
+      <!-- EVENTS SIDEBAR HERE -->
+      <rei:template id="478" name="SB-Sidebar-Carousel-Events" />
+
+      </aside>
+
+      <!-- SOCIAL SIDEBAR HERE -->
+      <rei:template id="469" name="SB-Social-Sidebar" />
+
+      </section>    
+           <!-- END MAIN CONTENT -->
+
+</div><!-- end wrapper -->
+</div><!-- end page-wrapper -->
+
+	</section>
+			
+			
+	<footer class="clearfix footer">
+			
+            <rei:template id="467" name="SB-Footer" />
+				
+	</footer>
+
+
+</div><!-- END .container -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function() {
+	
+	window.scrollTo(0, 1);
+	
+	$('.js #menu-toggle').click(function (e) {
+		$('body').toggleClass('active');
+		e.preventDefault();
+    });
+    
+    
+});
+</script>
+
+
+	
+</body>
+</html><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"[]>
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com">
+<head>
+
+<title><rei:variable type="Page Title" /></title>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- SCRIPTS - MUST INCLUDE MODERNIZR -->
+  <link rel="stylesheet" href="/dist/stylesheets/base.css" />
+  <!--[if (lte IE 8)&(!IEMobile)]>
+  <link rel="stylesheet" href="/dist/stylesheets/ie.css" />
+  <![endif]-->
+  <!--[if lte IE 7]><script src=/js/libs/lte-ie7.js"></script>
+  <script src="/js/libs/json.js"></script>
+  <![endif]-->
+  <script type="text/javascript" src="//use.typekit.net/rlm4rmy.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<script src="/js/libs/modernizr-dev.js"></script>
+
+<meta http-equiv="imagetoolbar" content="no" xmlns="" /><meta name="MSSmartTagsPreventParsing" content="TRUE" xmlns="" /><meta name="generator" content="REIgnition CMS Core 2.1.0.5" xmlns="" /><meta name="copyright" content="H. John Heinz III College" xmlns="" /><meta name="classification" content="Education" xmlns="" />
+
+<link rel="stylesheet" href="/dist/stylesheets/offcanvas-minimal.css" />
+
+</head>
+<body>
+
+
+<div class="container">
+	
+	<div class="menu_container">
+		<a id="menu-toggle" class="anchor-link" href="#mobile-nav">MENU</a>
+	</div>
+	
+	<nav id="#mobile-nav" class="nav clearfix" role="navigation">
+             <rei:template id="574" name="SB-Navigation-Primary" />
+	</nav>
+	
+
+	<section class="main_content" role="main">
+
+<div class="page-wrapper">
+<div id="sizeTest"></div>
+<!-- AUDIENCE NAV HERE -->
+<rei:template id="465" name="SB-Header-Audience" />
+
+<!-- PRIMARY NAVIGATION IS IN FOOTER -->
+<rei:template id="574" name="SB-Navigation-Primary" />
+
+<div class="wrapper">
+
+           <!-- MAIN CONTENT -->
+      <section id="main" class="content">
+        <div class="main-content">
+          <rei:template id="487" name="SB-Big Idea Slider" />
+        </div>
+      <aside class="news-sidebar">
+
+      <!-- NEWS SIDEBAR HERE -->
+      <rei:template id="476" name="SB-Sidebar-Carousel-News" />
+
+      <!-- STUDENT STORIES SIDEBAR HERE -->
+      <rei:template id="477" name="SB-Sidebar-Carousel-Students" />
+
+      <!-- EVENTS SIDEBAR HERE -->
+      <rei:template id="478" name="SB-Sidebar-Carousel-Events" />
+
+      </aside>
+
+      <!-- SOCIAL SIDEBAR HERE -->
+      <rei:template id="469" name="SB-Social-Sidebar" />
+
+      </section>    
+           <!-- END MAIN CONTENT -->
+
+</div><!-- end wrapper -->
+</div><!-- end page-wrapper -->
+
+	</section>
+			
+			
+	<footer class="clearfix footer">
+			
+            <rei:template id="467" name="SB-Footer" />
+				
+	</footer>
+
+
+</div><!-- END .container -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function() {
+	
+	window.scrollTo(0, 1);
+	
+	$('.js #menu-toggle').click(function (e) {
+		$('body').toggleClass('active');
+		e.preventDefault();
+    });
+    
+    
+});
+</script>
+
+
+	
+</body>
+</html>

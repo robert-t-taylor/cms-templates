@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+	<xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+	<xsl:param name="AllOccurancesExpired"></xsl:param>
+
+<!--===============================================
+ 1. PRIMARY TEMPLATE
+================================================-->	
+	<xsl:template match="/">
+		<xsl:apply-templates select="/Event" />
+		<script language="javascript" type="text/javascript"> document.write('<br /><br /><p><strong><a href="javascript:history.back();">Back to Previous Page</a></strong></p>'); </script>
+	</xsl:template>
+    
+
+<!--===============================================
+ 2. EVENT DETAILS
+================================================-->	
+	<xsl:template match="Event">
+		
+        <!--event title-->
+        <h1 id="title"><xsl:value-of select="Title" /></h1>
+		
+      	<!--of image exists, display-->
+		<xsl:if test="(ImageID) != 0">
+			<img src="image.aspx?id={ImageID}" alt="Image associated with the {Title} event" style="float:right;margin:0px 0px 8px 8px;border:1px solid #666;" />
+		</xsl:if>
+        
+        <!--if HTML exists, display; otherwise display event description-->
+		<xsl:choose>
+			<xsl:when test="CDATAContent != ''">
+				<p><xsl:value-of disable-output-escaping="yes" select="CDATAContent" /></p>
+			</xsl:when>
+			<xsl:otherwise>
+				<p><xsl:value-of select="Description" /></p>
+			</xsl:otherwise>
+		</xsl:choose>
+        
+        <!--contact info-->
+		<xsl:if test="(ContactInfo) != ''">
+			<p><strong>Contact Information:</strong><br /><xsl:value-of select="ContactInfo" /></p>
+		</xsl:if>
+        
+        <!--event URL-->
+		<xsl:if test="(URL) != ''">
+			<p><a href="{URL}" target="new" title="View Event Sponsor Website (link opens in new window)">View Event Sponsor Website</a></p>
+		</xsl:if>
+        <div class="clearIt"><xsl:text> </xsl:text></div>
+        <!--occurrences-->
+		<table id="eventTable" width="98%" cellpadding="6" cellspacing="0" border="1" summary="This table lists the occurrences for this event. It provides the date, time, location, and additional information for each occurrence of the event.">
+			<tr>
+				<th width="50%" align="left">Event Information</th>
+				<th width="50%" align="left">Location Information</th>
+			</tr>
+			<xsl:apply-templates select="Occurrences//Occurrence" />
+			<!-- After displaying all non expired events if for some reasont hey are all expired test for that and display a message -->
+			<xsl:variable name="isAllExpired">
+				<xsl:call-template name="isAllOccuranceExpired" />
+			</xsl:variable>
+			<xsl:if test="not(contains($isAllExpired, 'false'))">
+				<tr>
+					<td colspan="2">All occurrences of this event have expired. Please use the contact information to contact the event organizer for information regarding upcoming occurrences of this event.</td>
+				</tr>
+			</xsl:if>
+		</table>
+        
+	</xsl:template>
+
+
+<!--===============================================
+ 3. EVENT OCCURENCES
+================================================-->	
+	<xsl:template name="isAllOccuranceExpired">
+		<xsl:for-each select="//HasExpired">
+			<xsl:choose>
+				<xsl:when test=".= 'true'">true</xsl:when>
+				<xsl:when test=".= 'false'">false</xsl:when>
+			</xsl:choose>
+		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template match="Occurrence">
+		<xsl:if test="HasExpired != 'true'">
+			<tr>
+				<td valign="top">
+					<strong>Date:</strong>
+					<xsl:text> </xsl:text>
+					<xsl:value-of select="FormattedStartDate" />
+					<xsl:if test="FormattedEndDate != FormattedStartDate">
+						<xsl:text> to </xsl:text>
+						<xsl:value-of select="FormattedEndDate" />
+					</xsl:if>
+					<br />
+					<xsl:choose>
+						<!-- Start and End Dates are different and AllDay Event checked -->
+						<xsl:when test="(FormattedStartDate != FormattedEndDate) and (AllDayEvent = 'true')">
+							<strong>Time:</strong>
+							<xsl:text> </xsl:text>This is an all day, multi-day  event.<br />
+							<br />
+						</xsl:when>
+						<!-- Start and End Dates are the same and AllDay Event checked -->
+						<xsl:when test="(FormattedStartDate = FormattedEndDate) and (AllDayEvent = 'true')">
+							<strong>Time:</strong>
+							<xsl:text> </xsl:text>This is an all day event.<br />
+							<br />
+						</xsl:when>
+						<!-- Start and End Dates are different and Start/End times are the same-->
+						<xsl:when test="(FormattedStartDate) != (FormattedEndDate) and (FormattedStartTime = FormattedEndTime)">
+							<strong>Time:</strong>
+							<xsl:text> </xsl:text>
+							<xsl:value-of select="FormattedStartTime" />
+							<br />
+							<br />
+						</xsl:when>
+						<!-- Start and End Dates are different and Start/End Times are different-->
+						<xsl:when test="(FormattedStartDate) != (FormattedEndDate) and (FormattedStartTime != FormattedEndTime)">
+							<strong>Time:</strong>
+							<xsl:text> </xsl:text>
+							<xsl:value-of select="FormattedStartTime" /> to <xsl:value-of select="FormattedEndTime" />
+							<br />
+							<br />
+						</xsl:when>
+						<!-- Start and End Dates are the same and Start and End times are different -->
+						<xsl:when test="(FormattedStartDate) = (FormattedEndDate) and (FormattedStartTime != FormattedEndTime)">
+							<strong>Time:</strong>
+							<xsl:text> </xsl:text>
+							<xsl:value-of select="FormattedStartTime" /> to <xsl:value-of select="FormattedEndTime" />
+							<br />
+							<br />
+						</xsl:when>
+						<!-- Start/End Dates are the same and Start/End times are same -->
+						<xsl:when test="(FormattedStartDate) = (FormattedEndDate) and (FormattedStartTime = FormattedEndTime)">
+							<strong>Time:</strong>
+							<xsl:text> </xsl:text>
+							<xsl:value-of select="FormattedStartTime" />
+							<br />
+							<br />
+						</xsl:when>
+					</xsl:choose>
+					<xsl:if test="(Cost) != ''">
+						<p>
+							<strong>Cost: </strong>
+							<br />
+							<xsl:value-of select="Cost" />
+						</p>
+					</xsl:if>
+					<xsl:if test="(Details) != ''">
+						<p>
+							<strong>Details: </strong>
+							<br />
+							<xsl:value-of select="Details" />
+						</p>
+					</xsl:if>
+           <!-- Added 04.02.2009 by R. Taylor to allow for importing via iCal -->			
+           <a style="text-decoration:none;color:#000000;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'" href="http://www.heinz.cmu.edu/iCal.aspx?{/Event/ID}" alt="Download (.ics) File"><img src="/image.aspx?id=647" style="border:0px;display:inline; margin:0;" height="16" width="16" border="0" vspace="0" alt="Download (.ics) File" /> Download (.ics)</a> 
+          
+		
+				</td>
+				<td valign="top">
+					<p>
+						<xsl:apply-templates select="./Location" />
+					</p>
+					<xsl:if test="(URL) != ''">
+						<p>
+							<a href="{URL}" target="new" title="View Event Location Website (link opens in new window)">View Event Location Website</a>
+						</p>
+					</xsl:if>
+				</td>
+			</tr>
+		</xsl:if>
+	</xsl:template>
+    
+<!--===============================================
+ 3. EVENT LOCATIONS
+================================================-->	
+    <xsl:template match="Location">
+        <!-- Test for address data so that locations without an address don't display any of the data or punctuation (commas) that are associated with an address. Also enables non-US addresses to be displayed without extra punctuation (commas). -->  
+        <xsl:value-of select="Name" /><br />
+        <xsl:if test="(Address1) != ''"><xsl:value-of select="Address1" /><br /></xsl:if>
+        <xsl:if test="(Address2) != ''"><xsl:value-of select="Address2" /><br /></xsl:if>
+        <xsl:if test="(City) != '' and(StateProvince) != ''">
+            <xsl:value-of select="City" />
+            <xsl:if test="(StateProvince) != '' and (Country) = 'United States'">,<xsl:text> </xsl:text><xsl:value-of select="StateProvince" /></xsl:if>
+            <xsl:if test="(StateProvince) != '' and (Country) != 'United States'"><xsl:text> </xsl:text><xsl:value-of select="StateProvince" /></xsl:if> 
+        </xsl:if>
+        <xsl:if test="(Zip) != ''"><xsl:text> </xsl:text><xsl:value-of select="Zip" /></xsl:if><br />
+        <xsl:if test="(Country) != '' and (Country) != 'United States'"><xsl:text> </xsl:text><xsl:value-of select="Country" /></xsl:if>
+        <xsl:if test="(URL) != ''">
+            <p>
+                <a href="{URL}" target="new" title="View Event Location Website (link opens in new window)">View Event Location Website</a>
+            </p>
+        </xsl:if>
+        <!-- Test for Contact Info from the Location Dialog -->
+        <xsl:if test="(ContactInfo) != ''">
+            <p>
+                <strong>Contact Information:</strong>
+                <br />
+                <xsl:value-of select="ContactInfo" />
+            </p>
+        </xsl:if>
+
+
+    </xsl:template>
+
+   
+</xsl:stylesheet>

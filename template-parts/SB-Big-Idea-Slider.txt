@@ -1,0 +1,27 @@
+<ul class="slider" data-slide-count="0" style="overflow:hidden;">
+            <li class="slide active">
+             <div class="heading">
+              <h1>Innovation</h1>
+              <h2>Every day</h2>
+             </div>
+              <img src="../images/robot-sized.jpg" alt="Innovation" />
+              <p>Heinz College has ten centers that support research, so innovations like Traffic21 are improving the way we use transportation every day.</p>
+            </li>
+            <li class="slide"> 
+             <div class="heading">
+              <h1>Research</h1>
+              <h2>that changes everything</h2>
+             </div>
+              <img src="../images/phone-face.jpg" alt="Research" />
+              <p>From privacy and security issues such as facial recognitions and identity theft, to social policy issues such as LGBT and gender inequality, Heinz College is changing how we think and live.</p>
+            </li>
+            <li class="slide">
+             <div class="heading">
+              <h1>Expert</h1> 
+			  <h2>to the world, professor to you</h2>
+             </div>
+              <img src="../images/mic-sized.jpg" alt="Expert" />
+              <p>At Heinz College, professors bring frontline experiences into the classroom. So you're not just getting an expert education - you're learning from a world expert.</p>
+            </li>
+          <!-- <div class="controls">&nbsp;</div> --><!-- NOTE: must have explicit &nbsp; -->
+          </ul>

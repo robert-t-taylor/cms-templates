@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:param name="sort" />
+<xsl:param name="keywords" />
+<xsl:param name="research_type_id" />
+<xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+
+
+<xsl:template match="/">
+    <div id="research_search">
+		<script type="text/javascript">
+            function MM_jumpMenu(targ,selObj,restore){ //v3.0
+              eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+              if (restore) selObj.selectedIndex=0;
+            }
+        </script>
+        <form method="get" name="research_filter">
+            <div class="researchCourseInput">
+            	<h3><label for="discipline_id">Find by subject:</label></h3>
+                <select name="discipline_id" id="research_type_id" title="Search the research directory by category" onchange="MM_jumpMenu('parent',this,0)">
+                    <option value="">Select One</option>
+<option value="index.aspx?discipline_id=4">Management</option>
+<option value="index.aspx?discipline_id=11">Business Intelligence</option>
+<option value="index.aspx?discipline_id=14">Decision Analysis</option>
+<option value="index.aspx?discipline_id=19">Electronic Commerce</option>
+<option value="index.aspx?discipline_id=21">Entrepreneurship</option>
+<option value="index.aspx?discipline_id=23">Financial Management and Analysis</option>
+<!-- <option value="index.aspx?discipline_id=24">Government Intelligence and Security</option> -->
+<option value="index.aspx?discipline_id=25">Health Informatics</option>
+<option value="index.aspx?discipline_id=26">Health Care Management</option>
+<option value="index.aspx?discipline_id=27">Health Care Policy</option>
+<option value="index.aspx?discipline_id=28">Human Resources</option>
+<option value="index.aspx?discipline_id=31">Information Security</option>
+<option value="index.aspx?discipline_id=32">Information Technology Management</option>
+<option value="index.aspx?discipline_id=33">International Policy</option>
+<option value="index.aspx?discipline_id=34">Non-Profit/NGO Management</option>
+<option value="index.aspx?discipline_id=35">Online Markets and Economics</option>
+<option value="index.aspx?discipline_id=36">Policy Analysis</option>
+<option value="index.aspx?discipline_id=37">Service Management</option>
+<option value="index.aspx?discipline_id=38">Social Entrepreneurship</option>
+<option value="index.aspx?discipline_id=39">Software Design and Management</option>
+<option value="index.aspx?discipline_id=40">Technology Policy</option>
+                </select>
+            </div>
+            <a href="/academic-resources/course-results/index.aspx" title="Master Course Catalog"><img src="/images/mainCourseCatalogButton.jpg" width="157" height="22" border="0" alt="Master Course Catalog" title="Master Course Catalog" id="masterCourse" /></a>
+            <input type="hidden" name="sort" id="sort" value="{$sort}" />
+        </form>
+    </div>
+    
+    <xsl:choose>
+        <xsl:when test="count(ArrayOfCourse/Course)= 0">
+            <p><strong>No search results were found.</strong></p>
+            <p>Search Tips:</p>
+            <ul>
+                <li>Check the spelling of the keyword.</li>
+                <li>Try to search using a different keyword.</li>
+                <li>Try to search using more than one keyword. You will broaden your search if you use more than one keyword because the search will return research that contain at least one instance of any of the keywords.</li>
+                <li>Search by only research type to view all research within that type.</li>
+            </ul>
+        </xsl:when>
+        <xsl:otherwise>
+				<table cellspacing="0" cellpadding="0" width="684" border="3" id="specialtbl" summary="This table lists research by CMU Heinz University faculty. Each row of the table lists a particular research item and includes its title, its authors, and its research type. If author names are links, they point to more detailed information about the author. The Title, Author(s)/Editor(s), and Year headings will sort the research list. The first time a link is clicked, the list is sorted in ascending order. The second time a link is clicked, the list is sorted in descending order.">
+					<tr>
+                        <th width="132" nowrap="true" title="Course Number"><strong>Course Number</strong></th>
+                        <th width="212" nowrap="true" title="Title"><strong>Title</strong></th>
+                        <th width="132" nowrap="true" title="Faculty"><strong>Faculty</strong></th>
+					</tr>
+					<xsl:apply-templates select="//ArrayOfCourse" />
+				</table>
+            <p><strong><a href="#top" title="Back to Top">Back to Top</a></strong></p>
+            <br />
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+
+<xsl:template match="ArrayOfCourse">
+    <!-- sorting begin -->
+    <xsl:choose>
+        <xsl:when test="$sort = 'title_ascend'">
+            <xsl:for-each select="Course">
+                <xsl:sort select="Title" order="ascending" />
+                   <xsl:if test="ActiveYN != 'false'">
+                <tr>
+                    <xsl:attribute name="class">
+                        <xsl:choose>
+                            <xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                            <xsl:otherwise>rowB</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <td valign="top">
+                    	<a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{CourseNumber}"><xsl:value-of select="CourseNumber" /></a>
+                    </td>
+                    <td valign="top">
+                        <a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                    </td>
+                    <td valign="top">
+                      <xsl:for-each select="FacultyNVP/NameValuePair">
+                    	<a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile"><xsl:value-of select="Name" /></a><br />
+                      </xsl:for-each>
+                    </td>
+                </tr>
+              </xsl:if>
+            </xsl:for-each>
+        </xsl:when>
+        <xsl:when test="$sort = 'title_descend'">
+            <xsl:for-each select="Course">
+                <xsl:sort select="Title" order="descending" />
+                   <xsl:if test="ActiveYN != 'false'">
+                <tr>
+                    <xsl:attribute name="class">
+                        <xsl:choose>
+                            <xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                            <xsl:otherwise>rowB</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <td valign="top">
+                    	<a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{CourseNumber}"><xsl:value-of select="CourseNumber" /></a>
+                    </td>
+                    <td valign="top">
+                        <a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                    </td>
+                    <td valign="top">
+                      <xsl:for-each select="FacultyNVP/NameValuePair">
+                    	<a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile"><xsl:value-of select="Name" /></a><br />
+                      </xsl:for-each>
+                    </td>
+                </tr>
+              </xsl:if>
+            </xsl:for-each>
+        </xsl:when>
+        <xsl:when test="$sort = 'author_ascend'">
+            <xsl:for-each select="Course">
+                <xsl:sort select="AuthorLastName" order="ascending" />
+                <xsl:sort select="PublicationYear" order="descending" />
+                <xsl:if test="ActiveYN != 'false'">
+                <tr>
+                    <xsl:attribute name="class">
+                        <xsl:choose>
+                            <xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                            <xsl:otherwise>rowB</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <td valign="top">
+                    	<a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{CourseNumber}"><xsl:value-of select="CourseNumber" /></a>
+                    </td>
+                    <td valign="top">
+                        <a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                    </td>
+                    <td valign="top">
+                      <xsl:for-each select="FacultyNVP/NameValuePair">
+                    	<a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile"><xsl:value-of select="Name" /></a><br />
+                      </xsl:for-each>
+                    </td>
+                </tr>
+              </xsl:if>
+            </xsl:for-each>
+        </xsl:when>
+        <xsl:when test="$sort = 'author_descend'">
+            <xsl:for-each select="Course">
+                <xsl:sort select="AuthorLastName" order="descending" />
+                <xsl:sort select="PublicationYear" order="descending" />
+                <xsl:if test="ActiveYN != 'false'">
+                <tr>
+                    <xsl:attribute name="class">
+                        <xsl:choose>
+                            <xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                            <xsl:otherwise>rowB</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <td valign="top">
+                    	<a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{CourseNumber}"><xsl:value-of select="CourseNumber" /></a>
+                    </td>
+                    <td valign="top">
+                        <a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                    </td>
+                    <td valign="top">
+                      <xsl:for-each select="FacultyNVP/NameValuePair">
+                    	<a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile"><xsl:value-of select="Name" /></a><br />
+                      </xsl:for-each>
+                    </td>
+                </tr>
+              </xsl:if>
+            </xsl:for-each>
+        </xsl:when>
+        <xsl:when test="$sort = 'year_ascend'">
+            <xsl:for-each select="Course">
+                <xsl:sort select="PublicationYear" order="ascending" />
+                <xsl:sort select="AuthorLastName" order="ascending" />
+                <xsl:if test="ActiveYN != 'false'">
+                <tr>
+                    <xsl:attribute name="class">
+                        <xsl:choose>
+                            <xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                            <xsl:otherwise>rowB</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <td valign="top">
+                    	<a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{CourseNumber}"><xsl:value-of select="CourseNumber" /></a>
+                    </td>
+                    <td valign="top">
+                        <a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                    </td>
+                    <td valign="top">
+                    	<xsl:for-each select="FacultyNVP/NameValuePair">
+                    	<a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile"><xsl:value-of select="Name" /></a><br />
+                      </xsl:for-each>
+                    </td>
+                </tr>
+              </xsl:if>
+            </xsl:for-each>
+        </xsl:when>
+        <xsl:when test="$sort = 'year_descend'">
+            <xsl:for-each select="Course">
+                <xsl:sort select="PublicationYear" order="descending" />
+                <xsl:sort select="AuthorLastName" order="ascending" />
+                <xsl:if test="ActiveYN != 'false'">
+                <tr>
+                    <xsl:attribute name="class">
+                        <xsl:choose>
+                            <xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                            <xsl:otherwise>rowB</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <td valign="top">
+                    	<a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{CourseNumber}"><xsl:value-of select="CourseNumber" /></a>
+                    </td>
+                    <td valign="top">
+                        <a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                    </td>
+                    <td valign="top">
+                    	<xsl:for-each select="FacultyNVP/NameValuePair">
+                    	 <a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile"><xsl:value-of select="Name" /></a><br />
+                      </xsl:for-each>
+                    </td>
+                </tr>
+              </xsl:if>
+            </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:for-each select="Course">
+                <xsl:sort select="PublicationYear" order="descending" />
+                <xsl:sort select="AuthorLastName" order="ascending" />
+                <xsl:if test="ActiveYN != 'false'">
+                <tr>
+                    <xsl:attribute name="class">
+                        <xsl:choose>
+                            <xsl:when test="position() mod 2 = 1">rowA</xsl:when>
+                            <xsl:otherwise>rowB</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <td valign="top">
+                    	<a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{CourseNumber}"><xsl:value-of select="CourseNumber" /></a>
+                    </td>
+                    <td valign="top">
+                        <a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" title="{Title}"><xsl:value-of select="Title" /></a>
+                    </td>
+                    <td valign="top">
+                      <xsl:for-each select="FacultyNVP/NameValuePair">
+                    	<a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile"><xsl:value-of select="Name" /></a><br />
+                      </xsl:for-each>
+                    </td>
+                </tr>
+              </xsl:if>
+            </xsl:for-each>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+</xsl:stylesheet>

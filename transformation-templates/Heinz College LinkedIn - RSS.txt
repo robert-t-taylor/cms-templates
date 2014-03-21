@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created 11.03.2011 by R. Taylor -->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   <xsl:template match="/">
+<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:creativeCommons="http://cyber.law.harvard.edu/rss/creativeCommonsRssModule.html" xmlns:flickr="urn:flickr:user" version="2.0">
+  <channel>
+      <xsl:apply-templates select="rss" />
+</channel>
+</rss>
+   </xsl:template>
+
+   <xsl:template match="rss">
+         <xsl:for-each select="channel/item">
+          <!-- return 5 items only -->
+          <xsl:if test="position() &lt; 6">
+            <item>
+               <title>
+                 <xsl:value-of select="title" />
+               </title>
+               <link>
+                 <xsl:value-of select="link" />
+               </link>
+               <description>
+                 <xsl:value-of select="description" />
+               </description>
+               <pubDate>
+                 <xsl:value-of select="pubDate" />
+               </pubDate>
+            </item>
+           </xsl:if>
+         </xsl:for-each>
+   </xsl:template>
+</xsl:stylesheet>

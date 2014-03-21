@@ -1,0 +1,319 @@
+ <footer id="footer">
+        <a href="#top" class="jump">Back to Top ?</a>
+<!--
+        <nav id="audience-links">
+          <h1>For:</h1>
+          <ul>
+            <li><a href="#">Prospective Students</a></li>
+            <li><a href="#">Recruiters</a></li>
+            <li><a href="#">Corporate &amp; Institutional Partners</a></li>
+            <li><a href="#">Current Students</a></li>
+            <li><a href="#">Faculty &amp; Staff</a></li>
+            <li><a href="#">Alumni</a></li>
+          </ul>
+        </nav>
+-->
+        <div id="footer-nav" class="super-nav clearfix">
+          <nav class="secondary apply-menu">
+            <ul>
+              <li><a class="apply" href="http://www.heinz.cmu.edu/admissions/application-process/index.aspx">Apply<span aria-hidden="true" data-icon=" ?"></span></a></li>
+              <li><a class="donate" href="http://www.heinz.cmu.edu/give-to-heinz/index.aspx">Donate<span aria-hidden="true" data-icon="?"></span></a></li>
+            </ul>
+          </nav>
+          <nav class="main-nav" role="navigation">
+            <ul>
+              <li class="parent"><a href="/about-heinz/index.aspx">About Heinz<span aria-hidden="true" data-icon="?"></span></a>
+                <div class="sub-nav">
+                  <ul>
+                    <li class="item first">
+                      <a href="/about-heinz/index.aspx">About Heinz</a>
+                    </li>
+                      <li class="item">
+                      <a href="/about-heinz/deans-welcome/index.aspx">Dean’s Welcome</a>
+                    </li>
+                    <li class="item">
+                      <a href="/about-heinz/rankings-reputation/index.aspx">Rankings &amp; Reputation</a>
+                    </li>
+                    <li class="item">
+                      <a href="/about-heinz/deans-advisory-council/index.aspx">Dean's Advisory Council</a>
+                    </li>
+                    <li class="item">
+                      <a href="/faculty-and-research/faculty-profiles/index.aspx">Faculty</a>
+                    </li>
+                    <li class="item">
+                      <a href="/global-heinz/index.aspx">Global Heinz</a>
+                    </li>
+                    <li class="item">
+                      <a href="/about-heinz/contact-us/index.aspx">Contact Us</a>
+                    </li>
+                    <li class="item">
+                      <a href="about-heinz/connect/index.aspx">Social Media Directory</a>
+                    </li>
+                    <li class="item last">
+                      <a href="/about-heinz/heinz-wallpaper/index.aspx">Wallpaper</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="parent"><a href="#">Programs<span aria-hidden="true" data-icon="?"></span></a>
+  <div class="sub-nav">
+      <ul class="program-nav">
+            <!-- <div class="section-nav-left"> -->
+              <li class="section-nav-left">
+                  <ul>
+                         <li class="school"><a class="top" title="School of Information Systems &amp; Management " href="/school-of-information-systems-and-management2/index.aspx">School of Information Systems &amp; Management </a>
+
+<ul class="primary">
+<li>
+                                    <a href="/school-of-information-systems-and-management/information-systems-management-mism/index.aspx">Information Systems Management</a>
+                                </li>
+                                <li>
+                                    <a href="/school-of-information-systems-and-management/information-security-policy-management-msispm/index.aspx">Information Security Policy and Management</a>
+                                </li>
+                                <li>
+                                    <a href="/school-of-information-systems-and-management/information-technology-msit/index.aspx">Information Technology</a>
+                                </li>
+<li>
+                                    <a href="http://www.australia.cmu.edu/study/information-technology-programs">Information Technology - Australia</a>
+                                </li>
+                                <li class="first right">
+                                    <a href="/school-of-information-systems-and-management/cio-institute/index.aspx">CIO Institute</a>
+                                </li>
+<li><a href="/school-of-information-systems-and-management/chief-information-security-officer-executive-education-and-certification-program/index.aspx">CISO Certification</a>
+                                </li>
+                                <li>
+                                    <a href="/school-of-information-systems-and-management/doctoral-program/index.aspx">Doctoral Program</a>
+                                </li>
+                                <li>
+                                    <a href="/school-of-information-systems-and-management/part-time/index.aspx">Part-Time/Distance Programs</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.ischools.org/site/about/">iSchools Caucus</a>
+                                </li>
+                  </ul>
+              </li> 
+    </ul>
+</li>
+<!-- </div> --><!-- end section-nav-left -->
+
+      <!-- <div class="section-nav-right"> -->
+              <li class="section-nav-left">
+                  <ul>
+                  <li class="school"> <a class="top" href="/school-of-public-policy-management2/index.aspx">School of Public Policy &amp; Management</a>
+<ul class="primary">
+
+<li>
+    <a href="/school-of-public-policy-management/public-policy-management-msppm/index.aspx">Public Policy &amp; Management</a>
+</li>
+<li>
+    <a href="http://www.australia.cmu.edu/study/public-policy-and-management-programs">Public Policy &amp; Management - Australia</a>
+</li>
+<li>
+    <a href="/dc/index.aspx">Public Policy &amp; Management - DC</a>
+</li>
+
+<li><a href="/school-of-public-policy-management/public-policy-management-msppm/curriculum/curriculum-by-track/policy-analytics-track/index.aspx" title="MSPPM - Policy Analytics Track">Public Policy &amp; Management - Policy Analytics</a></li>
+
+<li>
+    <a href="/school-of-public-policy-management/public-management-mpm/index.aspx">Public Management</a>
+</li>
+<li>
+    <a href="/school-of-public-policy-management/arts-management-mam/index.aspx">Arts Management</a>
+</li>
+<li>
+    <a href="/school-of-public-policy-management/entertainment-industry-management-meim/index.aspx">Entertainment Industry Management</a>
+</li>
+<li class="first right">
+    <a href="/school-of-public-policy-management/healthcare-policy-management-hcpm/index.aspx">Health Care Policy and Management</a>
+</li>                          
+<li><a href="/school-of-public-policy-management/biotechnology-management-msbtm/index.aspx">Biotechnology and Management</a>
+</li>
+<li>
+    <a href="/school-of-public-policy-management/medical-management-mmm/index.aspx">Medical Management</a>
+</li>
+<li>
+    <a href="/heinz-college-negotiation-academy-for-women/index.aspx">Negotiation Academy for Women</a>
+</li>
+<li>
+    <a href="/school-of-public-policy-management/doctoral-program/index.aspx">Doctoral Program</a>
+</li>
+<li>
+    <a href="/school-of-public-policy-management/part-time/index.aspx">Part-Time Program</a>
+</li>
+<li>
+    <a href="/school-of-public-policy-management/certificate-programs/index.aspx">Certificate Programs</a>
+</li>       
+<li>
+    <a href="/school-of-public-policy-management/ppia/index.aspx">PPIA Junior Summer Institute</a>
+</li>
+</ul>
+ </li>
+</ul>
+</li> 
+<!-- </div> --><!-- end section-nav-right-->
+</ul>
+</div>
+</li>
+
+              <li class="parent"><a href="#">Admissions &amp; Financial Aid<span aria-hidden="true" data-icon="?"></span></a>
+                <div class="sub-nav">
+                  <ul>
+                    <li class="item first">
+                      <a href="/admissions/application-process/index.aspx">Application Process</a>
+                    </li>
+                    <li class="item">
+                      <a href="/financial-aid/index.aspx">Financial Aid</a>
+                    </li>
+                    <li class="item">
+                      <a href="/global-heinz/ambassador-map/index.aspx">Admissions Ambassador Program</a>
+                    </li>
+                    <li class="item">
+
+                      <a href="http://cmuspp.askadmissions.net/emtinterestpage.aspx?ip=heinzpittsburghlongform" target="_blank" onclick="javascript: pageTracker._trackPageview('/admissions/prospective-students.html');" title="Contact Heinz College Admissions">Contact Admissions</a>
+
+                    </li>
+                    <li class="item last">
+                      <a href="/visit-heinz-college/index.aspx">Visit Heinz</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="parent"><a href="#">Faculty &amp; Research<span aria-hidden="true" data-icon="?"></span></a>
+                <div class="sub-nav">
+                 <ul>
+                  <li class="item first">
+                    <a href="/faculty-and-research/research/index.aspx">Research Papers</a>
+                  </li>
+                  <li class="item">
+                    <a href="/directories/faculty-directory/index.aspx">Faculty Profiles</a>
+                  </li>
+                  <li class="item">
+                    <a href="/faculty-and-research/faculty-research-seminar-series/index.aspx">Faculty Research Seminars</a>
+                  </li>
+                  <li class="item ">
+                    <a href="/faculty-and-research/research-centers/index.aspx">Research Centers</a>
+                  </li>
+                  <li class="item">
+                    <a href="http://journal.heinz.cmu.edu/">Heinz Journal</a>
+                  </li>
+                  <li class="item last">
+                    <a href="/faculty-and-research/research-partnerships/index.aspx">Research Partners</a>
+                  </li>
+                </ul>
+              </div>
+            </li>  
+            <li class="parent"><a href="/current-students/index.aspx">Current Students<span aria-hidden="true" data-icon="?"></span></a>
+               <div class="sub-nav">
+              <ul>
+                <li class="item first"><a href="/academic-resources/index.aspx">Academic Resources</a></li>
+                <li class="item "><a href="/student-activities/index.aspx">Student Activities</a></li>
+                <li class="item "><a href="/financial-aid/index.aspx">Financial Aid</a></li>
+                <li class="item "><a href="/jobs-and-internships/students/index.aspx">Career Services</a></li>
+                <li class="item "><a href="/computing-services/index.aspx">Computing Services</a></li>
+                <li class="item "><a href="/university-resources/index.aspx">University Resources</a></li>
+                <li class="item"><a href="/admissions/admissions-ambassador-program/index.aspx">Admissions Ambassador Program</a></li>
+                <li class="item"><a href="/current-students/connect/index.aspx">Social Media Directory</a></li>
+                <li class="item last"><a href="/news/share-a-story/index.aspx">Share a Heinz Story</a></li>
+              </ul>
+            </div>
+            </li>
+          </ul>
+        </nav>
+        <nav class="secondary contact">
+          <ul>
+            <li><a href="http://www.heinz.cmu.edu/partnerships/index.aspx">Employers &amp; Corporate Partners</a></li>
+            <li><a href="http://www.heinz.cmu.edu/alumni/index.aspx">Alumni</a></li>
+          </ul>
+        </nav>
+        <nav class="secondary search">
+         <ul class="apply-give">
+          <li><a class="apply" href="http://www.heinz.cmu.edu/admissions/application-process/index.aspx">Apply</a></li><li> | </li>
+          <li><a class="donate" href="http://www.heinz.cmu.edu/give-to-heinz/index.aspx">Donate</a></li>
+         </ul><br />
+          <a href="#search" class="search">Search</a> 
+        <div class="top-search notation">
+           <form action="/search-results/index.aspx" method="post" name="keywordform" id="keywordform">
+                  <input type="hidden" name="pageindex" value="0" />
+                  <input type="hidden" name="pagesize" value="15" />
+                  <input id="keywords" name="keywords" type="text" value="Search this site..." onfocus="this.value='';" onblur="this.value ='Search this site...';" /><div class="submit" onclick="$('#keywordform').submit();"> </div>
+               </form>
+        </div>
+
+        </nav>
+        <nav class="secondary social">
+          <h4>What’s Happening?</h4>
+          <ul>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Student Stories</a></li>
+            <li><a href="#">Events</a></li>
+            <li class="social-media-link"><a href="#">Heinz on Social Media</a></li>
+          </ul>
+        </nav>
+        <div id="date" class="date">
+     <!-- <img src="res/img/date/110922.png" alt="Today's date" /> -->
+               <!-- These DIVs will be replaced with image digits, corresponding to the current date. For the BIG Date on homepage -->
+<div id="month1"> </div><div id="month2"> </div><div class="decimal"> </div><div id="day1"> </div><div id="day2"> </div><div class="decimal"> </div><div id="year1"> </div><div id="year2"> </div>
+<!-- <script type="text/javascript" src="/res/js/bigdate-responsive.js"></script> -->
+        </div>
+      </div>
+      <!-- end .super-nav -->
+<!-- 
+      <div class="second-nav main">
+        <nav class="no-children">
+          <ul>
+            <li><a href="#">About Heinz</a></li>
+            <li><a href="#">Programs</a></li>
+            <li><a href="#">Global</a></li>
+            <li><a href="#">Admissions &amp; Financial Aid</a></li>
+            <li><a href="#">Faculty &amp; Research</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Directories</a></li>
+            <li><a href="#">Site Map</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="second-nav footer-social">
+        <nav class="no-children">
+          <ul>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Student Stories</a></li>
+            <li><a href="#">Events</a></li>
+            <li class="social-media-link"><a href="#">Heinz on Social Media</a></li>
+          </ul>
+        </nav>
+      </div>
+-->
+      <div class="second-nav footer-apply-donate">
+        <nav class="no-children">
+          <ul>
+            <li><a class="apply" href="http://www.heinz.cmu.edu/admissions/application-process/index.aspx">Apply<span aria-hidden="true" data-icon=" ?"></span></a></li>
+            <li><a class="donate" href="http://www.heinz.cmu.edu/give-to-heinz/index.aspx">Donate<span aria-hidden="true" data-icon="?"></span></a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-logo">
+        <h2 class="logo"><a href="/">Heinz College Home Page</a></h2>
+      </div>
+      <div class="footer-links">
+        <ul>
+            <li><a href="http://www.heinz.cmu.edu/about-heinz/contact-us/index.aspx">Contact Us</a></li>
+            <li><a href="#">Directories</a></li>
+            <li><a href="#">Site Map</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="copyright">
+        <p>© 2014 Carnegie Mellon University H. John Heinz III College All Rights Reserved</p>
+      </div>
+<!-- 
+      <div id="search" class="footer-search">      
+        <form action="/search-results/index.aspx" method="post" name="keywordform" id="keywordform">
+                  <input type="hidden" name="pageindex" value="0" />
+                  <input type="hidden" name="pagesize" value="15" />
+                  <input id="keywords" name="keywords" type="text" value="Search this site..." onfocus="this.value='';" onblur="this.value ='Search this site...';" /><div class="submit" onclick="$('#keywordform').submit();"> </div>
+        </form> 
+      </div>
+-->
+    </footer>

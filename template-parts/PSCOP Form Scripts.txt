@@ -1,0 +1,43 @@
+<script type="text/javascript" language="JavaScript">
+function validate_pscop() {
+
+  alertStr = "";
+  validity = true; // assume valid
+ 
+  if (!check_empty(document.forms[1].name.value)) {
+  	validity = false;
+  	alertStr += "Please enter your name.\n";
+  }
+ 
+  if (!check_empty(document.forms[1].ccEmail.value)) {
+  	validity = false;
+  	alertStr += "Please enter your email address.\n";
+  }
+  
+  if (document.forms[1].electSig.checked == false) {
+  	validity = false;
+  	alertStr += "Please \"sign\" the application.\n";
+  }
+  
+  if (!check_empty(document.forms[1].apDate.value)) {
+  	validity = false;
+  	alertStr += "Please date the application.\n";
+  }
+
+  if ( validity == false ) {
+  	alert ( alertStr );
+  }
+
+  return validity;
+}
+</script>
+
+
+<script type="text/javascript" language="JavaScript">
+function check_empty(text) {
+  return (text.length &gt; 0); // returns false if empty
+}
+</script>
+
+<SCRIPT language="JavaScript" src="_js/misc.js"></SCRIPT>
+<SCRIPT language="JavaScript" src="_js/form.js"></SCRIPT>

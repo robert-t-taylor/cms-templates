@@ -1,0 +1,457 @@
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+    <xsl:param name="ID" select="/Faculty/ID"></xsl:param>
+<!-- Test for public display value. -->
+    <xsl:template match="/">
+        <xsl:choose>
+          <xsl:when test="Faculty/PublicDisplay != 'false'">
+            <xsl:apply-templates select="/Faculty" />
+          </xsl:when>
+          <xsl:otherwise>
+            <div id="middle_col">
+               <p><br /><h3>The profile information for this faculty member currently is unavailable.</h3></p>
+            </div>
+          </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+               
+    <xsl:template match="Faculty">
+    	<!-- Start center column -->
+        <div id="sub_middle_col">
+            <xsl:if test="PhotoFilename != ''"><img src="/faculty/{ID}photo.jpg" border="0" class="facultyProfilePhoto" alt="Photo of {concat(FirstName, ' ', MiddleName, ' ', LastName, ' ', Suffix)}" title="Photo of {FirstName} {LastName}" /><!-- <img src="/image.aspx?id={ID}&amp;width=110&amp;height=110&amp;mar=1" border="0" class="facultyProfilePhoto" alt="Photo of {concat(FirstName, ' ', MiddleName, ' ', LastName, ' ', Suffix)}" title="Photo of {FirstName} {LastName}" /> --></xsl:if>
+            <div id="facultyProfileIntro">
+                <h2>
+                    <xsl:value-of select="FirstName" />
+                    <xsl:if test="MiddleName != ''"><xsl:text> </xsl:text><xsl:value-of select="MiddleName" /></xsl:if>
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="LastName" />
+                    <xsl:if test="Suffix != ''"><xsl:text> </xsl:text><xsl:value-of select="Suffix" /></xsl:if>
+                </h2>
+                <!-- Added 03.20.2009 by R. Taylor to get ALL titles (i.e., category names) from a particular individual -->
+
+               <!-- Added 10.15.2009 by R. Taylor to pull title; seems to have been missing -->
+              <h3><xsl:value-of select="Title" /></h3>
+
+	      <xsl:variable name="allCategoryNames">
+		 <xsl:for-each select="FacultyCategories/Category">
+		     <xsl:value-of select="CategoryName" />
+		 </xsl:for-each>
+	      </xsl:variable>
+	      		
+	      <xsl:for-each select="FacultyCategories/Category">
+                  <h2><font size="-1"><xsl:value-of select="CategoryName" /></font></h2>
+	      </xsl:for-each>
+
+                <!-- <xsl:if test="Title != ''"><h3><xsl:call-template name="title" /></h3></xsl:if> -->       
+                <p>
+                    <xsl:if test="OfficeNum != ''"><strong>Office: </strong> <xsl:value-of select="OfficeNum" /><br /></xsl:if>
+                    <xsl:if test="Phone != ''"><strong>Voice: </strong> <xsl:value-of select="Phone" /><br /></xsl:if>
+                    <xsl:if test="Fax != ''"><strong>Fax: </strong> <xsl:value-of select="Fax" /><br /></xsl:if>
+                    <xsl:if test="Email != ''"><strong>Email: </strong> <a href="mailto:{Email}" title="Send an email to {concat(FirstName, ' ', MiddleName, ' ', LastName, ' ', Suffix)}"><xsl:value-of select="Email" /></a><br /></xsl:if>
+                    <xsl:if test="CVFilename != ''"><a href="/faculty/{ID}cv.pdf" title="View the curriculum vitae of {concat(FirstName, ' ', MiddleName, ' ', LastName, ' ', Suffix)} (this link opens in a new window)" target="_blank">View curriculum vitae</a> (.<acronym title="Adobe Portable Document Format">pdf</acronym>)<br /></xsl:if>
+                    <xsl:if test="PersonalURL != ''"><a href="{PersonalURL}" title="View the personal website of {concat(FirstName, ' ', MiddleName, ' ', LastName, ' ', Suffix)} (this link opens in a new window)" target="_blank">Personal Website</a></xsl:if>
+                    <xsl:text> </xsl:text>
+                </p>
+            </div>
+            <div class="clearIt"><xsl:text> </xsl:text></div>
+            
+                        <!-- MOVED BY B. STEPHENSON ON 3.18.13 -->
+
+            <xsl:if test="Courses//Course != ''">
+            	<div class="right_callout">
+	                <h2>Courses</h2>
+                    <div class="item_list">
+                        <ul>
+                            <xsl:for-each select="Courses//Course">
+                                <li><a href="/academic-resources/course-results/course-details/index.aspx?cid={ID}" class="readmore"><xsl:value-of select="Title" /></a></li>
+                            </xsl:for-each>
+                        </ul>
+                    </div>
+                </div>
+            </xsl:if>
+
+           <!-- Added 12.2011 by R. Taylor to pull other courses -->
+           <xsl:if test="OtherCourses != ''">
+            	<div class="right_callout">
+	                <h2>Other Courses</h2>
+                    <div class="item_list">
+                        <ul>
+                            <xsl:for-each select="OtherCourses">
+                              <xsl:call-template name="divide">
+                                <xsl:with-param name="to-be-divided" select="." />
+                                <xsl:with-param name="delimiter" select="','" />
+                              </xsl:call-template>
+                            </xsl:for-each>
+                        </ul>
+                    </div>
+                </div>
+            </xsl:if>
+
+            
+ <!-- MOVED BY B. STEPHENSON ON 3/29/13 -->
+
+    <xsl:if test="RelatedLinks != '' or RelatedLinksArray/RelatedLink">
+            	<div class="right_callout">
+                    <h2>Related Links</h2>
+                    <div class="item_list">
+                        <xsl:if test="RelatedLinks != ''">
+                        	<ul>
+                                <xsl:call-template name="relatedlinks">
+                                    <xsl:with-param name="list"><xsl:value-of select="RelatedLinks" /></xsl:with-param>
+                                </xsl:call-template>
+                            </ul>
+                        </xsl:if>
+                        
+                        <xsl:if test="RelatedLinksArray/RelatedLink">
+                            <ul>
+                                <xsl:for-each select="RelatedLinksArray/RelatedLink">
+                                    <li>
+                                        <a title="{Name} (this link opens in a new window)" target="_blank">
+                                            <xsl:attribute name="href">
+                                                <xsl:choose>
+                                                    <xsl:when test="contains(URL, 'http://') or contains(URL, 'https://')">
+                                                        <xsl:value-of select="URL" />
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        http://<xsl:value-of select="URL" />
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
+                                            </xsl:attribute>
+                                            <xsl:value-of select="Name" />
+                                        </a>
+                                    </li>
+                                </xsl:for-each>
+                            </ul>
+                        </xsl:if>
+                    </div>
+                </div>
+            </xsl:if>
+
+            <xsl:if test="MediaLinksArray/MediaLink">
+            	<div class="right_callout">
+                    <h2>Media Links</h2>
+                    <div class="item_list">
+                        <xsl:if test="MediaLinksArray/MediaLink">
+                        	<ul>
+                                <xsl:for-each select="MediaLinksArray/MediaLink">
+                                    <li>
+                                        <a title="{Name} (this link opens in a new window)" target="_blank">
+                                            <xsl:attribute name="href">
+                                                <xsl:choose>
+                                                    <xsl:when test="contains(URL, 'http://') or contains(URL, 'https://')">
+                                                        <xsl:value-of select="URL" />
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        http://<xsl:value-of select="URL" />
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
+                                            </xsl:attribute>
+                                            <xsl:value-of select="Name" />
+                                        </a>
+                                    </li>
+                                </xsl:for-each>
+                            </ul>
+                        </xsl:if>
+                	</div>
+                </div>
+            </xsl:if>           
+            
+            
+            <xsl:if test="CDATANarrativeBio  != ''">
+                <h3 style="font-size:1.3em;">Biography</h3>
+                <p><xsl:value-of select="CDATANarrativeBio" disable-output-escaping="yes" /><xsl:text> </xsl:text></p>
+            </xsl:if>
+            <xsl:if test="ResearchInterests != ''">
+                <h3 style="font-size:1.3em;">Research Interest(s)</h3><br />
+                <p><xsl:value-of select="ResearchInterests" /><xsl:text> </xsl:text></p>
+            </xsl:if>
+            <xsl:if test="AreasOfExpertise != ''">
+                <h3 style="font-size:1.3em;">Areas of Expertise</h3><br />
+                <p><xsl:value-of select="AreasOfExpertise" /><xsl:text> </xsl:text></p>
+            </xsl:if>
+            <xsl:if test="Education != ''">
+                <h3 style="font-size:1.3em;">Education</h3><br />
+                <p><xsl:call-template name="edu" /><xsl:text> </xsl:text></p>
+            </xsl:if>
+            <xsl:if test="MediaMentions != ''">
+                <h3 style="font-size:1.3em;">Media Mentions</h3><br />
+                <p><xsl:call-template name="mediamentions" /><xsl:text> </xsl:text></p>
+            </xsl:if>
+
+            <!--RESEARCH ARRAY	
+            <xsl:if test="count(ResearchArray/Research[not(PublicAccess = 'false')]) != 0">
+                <h2 style="font-size:1.4em;">Representative Publications</h2>
+            </xsl:if>
+            -->
+            <xsl:if test="count(ResearchArray/Research) != 0">
+                <xsl:if test="ResearchArray/Research[not(PublicAccess = 'false')]/ResearchTypeObj/TypeName = 'Book'">
+                    <h3 style="font-size:1.3em;">Books</h3>	
+                    <ul>
+                        <xsl:for-each select="ResearchArray/Research">
+                            <!--
+                            <xsl:sort select="PublicationYear" order="descending" />
+                            <xsl:sort select="CDATACitation" order="ascending" />
+                            -->
+                            <xsl:choose>
+                                <xsl:when test="ResearchTypeObj/TypeName = 'Book'">
+                                    <xsl:if test="PublicAccess = 'true'">
+                                        <xsl:choose>
+                                            <xsl:when test="CDATACitation != ''">
+                                                <li><xsl:value-of select="CDATACitation" disable-output-escaping="yes" /></li>	
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <li><xsl:value-of select="Title" /></li>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:if>
+                                </xsl:when>
+                            </xsl:choose>
+                        </xsl:for-each>
+                    </ul>
+                </xsl:if>
+            </xsl:if>
+        
+            <xsl:if test="count(ResearchArray/Research) != 0">
+                <xsl:if test="ResearchArray/Research[not(PublicAccess = 'false')]/ResearchTypeObj/TypeName = 'Article'">
+                    <h3 style="font-size:1.3em;">Articles</h3>
+                    <ul>
+                        <xsl:for-each select="ResearchArray/Research">
+                            <!--
+                            <xsl:sort select="PublicationYear" order="descending" />
+                            <xsl:sort select="CDATACitation" order="ascending" />
+                            -->
+                            <xsl:choose>
+                                <xsl:when test="ResearchTypeObj/TypeName = 'Article'">
+                                    <xsl:if test="PublicAccess = 'true'">
+                                        <xsl:choose>
+                                            <xsl:when test="CDATACitation != ''">
+                                                <li><xsl:value-of select="CDATACitation" disable-output-escaping="yes" /></li>	
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <li><xsl:value-of select="Title" /></li>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:if>
+                                </xsl:when>
+                            </xsl:choose>
+                        </xsl:for-each>
+                    </ul>
+                </xsl:if>
+            </xsl:if>
+    
+            <xsl:if test="count(ResearchArray/Research) != 0">
+                <xsl:if test="ResearchArray/Research[not(PublicAccess = 'false')]/ResearchTypeObj/TypeName = 'Working Paper'">
+                    <h3 style="font-size:1.3em;">Working Papers</h3><br />
+     
+                        <xsl:for-each select="ResearchArray/Research">
+                            <!--
+                            <xsl:sort select="PublicationYear" order="descending" />
+                            <xsl:sort select="CDATACitation" order="ascending" />
+                            -->
+                            <xsl:choose>
+                                <xsl:when test="ResearchTypeObj/TypeName = 'Working Paper'">
+                                    <xsl:if test="PublicAccess = 'true'">
+                                        <xsl:choose>
+                                            <xsl:when test="CDATACitation != ''">
+                                          <!-- Modified 03.18.2013 by R. Taylor -->
+                                                <em><strong><xsl:value-of select="Title" /></strong></em><br />
+                                                
+                                                  <xsl:value-of select="CDATACitation" disable-output-escaping="yes" /> <xsl:if test="Filename != ''"> <a href="/research/{ID}full.pdf" target="_blank">
+                                                       (Download)
+                                                     </a><br /><br />
+                                                  </xsl:if>
+                                                	
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <em><strong><xsl:value-of select="Title" /></strong></em><br />
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:if>
+                                </xsl:when>
+                            </xsl:choose>
+                        </xsl:for-each>
+                </xsl:if>
+            </xsl:if>
+    
+            <xsl:if test="count(ResearchArray/Research) != 0">
+                <xsl:if test="ResearchArray/Research[not(PublicAccess = 'false')]/ResearchTypeObj/TypeName = 'Presentations and Proceedings'">
+                    <h3 style="font-size:1.3em;">Presentations and Proceedings</h3>	
+                    <ul style="font-size:1.0em;">
+                        <xsl:for-each select="ResearchArray/Research">
+                            <!--
+                            <xsl:sort select="PublicationYear" order="descending" />
+                            <xsl:sort select="CDATACitation" order="ascending" />
+                            -->
+                            <xsl:choose>
+                                <xsl:when test="ResearchTypeObj/TypeName = 'Presentations and Proceedings'">
+                                    <xsl:if test="PublicAccess = 'true'">
+                                        <xsl:choose>
+                                            <!-- Modified 02.12.2009 by R. Taylor -->
+                                            <xsl:when test="Title != ''">
+                                                <li>
+                                                  <xsl:if test="Filename != ''">
+                                                     <a href="/research/{ID}full.pdf" target="_blank">
+                                                       <xsl:value-of select="Title" />
+                                                     </a>
+                                                  </xsl:if>
+                                                </li>	
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <li><xsl:value-of select="CDATACitation" disable-output-escaping="yes" /></li>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:if>
+                                </xsl:when>
+                            </xsl:choose>
+                        </xsl:for-each>
+                    </ul>
+                </xsl:if>
+            </xsl:if>
+            
+            <!--RESEARCH ARRAY-->
+            <div class="clearIt"><xsl:text> </xsl:text></div>
+            <script language="javascript" type="text/javascript">
+                document.write('<p><strong><a href="javascript:history.back();">Return to the previous page</a></strong></p>');
+            </script>
+        </div>
+        <!-- End center column -->
+        
+    	<!-- Start right column -->
+        <div id="sub_right_col">
+        
+        
+
+    
+
+
+
+            <!-- Added 10.2009 by R. Taylor to pull faculty affiliations -->
+            <xsl:if test="FacultyAffiliations/Affiliation">
+            	<div class="right_callout">
+	                <h2>Affiliations</h2>
+                    <div class="item_list">
+                        <ul>
+                            <xsl:for-each select="FacultyAffiliations/Affiliation">
+                                <li>
+
+							       <xsl:choose>
+							          <xsl:when test="contains(AffiliationName,'ILAB')">
+										<a href="http://www.heinz.cmu.edu/ilab" class="readmore" target="_blank">iLab</a>
+							          </xsl:when>
+							          <xsl:otherwise>
+	                					<a href="http://www.heinz.cmu.edu/{AffiliationName}" class="readmore" target="_blank"><xsl:value-of select="AffiliationName" /></a>
+			            			  </xsl:otherwise>
+							          
+							       </xsl:choose>
+							    </li>
+                            </xsl:for-each>
+                        </ul>
+                    </div>
+                </div>
+            </xsl:if>
+
+            <xsl:text> </xsl:text>
+        </div>
+    	<!-- End right column -->
+    </xsl:template>
+    
+    <xsl:template name="title">
+        <xsl:param name="text" select="/Faculty/Title" />
+        <xsl:choose>
+            <xsl:when test="contains($text, '&#xA;')">
+                <xsl:value-of select="substring-before($text, '&#xA;')" />
+                <xsl:call-template name="title">
+                    <xsl:with-param name="text" select="substring-after($text, '&#xA;')" />
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$text" />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="edu">
+        <xsl:param name="text" select="/Faculty/Education" />
+        <xsl:choose>
+            <xsl:when test="contains($text, '&#xA;')">
+                <xsl:value-of select="substring-before($text, '&#xA;')" /><br />
+                <xsl:call-template name="edu">
+                    <xsl:with-param name="text" select="substring-after($text, '&#xA;')" />
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$text" />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="mediamentions">
+        <xsl:param name="text" select="/Faculty/MediaMentions" />
+        <xsl:choose>
+            <xsl:when test="contains($text, '&#xA;')">
+                <xsl:value-of select="substring-before($text, '&#xA;')" /><br />
+                <xsl:call-template name="edu">
+                    <xsl:with-param name="text" select="substring-after($text, '&#xA;')" />
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$text" />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="relatedlinks">
+        <xsl:param name="list" />
+        <xsl:variable name="newlist" select="concat(normalize-space($list), ' ')" />
+        <xsl:variable name="first" select="substring-before($newlist, ' ')" />
+        <xsl:variable name="remaining" select="substring-after($newlist, ' ')" />
+    
+        <xsl:choose>
+            <xsl:when test="contains($first,'ssrn.com') and contains($first,'http://')">
+                <li><a href="{$first}" title="Visit the SSRN page of {concat(FirstName, ' ', MiddleName, ' ', LastName, ' ', Suffix)} (this link opens in a new window)" target="_blank">SSRN Page</a></li>
+            </xsl:when>
+            
+            <xsl:when test="contains($first,'ssrn.com') and not(contains($first,'http://'))">
+                <li><a href="http://{$first}" title="Visit the SSRN page of {concat(FirstName, ' ', MiddleName, ' ', LastName, ' ', Suffix)} (this link opens in a new window)" target="_blank">SSRN Page</a></li>
+            </xsl:when>
+            
+            <xsl:when test="not(contains($first,'http://')) and not(contains($first, '.com'))"><xsl:text> </xsl:text></xsl:when>
+            <xsl:when test="not(contains($first,'http://')) and not(contains($first, '.net'))"><xsl:text> </xsl:text></xsl:when>
+            <xsl:when test="not(contains($first,'http://')) and not(contains($first, '.edu'))"><xsl:text> </xsl:text></xsl:when>
+            <xsl:when test="not(contains($first,'http://')) and not(contains($first, '.biz'))"><xsl:text> </xsl:text></xsl:when>
+            <xsl:when test="not(contains($first,'http://')) and not(contains($first, '.gov'))"><xsl:text> </xsl:text></xsl:when>
+            <xsl:when test="not(contains($first,'http://')) and not(contains($first, '.org'))"><xsl:text> </xsl:text></xsl:when>
+            <xsl:when test="not(contains($first,'http://'))"><li><a href="http://{$first}" title="{$first} (link opens in a new window)" target="_blank">Related Link</a></li></xsl:when>
+            <xsl:otherwise><li><a href="{$first}" title="{$first} (link opens in a new window)" target="_blank">Related Link</a></li></xsl:otherwise>
+            
+        </xsl:choose>
+        
+        <xsl:if test="$remaining">
+            <xsl:call-template name="relatedlinks">
+
+                <xsl:with-param name="list" select="$remaining" />
+            </xsl:call-template>
+        </xsl:if>
+		<!-- Discipline(s):<xsl:for-each select="Disciplines//Discipline"><xsl:value-of select="DisciplineName" /></xsl:for-each> -->
+	</xsl:template>
+
+<!-- Added 12.2011 to break apart comma delimited strings -->
+<xsl:template name="divide">
+      <xsl:param name="to-be-divided" />
+      <xsl:param name="delimiter" />
+      <xsl:choose>
+          <xsl:when test="contains($to-be-divided,$delimiter)">
+              <li><xsl:value-of select="substring-before($to-be-divided,$delimiter)" /></li>
+              <xsl:call-template name="divide">
+                  <xsl:with-param name="to-be-divided" select="substring-after($to-be-divided,$delimiter)" />
+                  <xsl:with-param name="delimiter" select="','" />
+              </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+              <li><xsl:value-of select="$to-be-divided" /></li>
+          </xsl:otherwise>
+      </xsl:choose>
+ </xsl:template>
+		
+</xsl:stylesheet>

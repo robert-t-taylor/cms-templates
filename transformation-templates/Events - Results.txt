@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<!DOCTYPE xsl:stylesheet[<!ENTITY nbsp   "&#160;">]>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <!-- SET UP PARAMS -->
+    <xsl:param name="recordCount" />
+	<xsl:param name="keywords" />
+	<xsl:param name="categoryID" />
+	<xsl:param name="startDate" />
+	<xsl:param name="endDate" />
+	<xsl:param name="pageIndex" />
+	<xsl:param name="pageSize" />
+	<xsl:param name="pageCount" />
+
+<!--===============================================
+ 1. PRIMARY TEMPLATE
+================================================-->
+	<xsl:template match="/">	
+    
+        <link href="/css/ui.datepicker.css" rel="stylesheet" type="text/css" media="screen" />
+		<script type="text/javascript" language="javascript" src="/js/jq.ui.datepicker-3.4.js">//</script>
+        <script type="text/javascript" language="javascript">
+		//<![CDATA[
+			$(document).ready(function() {
+				$("#start_date").datepicker({showOn: 'both', buttonImageOnly: true, buttonImage: '/images/calendar_icon.gif', buttonText: 'Calendar'});
+				$("#end_date").datepicker({showOn: 'both', buttonImageOnly: true, buttonImage: '/images/calendar_icon.gif', buttonText: 'Calendar'});
+			});
+		//]]>
+        </script>
+        <noscript><p style="color:#ff0000;">Your browser does not support JavaScript, so the calendar utility is not displayed. Enter the start and end dates directly into the form using this format: month/day/year. For example: 2/28/2008.</p></noscript>
+
+        <div class="search_form">
+            <form action="/events/index.aspx" method="post" name="events" id="events_search">
+            	<!--<input type="hidden" name="pageIndex" value="0" />
+                <input type="hidden" name="pageSize" value="20" />-->
+                <input type="hidden" name="page_size" value="20" />
+                <input type="hidden" name="page_number" value="1" />
+                <table id="formtbl" cellspacing="0" cellpadding="3" summary="This table is used for the visual layout the events search form. The form includes a textbox to enter keywords and two calendar utilities with which to select a start and end date to search by a date range." border="0">
+                    <tr>
+                     <td align="left" colspan="2">The Heinz College hosts a variety of lectures, events, and workshops. Select from the choices below to refine your search.<br /><br />
+
+We encourage a week's notice for any accommodation requests. Please contact the <a href="mailto:access@andrew.cmu.edu?Subject=Request%20for%20Accomodation" target="_top">Office of Disability Resources</a> (access@andrew.cmu.edu) or <a href="mailto:lpowell@andrew.cmu.edu?Subject=Request%20for%20Accomodation" target="_top">Larry Powell</a> (lpowell@andrew.cmu.edu), Manager of Disability Resources, for assistance. <br /><br />
+</td>
+                    </tr>
+                    <tr>
+                        <td align="left"><label for="keywords1">Keywords:</label>
+                        </td>
+                        <td><input id="keywords1" maxlength="100" style="width:248px" name="keywords">
+                            <xsl:attribute name="value"><xsl:value-of select="$keywords" /></xsl:attribute>
+                            </input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left"><label for="category">Category:</label></td>
+                        <td>
+                            <select name="category" id="category" style="width:251px; border: 1px solid #ccc;">
+                                <option selected="selected" value="">All categories...</option>
+                                <option value="16">Academic</option>
+                                <option value="17">Admissions</option>
+                                <option value="21">Alumni</option>
+                                <option value="18">Career Services</option>
+<option value="130">Clubs &amp; Organizations</option>
+                                <option value="20">Convocation</option>
+                                <option value="22">General Event</option>
+<option value="74">Lectures, Speakers and Conferences</option>
+                                <option value="24">Networking Event</option>
+                                <option value="39">Seminar</option>
+                                <option value="131">Social Events</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left"><label for="start_date">Start Date:</label>
+                        </td>
+                        <td valign="middle">
+                        	<input id="start_date" style="width:231px" title="Use the calendar utility next to this textbox to select a start date." name="start_date" />
+                            <!--<xsl:if test="$startDate != '1/1/1970'">
+                                <xsl:attribute name="value"><xsl:value-of select="$startDate" /></xsl:attribute>
+                            </xsl:if>
+                            </input>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left"><label for="end_date">End Date:</label></td>
+                        <td valign="middle">
+                        	<input id="end_date" style="width:231px" title="Use the calendar utility next to this textbox to select an end date." name="end_date" />
+                            <!--<xsl:attribute name="value">
+                            	<xsl:value-of select="$endDate" />
+                            </xsl:attribute>
+                            </input>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="image" src="/images/event_search.gif" name="Submit" value="Submit" alt="Submit events search" title="Submit events search" /></td>
+                    </tr>
+                </table>
+            </form>
+            <div id="loading"><xsl:text> </xsl:text></div>
+        </div>
+
+<hr />
+        
+        <xsl:choose>
+
+        	<!--no results returned-->
+            <xsl:when test="count(//Event) = 0">
+                <p style="font-weight:bold;margin-bottom:6px;">We are sorry, no results were returned. Please use the form above to search again.<br /><br /><br /><br /><br /></p>
+            </xsl:when>
+            
+            <!--results-->
+            <xsl:otherwise>
+                <p style="font-weight:bold;margin-bottom:6px;">
+                    <xsl:value-of select="$recordCount" /> total results. Displaying page <xsl:value-of select="$pageIndex+1" /> of <xsl:value-of select="$pageCount" />.
+                </p> 
+                <div id="results">
+                    <xsl:call-template name="paging" />
+                    <xsl:apply-templates select="//Event" />
+                    <xsl:call-template name="paging" />
+                </div>
+            </xsl:otherwise>
+        </xsl:choose>
+
+
+
+
+    </xsl:template>
+    
+<!--===============================================
+ 2. EVENT LOOP
+================================================-->
+    <xsl:template match="Event">
+        <p>
+            <xsl:attribute name="class">
+                <xsl:choose>
+                    <xsl:when test="position() mod 2 = 1">result odd</xsl:when>
+                    <xsl:otherwise>result</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <a href="/events/event-detail/index.aspx?eid={ID}" title="More information on the {Title} event item">
+            	<xsl:value-of select="Title" />
+            </a>
+            <span><br />
+                <strong>Date/Time: </strong><xsl:apply-templates select="Occurrences/Occurrence" />
+                <strong>Location: </strong><xsl:value-of select="Occurrences/Occurrence/Location/Name" />
+            </span><br />
+            <strong>Description: </strong><xsl:value-of select="Description" />
+        </p>
+    </xsl:template>
+ 
+    <xsl:template match="Occurrence">
+         <xsl:if test="HasExpired != 'true'">
+		<xsl:choose>
+            <!-- Start and End Dates are different and AllDay Event checked -->
+            <xsl:when test="(FormattedStartDate != FormattedEndDate) and (AllDayEvent = 'true')">
+                <xsl:value-of select="FormattedStartDate" /> to <xsl:value-of select="FormattedEndDate" /><xsl:text> - This is an all day, multi-day event.</xsl:text><br />
+            </xsl:when>
+            <!-- Start and End Dates are the same and AllDay Event checked -->
+            <xsl:when test="(FormattedStartDate = FormattedEndDate) and (AllDayEvent = 'true')">
+                <xsl:value-of select="FormattedStartDate" /><xsl:text> - This is an all day event.</xsl:text>	<br />
+
+            </xsl:when>
+            <!-- Start and End Dates are different and Start/End times are the same-->
+            <xsl:when test="(FormattedStartDate != FormattedEndDate) and (FormattedStartTime = FormattedEndTime)">
+                <xsl:value-of select="FormattedStartDate" /> at <xsl:value-of select="FormattedStartTime" /> to <xsl:value-of select="FormattedEndDate" /> at <xsl:value-of select="FormattedEndTime" /><br />
+            </xsl:when>
+            <!-- Start and End Dates are different and Start/End times are different-->
+            <xsl:when test="(FormattedStartDate != FormattedEndDate) and (FormattedStartTime != FormattedEndTime)">
+                <xsl:value-of select="FormattedStartDate" /> at <xsl:value-of select="FormattedStartTime" /> to <xsl:value-of select="FormattedEndDate" /> at <xsl:value-of select="FormattedEndTime" /><br />
+            </xsl:when>
+            <!-- Start and End Dates are the same and Start and End times are different -->
+            <xsl:when test="(FormattedStartDate) = (FormattedEndDate) and (FormattedStartTime != FormattedEndTime)">
+                <xsl:value-of select="FormattedStartDate" /> from <xsl:value-of select="FormattedStartTime" /> to <xsl:value-of select="FormattedEndTime" /><br />
+            </xsl:when>
+            <!-- Start/End Dates are the same and Start/End times are same -->
+            <xsl:when test="(FormattedStartDate) = (FormattedEndDate) and (FormattedStartTime = FormattedEndTime)">
+                <xsl:value-of select="FormattedStartDate" /> at <xsl:value-of select="FormattedStartTime" /><br />
+            </xsl:when>
+        </xsl:choose>
+     </xsl:if>
+	</xsl:template>
+    
+<!--===============================================
+ 3. PAGING
+================================================-->
+    <xsl:template name="paging">
+        <xsl:if test="$pageCount &gt; 1">
+        	<p class="paging">
+                <xsl:if test="$pageIndex != 0">
+                    <a href="/events/index.aspx?pageIndex={($pageIndex)-1}&amp;keywords={$keywords}&amp;pageSize={$pageSize}&amp;category={$categoryID}&amp;start_date={$startDate}&amp;end_date={$endDate}" title="Go to the previous page of the site search results">Previous Page</a> |
+                </xsl:if>
+                <xsl:call-template name="pagingloop" />
+                <xsl:if test="($pageIndex+1) != $pageCount">
+                    | <a href="/events/index.aspx?pageIndex={($pageIndex)+1}&amp;keywords={$keywords}&amp;pageSize={$pageSize}&amp;category={$categoryID}&amp;start_date={$startDate}&amp;end_date={$endDate}" title="Go to the next page of the site search results">Next Page</a>
+                </xsl:if>
+            </p>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="pagingloop">
+        <xsl:param name="count" select="1" />	
+        <xsl:choose>
+            <xsl:when test="($count)-1 = $pageIndex">
+                <xsl:value-of select="$count" />
+            </xsl:when>
+            <xsl:otherwise>
+                <a href="/events/index.aspx?pageIndex={($count)-1}&amp;keywords={$keywords}&amp;pageSize={$pageSize}&amp;category={$categoryID}&amp;start_date={$startDate}&amp;end_date={$endDate}" title="Go to page {$count} of the site search results"><xsl:value-of select="$count" /></a>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="$count &lt; $pageCount">
+            <xsl:text> | </xsl:text>
+
+            <xsl:call-template name="pagingloop">
+                <xsl:with-param name="count" select="$count + 1" />
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+    
+</xsl:stylesheet>

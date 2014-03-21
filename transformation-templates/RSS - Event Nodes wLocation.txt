@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+  <xsl:template match="/">
+     <xsl:apply-templates select="//Event" />
+  </xsl:template>
+  <xsl:template match="Event">
+    <item>
+      <title>
+        <xsl:value-of select="Title" />
+      </title>
+      <link>http://www.heinz.cmu.edu/events/event-detail/index.aspx?eid=<xsl:value-of select="ID" /></link>
+      <location>
+          Location: <xsl:value-of select="Occurrences/Occurrence/Location/Name" />
+          <!-- Don't show default time of midnight! -->
+          <xsl:if test="Occurrences/Occurrence/FormattedStartTime != '12:00 AM'">
+           , Time: <xsl:value-of select="Occurrences/Occurrence/FormattedStartTime" />
+          </xsl:if>
+      </location>
+      <pubDate>
+          <!-- Added 04.13.2009 by R. Taylor to get the first non-expired date/time 
+          <xsl:apply-templates select="(Occurrences/Occurrence[not(HasExpired='true')])[1]" /> -->
+          <xsl:value-of select="Occurrences/Occurrence/StartDate" />
+      </pubDate>
+      <description> 
+        Description: <xsl:value-of select="Description" />
+      </description>
+    </item>
+  </xsl:template>
+  
+  <!-- Added 04.13.2009 by R. Taylor to avoid showing expired dates on lobby screens! -->
+  <xsl:template match="Occurrence">
+  	  <xsl:value-of select="StartDate" />
+  </xsl:template>
+
+</xsl:stylesheet>
+
+
+

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   <xsl:output method="text" indent="no" media-type="text/calendar" />
+
+   <!-- <xsl:strip-space elements="*" /> -->
+
+<!-- **************************************************************** -->
+<!-- ***********************  iCAL STYLESHEET  ********************** -->
+<!--                                                                  -->
+<!-- Author: R. Taylor                                                -->
+<!-- Date: 03.31.2009												  -->
+<!--                                                                  -->
+<!-- This stylesheet will transform a Heinz College event listing     -->
+<!-- into a vCalendar formatted record.                               -->
+<!--																  -->
+<!-- **************************************************************** -->
+<!-- ***********************   MAIN TEMPLATE   ********************** -->
+<!-- **************************************************************** -->
+   <xsl:template match="/">
+      <xsl:apply-templates select="/Event" />
+   </xsl:template>
+<!-- **************************************************************** -->
+<!-- ***********************   SINGLE EVENT    ********************** -->
+<!-- **************************************************************** -->
+   <xsl:template match="Event">BEGIN:VCALENDAR
+PRODID:-//H. John Heinz III College/rttaylor-custom//NONSGML v1.0//EN
+VERSION:2.0
+METHOD:PUBLISH
+X-WR-TIMEZONE:America/New_York
+BEGIN:VTIMEZONE
+TZID:America/New_York
+X-LIC-LOCATION:America/New_York
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART:<xsl:value-of select="translate(Occurrences/Occurrence/StartDate, translate(Occurrences/Occurrence/StartDate,&#xD;&#xA;'0123456789TZ', ''), '')" />
+DTEND:<xsl:value-of select="translate(Occurrences/Occurrence/EndDate, translate(Occurrences/Occurrence/EndDate,&#xD;&#xA;'0123456789TZ', ''), '')" />
+LOCATION:<xsl:value-of select="Occurrences/Occurrence/Location/Name" />
+SUMMARY:<xsl:value-of select="Title" />
+DESCRIPTION:<xsl:value-of select="normalize-space(Description)" />
+<xsl:if test="cost!=''">
+Cost:
+<xsl:value-of select="cost" />
+</xsl:if>
+CLASS:PUBLIC
+UID:<xsl:value-of select="/Event/ID" />@heinz.cmu.edu
+END:VEVENT
+END:VCALENDAR</xsl:template>
+</xsl:stylesheet>

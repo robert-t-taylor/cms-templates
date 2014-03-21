@@ -1,0 +1,113 @@
+<!-- javascript here -->
+<script type="text/javascript">
+
+function validate_aab_form() {
+
+	
+	var msg = "Please enter:";
+
+	if (document.forms[1].nom_name.value.length == 0) {
+		msg += "
+your name";
+	}
+	
+	if (document.forms[1].nom_affiliation.value == "- Please Select -") {
+		msg += "
+your affiliation";
+	}
+	
+	if (document.forms[1].nom_email.value.length == 0) {
+		msg += "
+your email address";
+	}
+	
+	else {
+		validate_email(document.forms[1].nom_email.value);
+	}
+
+	if (document.forms[1].nom_phone.value.length == 0) {
+		msg += "
+your phone number";
+	}
+	
+	if (document.forms[1].name.value.length == 0) {
+		msg += "
+
+nominee's name";
+	}
+	/*
+	if (document.forms[1].degree.value == "- Please Select -") {
+		msg += "
+nominee's degree program";
+	}
+	
+	if (document.forms[1].degree_year.value.length == 0) {
+		msg += "
+nominee's grad year";
+	}
+	*/
+	if (document.forms[1].award.value == "- Please Select -") {
+		msg += "
+award type";
+	}
+	
+	if (document.forms[1].attend.value == "- Please Select -") {
+		msg += "
+which welcome reception";
+	}
+	
+	if (document.forms[1].email.value.length == 0) {
+		msg += "
+nominee's email address";
+	}
+	
+	else {
+		validate_email(document.forms[1].email.value);
+	}
+
+	if (document.forms[1].phone.value.length == 0) {
+		msg += "
+nominee's phone number";
+	}
+	
+	if (document.forms[1].why.value.length == 55) {
+		msg += "
+reason for nomination";
+	}
+	
+	if (document.forms[1].accomplishments.value.length == 54) {
+		msg += "
+nominee's accomplishments";
+	}
+	
+	if (document.forms[1].service.value.length == 54) {
+		msg += "
+nominee's service to Heinz";
+	}
+	/*
+	if (document.forms[1].community.value.length == 54) {
+		msg += "
+nominee's affiliations";
+	}
+	
+	if (document.forms[1].honors.value.length == 54) {
+		msg += "
+nominee's awards";
+	}
+	
+	if (document.forms[1].publications.value.length == 54) {
+		msg += "
+nominee's publications";
+	}
+	*/
+	if (msg.length == 13)
+		return true;
+	else {
+		alert(msg += "
+
+before submitting the form");
+		return false;
+	}
+}
+</script> 
+

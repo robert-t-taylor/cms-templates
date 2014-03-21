@@ -1,0 +1,3 @@
+<noscript>
+<p class="noscript">A browser that supports JavaScript is required to view certain sections of the site.</p>
+</noscript>

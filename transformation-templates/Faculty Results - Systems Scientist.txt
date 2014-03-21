@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+
+<xsl:param name="search_type"></xsl:param>
+<xsl:param name="from_letter"></xsl:param>
+<xsl:key name="FacultyKey" match="//Faculty" use="substring(LastName, 1, 1)" />	
+
+<xsl:template match="/">
+    <div id="facultyResults">
+        <div class="facultyAlpha">
+            <h3>Find by last name:</h3>
+            <ul class="inline">
+                <li><a href="index.aspx?search_type=a&amp;from_letter=A&amp;to_letter=D" title="Faculty members with last names beginning with the letter A through the letter D" style="border:none;padding-left:0px;">A-D</a></li>
+                <li><a href="index.aspx?search_type=a&amp;from_letter=E&amp;to_letter=H" title="Faculty members with last names beginning with the letter E through the letter H">E-H</a></li>
+                <li><a href="index.aspx?search_type=a&amp;from_letter=I&amp;to_letter=L" title="Faculty members with last names beginning with the letter I through the letter L">I-L</a></li>
+                <li><a href="index.aspx?search_type=a&amp;from_letter=M&amp;to_letter=P" title="Faculty members with last names beginning with the letter M through the letter P">M-P</a></li>
+                <li><a href="index.aspx?search_type=a&amp;from_letter=Q&amp;to_letter=T" title="Faculty members with last names beginning with the letter Q through the letter T">Q-T</a></li>
+                <li><a href="index.aspx?search_type=a&amp;from_letter=U&amp;to_letter=Z" title="Faculty members with last names beginning with the letter U through the letter Z">U-Z</a></li> 
+                <!--
+                <li>
+                	<xsl:choose>
+                        <xsl:when test="$from_letter = 'A' or $from_letter = ''">
+                            A-D
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <a href="index.aspx?search_type=a&amp;from_letter=A&amp;to_letter=D" title="Faculty members with last names beginning with the letter A through the letter D" style="border:none;">A-D</a>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </li>
+                <li>
+                	<xsl:choose>
+                        <xsl:when test="$from_letter = 'E'">
+                            E-H
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <a href="index.aspx?search_type=a&amp;from_letter=E&amp;to_letter=H" title="Faculty members with last names beginning with the letter E through the letter H">E-H</a>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </li>
+                <li>
+                	<xsl:choose>
+                        <xsl:when test="$from_letter = 'I'">
+                            I-L
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <a href="index.aspx?search_type=a&amp;from_letter=I&amp;to_letter=L" title="Faculty members with last names beginning with the letter I through the letter L">I-L</a>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </li>
+                <li>
+                	<xsl:choose>
+                        <xsl:when test="$from_letter = 'M'">
+                            M-P
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <a href="index.aspx?search_type=a&amp;from_letter=M&amp;to_letter=P" title="Faculty members with last names beginning with the letter M through the letter P">M-P</a>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </li>
+                <li>
+                	<xsl:choose>
+                        <xsl:when test="$from_letter = 'Q'">
+                            Q-T
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <a href="index.aspx?search_type=a&amp;from_letter=Q&amp;to_letter=T" title="Faculty members with last names beginning with the letter Q through the letter T">Q-T</a>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </li>
+                <li>
+                	<xsl:choose>
+                        <xsl:when test="$from_letter = 'U'">
+                            U-Z
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <a href="index.aspx?search_type=a&amp;from_letter=U&amp;to_letter=Z" title="Faculty members with last names beginning with the letter U through the letter Z">U-Z</a>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </li>
+                -->
+            </ul>
+        </div>
+        <div class="facultyAlpha">
+            <script type="text/javascript">
+                function MM_jumpMenu(targ,selObj,restore){ //v3.0
+                  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+                  if (restore) selObj.selectedIndex=0;
+                }
+            </script>
+<!-- Modified 03.10.2009 by R. Taylor; currently broken...
+            <h3>Find by subject:</h3>
+            <form name="subjectForm" id="subjectForm">
+              <select name="discipline_id" id="subjectMenu" onchange="MM_jumpMenu('parent',this,0)">
+                <option value="">All</option>
+                <option value="index.aspx?search_type=d&amp;discipline_id=2">Health Care</option>
+                <option value="index.aspx?search_type=d&amp;discipline_id=3">Information Systems and Technology</option>
+                <option value="index.aspx?search_type=d&amp;discipline_id=4">Management</option>
+                <option value="index.aspx?search_type=d&amp;discipline_id=5">Public Policy</option>
+                <option value="index.aspx?search_type=d&amp;discipline_id=6">Social Welfare</option>
+              </select>
+            </form>
+-->
+        </div>
+        <div class="clearIt"><xsl:text> </xsl:text></div>
+        <xsl:call-template name="alphabetical" />
+    </div>        
+</xsl:template>
+
+<xsl:template match="Faculty">
+    <li>
+        <div class="facultyImage">
+            <a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={ID}" title="{FirstName} {LastName}"><img src="/faculty/{ID}photo.jpg" width="47" height="47" border="0" alt="{FirstName} {LastName}" title="{FirstName} {LastName}" /></a>
+        </div>
+        <div class="facultyText">
+    		<a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={ID}" title="{FirstName} {LastName}"><xsl:value-of select="FirstName" /><xsl:text> </xsl:text><xsl:value-of select="LastName" /></a><br />
+            <xsl:value-of select="Title" />
+        </div>
+    </li>
+</xsl:template>
+
+<xsl:template name="alphabetical">
+	<xsl:param name="alphabet" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
+	<xsl:if test="$alphabet != ''">
+		<xsl:variable name="letter" select="substring($alphabet, 1, 1)" />
+		<xsl:if test="key('FacultyKey',$letter)">
+			<div class="facultyRepeat">
+                <h3><xsl:value-of select="$letter" /></h3>
+                <div class="facultyDivider" style="overflow:hidden;"><xsl:text> </xsl:text></div>
+                <xsl:for-each select="key('FacultyKey',$letter)">
+                    <xsl:sort select="LastName" /> 
+                   <!-- Added 03.19.2009 by R. Taylor to get Faculty ID, name, etc. -->
+               		<xsl:variable name="fac_id" select="ID" />
+               		<xsl:variable name="fac_fname" select="FirstName" />
+               		<xsl:variable name="fac_mname" select="MiddleName" />
+               		<xsl:variable name="fac_lname" select="LastName" />
+               		<xsl:variable name="fac_suffix" select="Suffix" />
+               		
+                    <!-- Added 9.22.2009 by R. Taylor to get ONLY Systems Scientists-->
+                     <xsl:for-each select="FacultyCategories/Category">
+	                   <xsl:if test="contains(CategoryName,'Systems Scientist')">
+	                    <xsl:variable name="fac_category" select="CategoryName" />
+	                    <ul>
+	                        <li>
+	                        	<div class="facultyImage">
+	                            	<a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={$fac_id}" title="{$fac_fname} {$fac_lname}"><img src="/faculty/{$fac_id}photo.jpg" border="0" alt="{$fac_fname} {$fac_lname}" title="{$fac_fname} {$fac_lname}" /></a>
+	                            </div>
+	                            <div class="facultyText">
+	                        		<a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={$fac_id}" title="{$fac_fname} {$fac_lname}"><xsl:value-of select="$fac_fname" /><xsl:text> </xsl:text><xsl:value-of select="$fac_mname" /><xsl:text> </xsl:text><xsl:value-of select="$fac_lname" /><xsl:text> </xsl:text><xsl:value-of select="$fac_suffix" /></a><br />
+		                            <xsl:value-of select="$fac_category" />
+	                            </div>
+	                        </li>
+	                    </ul>
+	                   </xsl:if>
+	              </xsl:for-each>
+                </xsl:for-each>
+                <p style="margin:0 0 12px;"><a href="#top">Back to top</a></p>
+            </div>
+		</xsl:if>
+		<xsl:call-template name="alphabetical">
+			<xsl:with-param name="alphabet" select="substring($alphabet, 2)" />
+		</xsl:call-template>
+	</xsl:if>
+</xsl:template>
+</xsl:stylesheet>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created 10.28.2011 by R. Taylor -->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+
+    <xsl:template match="/">
+        <p>
+        <br />
+        There are <xsl:value-of select="count(atom:feed/atom:entry)" /> videos.
+        </p>
+        <p>
+        Link: <xsl:value-of select="//atom:entry[position() = 1]/atom:link[@rel='via']/@href" /> videos.
+        </p>
+
+    </xsl:template>
+
+</xsl:stylesheet>

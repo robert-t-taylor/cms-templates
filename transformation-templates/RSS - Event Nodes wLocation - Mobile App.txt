@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+  <xsl:template match="/">
+     <xsl:apply-templates select="//Event" />
+  </xsl:template>
+  <xsl:template match="Event">
+    <item>
+      <title>
+        <xsl:value-of select="Title" />
+      </title>
+      <link>
+          http://www.heinz.cmu.edu/events/event-detail/index.aspx?eid=<xsl:value-of select="ID" />
+      </link>
+      <eid>
+          <xsl:value-of select="ID" />
+      </eid>
+      <briefLocation>
+          <xsl:value-of select="Occurrences/Occurrence/Location/Name" />
+      </briefLocation>
+      <fullLocation>
+          Location: <xsl:value-of select="Occurrences/Occurrence/Location/Name" />
+          <!-- Don't show default time of midnight! -->
+          <!-- <xsl:if test="Occurrences/Occurrence/FormattedStartTime != '12:00 AM'"> -->
+           , Time: <xsl:value-of select="Occurrences/Occurrence/FormattedStartTime" />
+          <!-- </xsl:if> -->
+      </fullLocation>
+      <briefDescription>
+           Description: <xsl:value-of select="Description" />
+      </briefDescription>
+      <fullDescription>
+          <xsl:value-of select="CDATAContent" />
+      </fullDescription>
+      <startDate>
+          <!-- <xsl:if test="Occurrences/Occurrence/FormattedStartTime != '12:00 AM'"> -->
+           Start Date: <xsl:value-of select="Occurrences/Occurrence/FormattedStartDate" />, Time: <xsl:value-of select="Occurrences/Occurrence/FormattedStartTime" />
+          <!-- </xsl:if> -->
+      </startDate>
+ 	  <endDate>
+ 	      <!-- <xsl:if test="Occurrences/Occurrence/FormattedEndTime != '12:00 AM'"> -->
+           End Date: <xsl:value-of select="Occurrences/Occurrence/FormattedEndDate" />, Time: <xsl:value-of select="Occurrences/Occurrence/FormattedEndTime" />
+          <!-- </xsl:if> -->
+ 	  </endDate>
+      <pubDate>
+          <!-- Added 04.13.2009 by R. Taylor to get the first non-expired date/time 
+          <xsl:apply-templates select="(Occurrences/Occurrence[not(HasExpired='true')])[1]" /> -->
+          <xsl:value-of select="DateCreatedLong" />
+      </pubDate>
+      <rsvpLink><xsl:value-of select="Occurrences/Occurrence/Details" /></rsvpLink>
+      <eventLink><xsl:value-of select="Occurrences/Occurrence/URL" /></eventLink>
+      <cost><xsl:value-of select="Occurrences/Occurrence/Cost" /></cost>
+    </item>
+  </xsl:template>
+  
+  <!-- Added by R. Taylor to avoid showing expired items! -->
+  <xsl:template match="Occurrence">
+  	  <xsl:value-of select="StartDate" />
+  </xsl:template>
+
+</xsl:stylesheet>

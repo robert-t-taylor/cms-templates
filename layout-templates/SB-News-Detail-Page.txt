@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    
+<rei:template id="464" name="SB-Head" />
+<!-- BODY HERE -->
+  <body onload="setSelected();">
+   <div class="page-wrapper">
+    <div id="sizeTest"></div>
+    <!-- NO AUDIENCE NAV HERE -->
+    <rei:template id="466" name="SB-Header-No-Audience" />
+    <div class="wrapper">
+       <section id="main" class="content">
+         <div class="main-content"> 
+         <!-- NEWS ITEM CONTENT HERE -->
+         <rei:template id="592" name="SB-News-Details" />
+
+          </div> <!-- end main-content -->
+
+       <aside class="news-sidebar">
+
+       <!-- NEWS LISTINGS HERE -->
+       <rei:template id="395" name="TF-Listing-News (Do Not Edit)" />
+
+       </aside>
+      <!-- SOCIAL SIDEBAR HERE -->
+      <rei:template id="469" name="SB-Social-Sidebar" />
+
+      </section><!-- end section content -->
+     
+      <!-- FOOTER HERE -->   
+      <rei:template id="586" name="SB-Footer-ALT" />
+
+    </div> <!-- end wrapper -->
+
+      <!-- POST RENDER SCRIPTS HERE -->
+      <rei:template id="490" name="SB-Footer-Scripts" /> 
+
+ </div> <!-- end page wrapper -->
+</body>
+</html>

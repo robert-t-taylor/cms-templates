@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+    <xsl:param name="ID" select="/Faculty/ID"></xsl:param>
+
+    <xsl:template match="/">
+        <xsl:apply-templates select="/Faculty" />
+    </xsl:template>         
+    <xsl:template match="Faculty">
+		<title>Heinz College Working Papers Author: 
+		      <xsl:value-of select="FirstName" />
+              <xsl:if test="MiddleName != ''"><xsl:text> </xsl:text><xsl:value-of select="MiddleName" /></xsl:if>
+              <xsl:text> </xsl:text>
+              <xsl:value-of select="LastName" />
+              <xsl:if test="Suffix != ''"><xsl:text> </xsl:text><xsl:value-of select="Suffix" /></xsl:if>
+		</title>
+		<link>http://www.heinz.cmu.edu/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id=<xsl:value-of select="$ID" /></link>
+		<description>
+		   <xsl:value-of select="FirstName" />
+              <xsl:if test="MiddleName != ''"><xsl:text> </xsl:text><xsl:value-of select="MiddleName" /></xsl:if>
+              <xsl:text> </xsl:text>
+              <xsl:value-of select="LastName" />
+              <xsl:if test="Suffix != ''"><xsl:text> </xsl:text><xsl:value-of select="Suffix" /></xsl:if>
+               Heinz College Working Papers
+         </description>
+
+
+            <!--RESEARCH ARRAY-->
+            <xsl:if test="count(ResearchArray/Research) != 0">
+                <xsl:if test="ResearchArray/Research[not(PublicAccess = 'false')]/ResearchTypeObj/TypeName = 'Working Paper'">
+                        <xsl:for-each select="ResearchArray/Research">
+                          <item>
+                            <!--
+                            <xsl:sort select="PublicationYear" order="descending" />
+                            <xsl:sort select="CDATACitation" order="ascending" />
+                            -->
+                            <xsl:choose>
+                                <xsl:when test="ResearchTypeObj/TypeName = 'Working Paper'">
+                                    <xsl:if test="PublicAccess = 'true'">
+                                        <xsl:choose>
+                                            <!-- Modified 02.12.2009 by R. Taylor -->
+                                            <xsl:when test="Title != ''">
+                                                  <xsl:if test="Filename != ''">
+                                                  <title><xsl:value-of select="Title" /></title>
+                                                  <link>http://www.heinz.cmu.edu/research/<xsl:value-of select="ID" />full.pdf</link>
+                                                  <description><xsl:value-of select="CDATACitation" disable-output-escaping="no" /></description>
+                                                     <guid>http://www.heinz.cmu.edu/research/<xsl:value-of select="ID" />full.pdf</guid>
+                                                  </xsl:if>	
+                                            </xsl:when>
+                                        </xsl:choose>
+                                    </xsl:if>
+                                </xsl:when>
+                            </xsl:choose>
+                          </item>
+                        </xsl:for-each>
+                </xsl:if>
+            </xsl:if>
+    </xsl:template>
+</xsl:stylesheet>

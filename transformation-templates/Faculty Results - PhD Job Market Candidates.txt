@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+
+<xsl:param name="search_type"></xsl:param>
+<xsl:param name="from_letter"></xsl:param>
+
+
+<xsl:key name="FacultyKey" match="//Faculty" use="substring(LastName, 1, 1)" />	
+
+<xsl:template match="/">
+    <div id="facultyResults">
+        <div class="facultyAlpha">
+            <script type="text/javascript">
+                function MM_jumpMenu(targ,selObj,restore){ //v3.0
+                  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+                  if (restore) selObj.selectedIndex=0;
+                }
+            </script>
+        </div>
+        <div class="clearIt"><xsl:text> </xsl:text></div>
+        <br />
+        <div class="facultyRepeat">
+         <xsl:call-template name="alphabetical" />
+         <p style="margin:0 0 12px;"><a href="#top">Back to top</a></p>
+        </div>
+    </div>        
+</xsl:template>
+
+<xsl:template name="alphabetical">
+	<xsl:param name="alphabet" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
+    
+	<xsl:if test="$alphabet != ''">
+		<xsl:variable name="letter" select="substring($alphabet, 1, 1)" /> 
+  
+		<xsl:if test="key('FacultyKey',$letter)">
+
+			<!-- <div class="facultyRepeat"> -->
+                <!--
+                <h3><xsl:value-of select="$letter" /></h3>
+                <div class="facultyDivider" style="overflow:hidden;"><xsl:text> </xsl:text></div>
+                -->
+                <xsl:for-each select="key('FacultyKey',$letter)">
+                    <xsl:sort select="LastName" /> 
+                   <!-- Added 03.19.2009 by R. Taylor to get Faculty ID, name, etc. -->
+               		<xsl:variable name="fac_id" select="ID" />
+                        <xsl:variable name="title" select="Title" />
+               		<xsl:variable name="fac_fname" select="FirstName" />
+               		<xsl:variable name="fac_mname" select="MiddleName" />
+               		<xsl:variable name="fac_lname" select="LastName" />
+               		<xsl:variable name="fac_suffix" select="Suffix" />
+               		
+                    <!-- Added 03.10.2009 by R. Taylor to get ONLY PhD Job Market Candidates -->
+                     <xsl:for-each select="FacultyCategories/Category">
+	                   <xsl:if test="contains(CategoryName,'PhD Job Market Candidate')">
+	                    <xsl:variable name="fac_category" select="CategoryName" />
+	                    <ul>
+	                        <li>
+	                        	<div class="facultyImage">
+	                            	<a href="/directories/doctoral-students/doctoral-student-details/index.aspx?faculty_id={$fac_id}" title="{$fac_fname} {$fac_lname}"><img src="/faculty/{$fac_id}photo.jpg" border="0" alt="{$fac_fname} {$fac_lname}" title="{$fac_fname} {$fac_lname}" /></a>
+	                            </div>
+	                            <div class="facultyText">
+	                        		<a href="/directories/doctoral-students/doctoral-student-details/index.aspx?faculty_id={$fac_id}" title="{$fac_fname} {$fac_lname}"><xsl:value-of select="$fac_fname" /><xsl:text> </xsl:text><xsl:value-of select="$fac_mname" /><xsl:text> </xsl:text><xsl:value-of select="$fac_lname" /><xsl:text> </xsl:text><xsl:value-of select="$fac_suffix" /></a><br />
+                                     <!--
+                                     <xsl:if test="contains($title,'Economics')">   
+                                       <xsl:value-of select="$title" /><br />
+                                     </xsl:if>
+                                     -->
+                                            <xsl:for-each select="../../FacultyAffiliations/Affiliation">
+	                                         <xsl:if test="contains(AffiliationName,'PhD')">
+                                                        <xsl:value-of select="AffiliationName" /><br />
+                                                 </xsl:if>
+                                            </xsl:for-each>                
+<a href="/directories/doctoral-students/doctoral-student-details/index.aspx?faculty_id={$fac_id}" title="{$fac_fname} {$fac_lname}" style="font-size:90%;color:#990000;">Read more...</a>
+	                            </div>
+	                        </li>
+	                    </ul>
+	                   </xsl:if>
+	              </xsl:for-each>
+                </xsl:for-each>
+                
+            <!-- </div> -->
+
+		</xsl:if>
+		<xsl:call-template name="alphabetical">
+			<xsl:with-param name="alphabet" select="substring($alphabet, 2)" />
+		</xsl:call-template>
+                
+	</xsl:if>
+</xsl:template>
+
+</xsl:stylesheet>

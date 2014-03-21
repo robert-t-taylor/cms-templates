@@ -1,0 +1,30 @@
+<script type="text/javascript" src="res/js/jquery/jQuery-1.6.2.js"></script>
+<script type="text/javascript" src="res/js/jquery/carhartl-jquery-cookie-575a419/jquery.cookie.js"></script>
+<script type="text/javascript" src="res/js/pageutils.js"></script> 
+<script type="text/javascript" src="res/js/menu.js"></script> 
+<script type="text/javascript" src="res/js/feeds.js"></script>        
+<script type="text/javascript" src="res/js/carousel.js"></script> 
+<script type="text/javascript" src="res/lib/swfobject/swfobject.js"></script>
+<script type="text/javascript" src="res/lib/mediaplayer/mediaplayer.js"></script>
+<script type="text/javascript" src="res/js/carousel.js"></script>
+<script type="text/javascript" src="res/js/initialize.js"></script>
+<script type="text/javascript" src="/res/js/sidenav.js"></script> 
+
+<script type="text/javascript" src="/res/js/bigdate.js"></script> 
+<script type="text/javascript" src="/res/js/jclip.js"></script>
+<script type="text/javascript">
+     $(document).ready(function(){
+          $('#newsimg').jclip(164, 106);
+          $('#newsimg1').jclip(164, 106);
+          $('#newsimg2').jclip(164, 106);
+          $('#newsimg3').jclip(164, 106);
+          $('#newsimg4').jclip(164, 106);
+          $('#storyimg').jclip(164, 106);
+     });
+</script>
+
+<script type="text/javascript" src="/res/js/global.js"></script> 
+
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "b38b39cc-d36b-448d-a41e-93eb23317578"});</script>

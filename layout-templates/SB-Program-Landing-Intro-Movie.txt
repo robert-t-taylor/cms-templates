@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"[]>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    
+<rei:template id="464" name="SB-Head" />
+<!-- BODY HERE -->
+  <body>
+   <div class="page-wrapper">
+    <div id="sizeTest"></div>
+    <!-- HEADER HERE -->
+    <!-- <rei:template id="465" name="SB-Header-Audience" /> -->
+    <rei:template id="466" name="SB-Header-No-Audience" />
+    <div class="wrapper notation" note="NOTE: This 'metaframe' functionality interferes with the correct operation of the responsive templates, due to some overlap in the CSS. It could be useful for design notations, but I will disable for functional testing.">
+      <section id="main" class="content">
+<aside class="section-nav sidenav first">
+  <a href="#" class="more-toggle">More pages in this section<span aria-hidden="true" data-icon="?"></span></a>
+  <rei:template id="472" name="SB-Side-Navigation" />
+</aside>
+        <div class="main-content secondary-page three-sidebars">
+          <!-- titlebar was here -->
+          <div class="section">
+          <div class="titlebar">
+             <h1 class="page-title"><rei:variable type="Page Title" xmlns:rei="http://r-effects.com" /></h1>
+          </div>
+             <div class="flash">
+               <rei:control type="HTMLElement" name="Video Embed" id="692" />
+             </div>
+
+             <span class="intro-text notation" note="This font appears to be a bit too large. Also, it is Trebuchet MS. Thoughts?">
+               <rei:control type="HTMLElement" name="Intro Text" id="689" />
+             </span><hr />
+           </div>
+            <rei:control type="HTMLElement" name="Page Body" id="690" />
+         </div>
+
+      <aside class="caption-sidebar notation" note="What do you think about white text on blue? This keeps with Sparkbox's design, rather than the red on white of the current site."> <!-- was news-sidebar -->
+
+      <!-- INTRO IMAGE CAPTION HERE -->
+      <div class="sidebar-caption">
+        <rei:control type="HTMLElement" name="Intro Image Caption" id="691" />
+
+        <rei:control type="HTMLElement" name="Sidebar Body" id="693" />
+      </div>
+
+      </aside>
+
+      <!-- SOCIAL SIDEBAR HERE -->
+      <rei:template id="469" name="SB-Social-Sidebar" />
+
+      </section>    
+      <!-- FOOTER HERE -->   
+        <!-- <rei:template id="569" name="SB-Footer-ORIG" /> -->
+        <rei:template id="586" name="SB-Footer-ALT" />
+      </div>
+  
+      <rei:template id="490" name="SB-Footer-Scripts" />
+
+</div>
+</body>
+</html>

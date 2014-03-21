@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"[]>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com">
+  <head>
+    <rei:template id="370" name="TF-Base-URL" />
+    <rei:template id="341" name="TF-Title" />
+    <rei:template id="340" name="TF-Meta" />
+    <rei:template id="338" name="TF-Stylesheets" />
+    <rei:template id="339" name="TF-Javascript" />
+                
+    <meta http-equiv="imagetoolbar" content="no" xmlns="" /><meta name="MSSmartTagsPreventParsing" content="TRUE" xmlns="" /><meta name="generator" content="REIgnition CMS Core 2.1.0.5" xmlns="" /><meta name="copyright" content="H. John Heinz III College" xmlns="" /><meta name="classification" content="Education" xmlns="" />
+
+<!-- Quantcast template included added 04.03.2013 -->
+<rei:template id="486" name="Quantcast Script" />
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7109555-1']);
+  _gaq.push(['_setDomainName', '.heinz.cmu.edu']);
+  _gaq.push(['_trackPageview']);
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+    <body class="wide">
+      <div class="page">
+
+       <rei:template id="405" name="TF-Masthead (Do Not Edit)" />
+            
+        <div class="body">
+          <div class="contents">
+            <div class="full">
+              <div class="outer">
+
+               <rei:template id="357" name="TF-Breadcrumbs" />
+                <div class="inner">
+                  <rei:template id="389" name="TF-Navigation - Sub (Do Not Edit)" />
+
+                  <div class="subject">
+                    <div class="titlebar">
+                      <h1><rei:variable type="Page Title" xmlns:rei="http://r-effects.com" /></h1>
+                    </div>
+                    <rei:control type="HTMLElement" name="Page Body" id="607" />
+<div>
+<rei:control type="TransformationElement" name="Transformation Control" id="608" />
+</div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+             <rei:template id="342" name="TF-Feeds" />
+          </div>
+      </div>
+      <rei:template id="337" name="TF-Footer" />
+
+
+
+    </body>
+</html>
+

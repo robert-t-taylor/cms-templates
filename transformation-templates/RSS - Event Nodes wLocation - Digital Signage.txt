@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+  <xsl:template match="/">
+     <xsl:apply-templates select="//Event" /> 
+  </xsl:template>
+  <xsl:template match="Event">
+    <item>
+      <title>
+        <xsl:value-of select="Title" />
+      </title>
+      <link>
+          http://www.heinz.cmu.edu/events/event-detail/index.aspx?eid=<xsl:value-of select="ID" />
+      </link>
+      <eid>
+          <xsl:value-of select="ID" />
+      </eid>
+      <briefLocation>
+          <xsl:value-of select="Occurrences/Occurrence/Location/Name" />
+      </briefLocation>
+      <fullLocation>
+          <xsl:value-of select="Occurrences/Occurrence/Location/Name" />
+          <!-- Don't show default time of midnight! -->
+          <!-- <xsl:if test="Occurrences/Occurrence/FormattedStartTime != '12:00 AM'"> -->
+           , Time: <xsl:value-of select="Occurrences/Occurrence/FormattedStartTime" />
+          <!-- </xsl:if> -->
+      </fullLocation>
+      <briefDescription>
+           <xsl:value-of select="Description" />
+      </briefDescription>
+      <fullDescription>
+          <xsl:value-of select="CDATAContent" />
+      </fullDescription>
+      <basicDate>
+           <xsl:call-template name="date-format">
+               <xsl:with-param name="yyyy-mm-dd" select="Occurrences/Occurrence/StartDate" /> 
+           </xsl:call-template>
+      </basicDate>
+      <startDate>
+          <!-- <xsl:if test="Occurrences/Occurrence/FormattedStartTime != '12:00 AM'"> -->
+           Start Date: <xsl:value-of select="Occurrences/Occurrence/FormattedStartDate" />, Time: <xsl:value-of select="Occurrences/Occurrence/FormattedStartTime" />
+          <!-- </xsl:if> -->
+      </startDate>
+ 	  <endDate>
+ 	      <!-- <xsl:if test="Occurrences/Occurrence/FormattedEndTime != '12:00 AM'"> -->
+           End Date: <xsl:value-of select="Occurrences/Occurrence/FormattedEndDate" />, Time: <xsl:value-of select="Occurrences/Occurrence/FormattedEndTime" />
+          <!-- </xsl:if> -->
+ 	  </endDate>
+      <pubDate>
+          <!-- Added 04.13.2009 by R. Taylor to get the first non-expired date/time 
+          <xsl:apply-templates select="(Occurrences/Occurrence[not(HasExpired='true')])[1]" /> -->
+          <xsl:value-of select="DateCreatedLong" />
+      </pubDate>
+      <rsvpLink><xsl:value-of select="Occurrences/Occurrence/Details" /></rsvpLink>
+      <eventLink><xsl:value-of select="Occurrences/Occurrence/URL" /></eventLink>
+      <cost><xsl:value-of select="Occurrences/Occurrence/Cost" /></cost>
+    </item>
+  </xsl:template>
+  
+  <!-- Added by R. Taylor to avoid showing expired items! -->
+  <xsl:template match="Occurrence">
+  	  <xsl:value-of select="StartDate" />
+  </xsl:template>
+
+  <!-- Added by R. Taylor to get day of week based on
+       SOURCE: http://stackoverflow.com/questions/16739141/can-a-date-be-converted-to-day-of-week-month-dd-within-xsl -->
+  <xsl:template name="date-format">
+    <xsl:param name="yyyy-mm-dd" />
+
+    <xsl:variable name="yyyy" select="substring-before($yyyy-mm-dd, '-')" />
+    <xsl:variable name="mm-dd" select="substring-after($yyyy-mm-dd, '-')" />
+    <xsl:variable name="mm" select="substring-before($mm-dd, '-')" />
+    <xsl:variable name="ddT" select="substring-after($mm-dd, '-')" />
+    <xsl:variable name="dd" select="substring-before($ddT, 'T')" />
+
+    <xsl:variable name="Y">
+      <xsl:choose>
+        <xsl:when test="$mm &lt; 3"><xsl:value-of select="$yyyy - 1" /></xsl:when>
+        <xsl:otherwise><xsl:value-of select="$yyyy + 0" /></xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="y" select="$Y mod 100" />
+    <xsl:variable name="c" select="floor($Y div 100)" />
+    <xsl:variable name="d" select="$dd+0" />
+    <xsl:variable name="m">
+      <xsl:choose>
+        <xsl:when test="$mm &lt; 3"><xsl:value-of select="$mm + 12" /></xsl:when>
+        <xsl:otherwise><xsl:value-of select="$mm + 0" /></xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="w" select="($d + floor(($m + 1) * 2.6) + $y + floor($y div 4) + floor($c div 4) - $c * 2 - 1) mod 7" />
+
+    <xsl:variable name="www">
+      <xsl:choose>
+        <xsl:when test="$w = 0">Sun</xsl:when>
+        <xsl:when test="$w = 1">Mon</xsl:when>
+        <xsl:when test="$w = 2">Tue</xsl:when>
+        <xsl:when test="$w = 3">Wed</xsl:when>
+        <xsl:when test="$w = 4">Thu</xsl:when>
+        <xsl:when test="$w = 5">Fri</xsl:when>
+        <xsl:when test="$w = 6">Sat</xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="mmm">
+      <xsl:choose>
+        <xsl:when test="$mm =  1">January</xsl:when>
+        <xsl:when test="$mm =  2">February</xsl:when>
+        <xsl:when test="$mm =  3">March</xsl:when>
+        <xsl:when test="$mm =  4">April</xsl:when>
+        <xsl:when test="$mm =  5">May</xsl:when>
+        <xsl:when test="$mm =  6">June</xsl:when>
+        <xsl:when test="$mm =  7">July</xsl:when>
+        <xsl:when test="$mm =  8">August</xsl:when>
+        <xsl:when test="$mm =  9">September</xsl:when>
+        <xsl:when test="$mm = 10">October</xsl:when>
+        <xsl:when test="$mm = 11">November</xsl:when>
+        <xsl:when test="$mm = 12">December</xsl:when>
+      </xsl:choose>
+    </xsl:variable>
+
+        <xsl:value-of select="concat($www, ' ', $d, ' ', $mmm)" /> 
+  </xsl:template>
+
+</xsl:stylesheet>

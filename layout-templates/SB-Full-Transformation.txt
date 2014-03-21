@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"[]>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    
+<rei:template id="464" name="SB-Head" />
+<!-- BODY HERE -->
+  <body>
+   <div class="page-wrapper">
+    <div id="sizeTest"></div>
+    <!-- AUDIENCE NAV HERE -->
+    <rei:template id="465" name="SB-Header-Audience" />
+    <div class="wrapper">
+      <section id="main" class="content">
+<aside class="section-nav">
+  <a href="#" class="more-toggle">More pages in this section<span aria-hidden="true" data-icon="?"></span></a>
+  <rei:template id="472" name="SB-Side-Navigation" />
+</aside>
+        <div class="main-content secondary-page two-sidebars">
+          <!-- titlebar was here -->
+          <div class="section">
+          <div class="titlebar">
+             <h1><rei:variable type="Page Title" xmlns:rei="http://r-effects.com" /></h1>
+          </div>
+             <div class="flash">
+               
+             </div>
+
+             <span class="intro-text">
+               
+             </span><hr />
+           </div>
+            <rei:control type="HTMLElement" name="Page Body" id="709" />
+            <rei:control type="TransformationElement" name="Transformation Control" id="710" />
+         </div>
+ 
+      <!-- SOCIAL SIDEBAR HERE -->
+      <rei:template id="469" name="SB-Social-Sidebar" />
+
+      </section>    
+      <!-- FOOTER HERE -->   
+      <rei:template id="467" name="SB-Footer" /> 
+      </div>
+  
+      <rei:template id="490" name="SB-Footer-Scripts" />
+
+</div>
+</body>
+</html>

@@ -1,0 +1,3 @@
+<div class="feeds">
+   <iframe scrolling="no" width="170px" height="1300px" src="http://heinz.cmu.edu/social-no-icons.html"></iframe> 
+</div>

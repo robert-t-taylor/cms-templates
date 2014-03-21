@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+  <xsl:template match="/">
+   <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+     <xsl:apply-templates select="//News" />
+    </channel>
+   </rss>
+  </xsl:template>
+  <xsl:template match="News">
+    <!-- return 5 items only -->
+    <xsl:if test="position() &lt; 6">
+            <item>
+                <title>
+                  <xsl:value-of select="Title" />
+                </title>
+                <description>
+                  <xsl:value-of select="substring(Description, 1, 150)" disable-output-escaping="yes" />...
+                </description>
+                <link>
+                  <a href="http://www.heinz.cmu.edu/news/news-detail/index.aspx?nid={ID}">more &gt;&gt;</a>
+                </link>
+                <pubDate>
+                   <xsl:value-of select="FormattedReleaseDateTime" />
+                </pubDate>
+             </item>
+             <br /><br />
+    </xsl:if>
+  </xsl:template>
+</xsl:stylesheet>

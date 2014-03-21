@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE xsl:stylesheet[<!ENTITY nbsp   "&#160;">]>
+<!-- DWXMLSource="test.xml" -->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+
+
+<!--===============================================
+ 1. PRIMARY TEMPLATE
+================================================-->	
+    <xsl:template match="/">
+        <xsl:apply-templates select="//News" />
+        <script language="javascript" type="text/javascript">
+        document.write('<p><strong><a href="javascript:history.back();">Back to Previous Page</a></strong></p>');
+        </script>
+    </xsl:template>
+
+<!--===============================================
+ 1. NEWS DETAIL
+================================================-->	
+    <xsl:template match="News">
+        
+        <!--news title-->
+        <h1 class="listing" id="title"><xsl:value-of select="Title" /></h1>
+
+        <!-- Added 04.2010 by R. Taylor to dynamically set title bar -->
+        <script language="javascript" type="text/javascript">
+          document.title = "<xsl:value-of select="Title" />";
+          
+
+          // Added 04.27.2010
+          var meta;
+          if (document.getElementsByTagName) {
+           meta = document.getElementsByTagName('meta')[7];
+           // meta = document.getElementsByTagName('meta')[8];
+
+           if (meta) {
+
+             meta.name = 'title';
+             // meta.name = 'og:title';
+
+             meta.setAttribute("content", document.title);
+
+             // now add the meta element to the head
+             document.getElementsByTagName('head')[0].appendChild(meta);
+
+           }
+        }
+        </script>
+
+        <!--release date/author-->
+        <p>
+            <xsl:value-of select="FormattedReleaseDateTime" />
+            <xsl:if test="(AuthorName) != ''">  
+                <xsl:text>  </xsl:text>&nbsp;|&nbsp;<xsl:text>  </xsl:text> <strong>Author: </strong> <xsl:value-of select="AuthorName" />
+            </xsl:if>
+        </p>
+        <hr />
+
+
+       
+         <!-- Test if there is an image associated with the news item and if so display-->
+         <xsl:if test="(ImageID) != 0">
+             <img src="image.aspx?id={ImageID}" alt="Image associated with the {Title} news item" style="float: right;margin:0 0 8px 8px; max-width:250px" />
+         </xsl:if>
+
+        <!--if html content exists display, otherwise use description as fallback-->
+        <xsl:choose>
+            <xsl:when test="CDATAContent != ''">
+               <p><xsl:value-of disable-output-escaping="yes" select="CDATAContent" /></p>
+            </xsl:when>
+            <xsl:otherwise>
+                <p><xsl:value-of select="Description" /></p>
+            </xsl:otherwise>
+        </xsl:choose>
+ <p>-------------</p>
+
+
+                <p><strong>Interested in supporting Heinz College students and initiatives like those featured in this story? <a href="http://www.heinz.cmu.edu/give-to-heinz/index.aspx">Click here for more information.</a></strong></p>
+
+
+
+     </xsl:template>
+
+</xsl:stylesheet>

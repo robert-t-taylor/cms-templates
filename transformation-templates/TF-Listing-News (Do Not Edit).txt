@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<!DOCTYPE xsl:stylesheet[<!ENTITY nbsp   "&#160;">]>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <!-- SET UP PARAMS -->
+        <xsl:param name="CurrentPageId" />
+	<xsl:param name="recordCount" />
+	<xsl:param name="keywords" />
+	<xsl:param name="categoryID" />
+	<xsl:param name="startDate" />
+	<xsl:param name="endDate" />
+	<xsl:param name="pageIndex" />
+	<xsl:param name="pageSize" />
+	<xsl:param name="pageCount" />
+
+
+<!--===============================================
+ 1. PRIMARY TEMPLATE
+================================================-->	
+	<xsl:template match="/">
+
+		<script type="text/javascript">
+            function MM_jumpMenu(targ,selObj,restore){ //v3.0
+              eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+              if (restore) selObj.selectedIndex=0;
+            }
+        </script>
+        <div class="section">
+         <div class="header">
+          <h4>News</h4>
+         </div>
+        </div>
+        <div class="floats section">
+         <form id="category">
+           <select name="categories" id="subjectMenu" onchange="MM_jumpMenu('parent',this,0)">
+             <option value="">Select a category</option>
+             <option value="/news/index.aspx">All</option>
+             <option value="/news/index.aspx?category=121">Arts and Entertainment</option>
+             <option value="/news/index.aspx?category=123">Health Care</option>
+             <option value="/news/index.aspx?category=122">Information Systems and Security</option>
+             <option value="/news/index.aspx?category=124">Public Policy</option>
+             <option value="/news/index.aspx?category=125">Alumni</option>
+             <option value="/news/index.aspx?category=126">Student Clubs and Activities</option>
+             <option value="/news/news-detail/index.aspx?category=127">Faculty and Staff</option>
+           </select>
+           <div class="submit nofont" onclick="$('#category').submit();">&nbsp;</div>
+         </form>
+        </div>
+        <div class="search_form" style="padding:0;background:#fff;height:0;">
+            <div id="loading"><xsl:text> </xsl:text></div>
+        </div>
+        
+        <xsl:choose>
+        	
+       
+        	<!--no results returned-->
+            <xsl:when test="count(//News) = 0">
+                <p style="font-weight:bold;margin-bottom:6px;">We are sorry, no results were returned. Please use the form above to search again.<br /><br /><br /><br /><br /></p>
+            </xsl:when>
+            
+            <!--results-->
+            <xsl:otherwise>
+                <div id="results">
+                      <xsl:apply-templates select="//News" />
+                    <xsl:call-template name="paging" />
+                </div>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+    </xsl:template>
+    
+<!--===============================================
+ 2. NEWS LOOP
+================================================-->
+    <xsl:template match="//News">
+    <!-- return 9 items only -->
+    <xsl:if test="position() &lt; 10">
+     <ul class="list">
+      <li>
+            <xsl:attribute name="class">
+                <xsl:choose>
+                    <xsl:when test="position() mod 2 = 1">result odd</xsl:when>
+                    <xsl:otherwise>result</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <a href="/news/news-detail/index.aspx?nid={ID}" title="More information on the {Title} news item" name="{ID}" id="{ID}">
+
+
+            <xsl:attribute name="class">
+                <xsl:choose>
+                    <xsl:when test="$CurrentPageId">selected</xsl:when>
+                    <xsl:otherwise>result</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+
+
+                <xsl:value-of select="Title" />
+                <span class="date"><xsl:value-of select="FormattedReleaseDateTime" /></span>
+            </a>
+      </li>
+     </ul>
+    </xsl:if> 
+    </xsl:template>
+    
+<!--===============================================
+ 3. PAGING
+================================================-->
+    <xsl:template name="paging">
+        <xsl:if test="$pageCount &gt; 1">
+          <div class="pager">
+           <ul>
+                <xsl:if test="$pageIndex != 0"> 
+                  <li class="previous">
+                    <a href="/news/index.aspx?pageIndex={($pageIndex)-1}&amp;keywords={$keywords}&amp;pageSize={$pageSize}&amp;category={$categoryID}&amp;start_date={$startDate}&amp;end_date={$endDate}" title="Go to the previous page of the site search results">&nbsp;</a></li> 
+                </xsl:if>
+                <xsl:call-template name="pagingloop" />
+                <xsl:if test="($pageIndex+1) != $pageCount">
+                    <li class="next"><a href="/news/index.aspx?pageIndex={($pageIndex)+1}&amp;keywords={$keywords}&amp;pageSize={$pageSize}&amp;category={$categoryID}&amp;start_date={$startDate}&amp;end_date={$endDate}" title="Go to the next page of the site search results">&nbsp;</a></li>
+                </xsl:if>
+           </ul>
+          </div>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="pagingloop">
+        <xsl:param name="count" select="1" />	
+        <xsl:choose>
+            <xsl:when test="($count)-1 = $pageIndex">
+                <li>&nbsp;<xsl:value-of select="$count" />&nbsp;</li>
+            </xsl:when>
+            <xsl:otherwise>
+                <li><a href="/news/index.aspx?pageIndex={($count)-1}&amp;keywords={$keywords}&amp;pageSize={$pageSize}&amp;category={$categoryID}&amp;start_date={$startDate}&amp;end_date={$endDate}" title="Go to page {$count} of the site search results"><xsl:value-of select="$count" /></a></li>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="$count &lt; $pageCount">
+            <xsl:call-template name="pagingloop">
+                <xsl:with-param name="count" select="$count + 1" />
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+
+</xsl:stylesheet>

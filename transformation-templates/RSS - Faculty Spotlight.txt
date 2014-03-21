@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+    <xsl:param name="ID" select="/ArrayOfFaculty/Faculty/ID"></xsl:param>
+
+    <xsl:template match="/">
+        <xsl:apply-templates select="/ArrayOfFaculty/Faculty" />
+    </xsl:template>         
+    <xsl:template match="/ArrayOfFaculty/Faculty">
+              <item>
+		<title>Heinz College Faculty Spotlight: 
+		      <xsl:value-of select="FirstName" />
+              <xsl:if test="MiddleName != ''"><xsl:text> </xsl:text><xsl:value-of select="MiddleName" /></xsl:if>
+              <xsl:text> </xsl:text>
+              <xsl:value-of select="LastName" />
+              <xsl:if test="Suffix != ''"><xsl:text> </xsl:text><xsl:value-of select="Suffix" /></xsl:if>
+		</title>
+		<link>http://www.heinz.cmu.edu/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id=<xsl:value-of select="$ID" /></link>
+		<description>
+     
+              <div class="facultyImage">
+            	<a href="http://www.heinz.cmu.edu/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={ID}" title="{FirstName} {LastName}">
+            	   <img src="http://www.heinz.cmu.edu/faculty/{ID}photo.jpg" width="110" height="110" border="0" alt="{FirstName} {LastName}" title="{FirstName} {LastName}" />
+            	</a>
+        	  </div>
+        	  
+        	  <div id="facultyProfileIntro">
+                <h2>
+                    <xsl:value-of select="FirstName" />
+                    <xsl:if test="MiddleName != ''"><xsl:text> </xsl:text><xsl:value-of select="MiddleName" /></xsl:if>
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="LastName" />
+                    <xsl:if test="Suffix != ''"><xsl:text> </xsl:text><xsl:value-of select="Suffix" /></xsl:if>
+                </h2>
+
+               <!-- Added 10.15.2009 by R. Taylor to pull title; seems to have been missing -->
+              <h3> &lt;b&gt;<xsl:value-of select="Title" />&lt;/b&gt;</h3>
+
+            <xsl:if test="CDATANarrativeBio  != ''">
+                   <xsl:call-template name="limitWordCount">
+                   		<xsl:with-param name="CDATANarrativeBio" />
+                   </xsl:call-template>
+            	   <a href="http://www.heinz.cmu.edu/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={ID}" title="{FirstName} {LastName}">... read more </a>
+                   
+            </xsl:if>
+	   </div>
+               
+            <!--AFFILIATIONS ARRAY -->
+            <xsl:if test="count(FacultyAffiliations/Affiliation) != 0">
+               <ul>
+                            <xsl:for-each select="FacultyAffiliations/Affiliation">
+                                <li>
+
+							       <xsl:choose>
+							          <xsl:when test="contains(AffiliationName,'ILAB')">
+										<a href="http://www.heinz.cmu.edu/ilab" class="readmore" target="_blank">iLab </a>
+							          </xsl:when>
+							          <xsl:otherwise>
+	                					<a href="http://www.heinz.cmu.edu/{AffiliationName}" class="readmore" target="_blank"><xsl:value-of select="AffiliationName" /> </a>
+			            			  </xsl:otherwise>
+							          
+							       </xsl:choose>
+							    </li>
+                            </xsl:for-each>
+                        </ul>
+
+             </xsl:if>
+             
+             
+         </description>
+       </item>
+    </xsl:template>
+    <!-- Added 11.09.2009 to limit bio to "roughly" 50 words --> 
+    <xsl:template match="CDATANarrativeBio" name="limitWordCount">    
+       <xsl:call-template name="firstWords">     
+        <xsl:with-param name="value" select="CDATANarrativeBio" />      
+        <xsl:with-param name="count" select="50" />    
+        </xsl:call-template>  
+        </xsl:template>  
+        <xsl:template name="firstWords">    
+        <xsl:param name="value" />    
+        <xsl:param name="count" />    
+        <xsl:if test="number($count) &gt;= 1">      
+	        <xsl:value-of select="concat(substring-before($value,' '),' ')" disable-output-escaping="no" />
+	    </xsl:if>    
+	    <xsl:if test="number($count) &gt; 1">  
+	        <xsl:variable name="remaining" select="substring-after($value,' ')" />    
+	        <xsl:if test="string-length($remaining) &gt; 0">        
+		        <xsl:call-template name="firstWords">          
+		        <xsl:with-param name="value" select="$remaining" />          
+		        <xsl:with-param name="count" select="number($count)-1" />        
+		        </xsl:call-template>      
+	        </xsl:if>  
+        </xsl:if> 
+    </xsl:template>
+    
+</xsl:stylesheet>

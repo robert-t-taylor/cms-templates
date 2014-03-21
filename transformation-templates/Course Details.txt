@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+	<xsl:output method="html" version="4.0" encoding="iso-8859-1" indent="yes" />
+	<xsl:template match="/">
+		<xsl:apply-templates select="/Course" />
+		<script language="javascript" type="text/javascript">
+            document.write('<p><strong><a href="javascript:history.back();">Return to the previous page</a></strong></p>');
+        </script>
+	</xsl:template>
+	
+	<xsl:template match="Course">
+		<div id="researchDetails">
+            <p><strong>Course Number: </strong><xsl:value-of select="CourseNumber" /></p>
+            <h2><xsl:value-of select="Title" /></h2>
+            <p><strong>Units: </strong><xsl:value-of select="Credits" /></p>
+            <p>
+                 <!-- <xsl:value-of select="Description" disable-output-escaping="yes" /> -->
+            <xsl:call-template name="PreserveLineBreaks">
+               <xsl:with-param name="Description" select="/Course/Description" />
+            </xsl:call-template>
+
+            </p>
+            
+            <xsl:if test="SampleLearningObjectives !=''">
+              <p>
+                 <strong>Learning Objectives: </strong><br /><br />
+                 <xsl:call-template name="PreserveLineBreaks">
+                   <xsl:with-param name="Description" select="/Course/SampleLearningObjectives" />
+                 </xsl:call-template>
+              </p>
+            </xsl:if>
+
+            <xsl:if test="SoftPrerequisites !=''">
+              <p>
+                 <strong>Soft Prerequisites: </strong><br /><br />
+                 <xsl:call-template name="PreserveLineBreaks">
+                   <xsl:with-param name="Description" select="/Course/SoftPrerequisites" />
+                 </xsl:call-template>
+              </p>
+            </xsl:if>
+
+            <xsl:if test="TextbookList !=''">
+              <p>
+                 <strong>Textbooks: </strong><br /><br />
+                 <xsl:call-template name="PreserveLineBreaks">
+                   <xsl:with-param name="Description" select="/Course/TextbookList " />
+                 </xsl:call-template>
+              </p>
+            </xsl:if>
+
+            <!--I don't see an XML node for this next one-->
+            <!--<xsl:if test="DeliveryFormat !=''"><p><strong>Delivery Format: </strong></p></xsl:if>-->
+            <!-- Added 06.08.2009 by R. Taylor to add syllabi to the course detail -->
+            <xsl:if test="SyllabusFilename !=''"><p><strong><a href="/Courses/{ID}syl.pdf" target="_blank">Syllabus</a></strong></p></xsl:if>
+
+            <xsl:if test="CoursePrerequisites !=''"><p>
+<!-- Modified 07.09.2009 by R. Taylor to show all prereqs
+<strong>Prerequisites: </strong><a href="/academic-resources/course-results/course-details/index.aspx?cid={CoursePrerequisites/NameValuePair/Value}" title="{CoursePrerequisites/NameValuePair/Name}"><xsl:value-of select="CoursePrerequisites/NameValuePair/Name" /></a>
+-->
+<strong>Prerequisites:</strong>
+               
+               <xsl:for-each select="CoursePrerequisites/NameValuePair">
+                  <br />
+
+	               <a href="/academic-resources/course-results/course-details/index.aspx?cid={Value}" title="{Name}">
+	                  <xsl:value-of select="Name" />
+	               </a>
+               </xsl:for-each>
+</p></xsl:if>
+            <xsl:if test="FacultyNVP !=''"><p><strong>Faculty: </strong><xsl:for-each select="FacultyNVP/NameValuePair">
+                    	<br /><a href="/faculty-and-research/faculty-profiles/faculty-details/index.aspx?faculty_id={Value}" title="View {Name}'s profile"><xsl:value-of select="Name" /></a>
+                      </xsl:for-each></p></xsl:if>
+		</div>
+	</xsl:template>
+<!-- Added 03.31.2009 by R. Taylor to preserve paragraphs in the description -->
+    <xsl:template name="PreserveLineBreaks">
+        <xsl:param name="Description" />
+
+        <xsl:choose>
+            <xsl:when test="contains($Description,'&#xA;')">
+                <xsl:value-of select="substring-before($Description,'&#xA;')" />
+                <br />
+                <xsl:call-template name="PreserveLineBreaks">
+                    <xsl:with-param name="Description">
+                        <p><xsl:value-of select="substring-after($Description,'&#xA;')" /></p>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+               <p><xsl:value-of select="$Description" /></p>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+	
+</xsl:stylesheet>

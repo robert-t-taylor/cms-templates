@@ -1,0 +1,58 @@
+ <aside class="social-sidebar notation">
+          <h2>Stay Connected</h2>
+          <nav class="social-nav">
+            <ol>
+              <li><a href="#twitter" class="active">
+                <span aria-hidden="true" data-icon="?"></span>
+                <span class="screen-reader-text">Twitter</span>
+              </a></li>
+              <li><a href="#facebook">
+                <span aria-hidden="true" data-icon="?"></span>
+                <span class="screen-reader-text">Facebook</span>
+              </a></li>
+              <li><a href="#youtube">
+                <span aria-hidden="true" data-icon="?"></span>
+                <span class="screen-reader-text">Youtube</span>
+              </a></li>
+              <li><a href="#linkedin">
+                <span aria-hidden="true" data-icon="?"></span>
+                <span class="screen-reader-text">LinkedIn</span>
+              </a></li>
+            </ol>
+          </nav>
+          <noscript>
+            <p>Check out our recent tweets below, and visit our <a href="http://www.twitter.com/HeinzCollege" target="_blank">Twitter page</a> for more updates about CMU's Heinz College!</p>
+            <p>Enable Javascript in your Browser to see our tweets right here.</p>
+          </noscript>
+          <section class="twitter-feed stack">
+            <div class="feeds">
+               <iframe scrolling="no" width="100%" height="780px" src="http://heinz.cmu.edu/social-no-icons.html"></iframe> 
+            </div>
+<!--
+            <h2><a href="http://www.twitter.com/HeinzCollege">Heinz College on Twitter</a></h2>
+            <p>Check out our recent tweets below, and visit our <a href="http://www.twitter.com/HeinzCollege" target="_blank">Twitter page</a> for more updates about CMU's Heinz College!</p>
+            <div id="tweets"></div>
+-->
+          </section>
+          <section class="facebook-feed stack">
+            <h2>Heinz College on Facebook</h2>
+            <p>Connect with us on <a href="#">Facebook</a> for the latest updates and media from CMU's Heinz College!</p>
+            <div id="fb-root"></div>
+            <![CDATA[ <fb:activity
+            site="http://heinz.cmu.edu"
+            colorscheme="light"
+            >
+            </fb:activity> ]]>
+
+          </section>
+          <section class="youtube-feed stack">
+            <h2><a href="http://www.youtube.com/heinzcollege">Heinz College on YouTube</a></h2>
+            <p>Visit our <a href="http://www.youtube.com/heinzcollege">YouTube channel </a> for videos about Heinz College's graduate degree programs and research! </p>
+            <div id="videos"></div>
+          </section>
+          <section class="linkedin-feed stack">
+            <h2>Heinz College on LinkedIn</h2>
+            <p>Join the <a href="#">Heinz College LinkedIn group</a> to connect with fellow alumni and leverage their networks. Find and share job openings, identify research opportunities, or just catch up with old friends.
+            Start networking with thousands of highly qualified professionals today!</p>
+          </section>
+        </aside>

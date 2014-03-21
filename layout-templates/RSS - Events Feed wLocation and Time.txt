@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:rei="http://r-effects.com">
+  <channel>
+    <title><rei:variable type="Page Title" /></title>
+    <link><rei:variable type="Site Root" /></link>
+    <description>Heinz College Events RSS</description>
+    <rei:template id="100" name="RSS - Event Nodes w/Location" />
+  </channel>
+</rss>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created 11.03.2011 by R. Taylor -->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+   <xsl:template match="/">
+<rss xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
+   <channel>
+      <xsl:apply-templates select="rss" />
+   </channel>
+</rss>
+   </xsl:template>
+
+   <xsl:template match="rss">
+         <xsl:for-each select="channel/item">
+          <!-- return 5 items only -->
+          <xsl:if test="position() &lt; 6">
+            <item>
+               <title>
+                 <xsl:value-of select="title" />
+               </title>
+               <description>
+                 <xsl:value-of select="substring(description, 1, 150)" disable-output-escaping="yes" />...
+               </description>
+
+               <xsl:variable name="url">
+                 <xsl:value-of select="link" />
+               </xsl:variable>
+
+               <link>
+<!--
+                  <a href="http://www.cnn.com">HEY</a>
+                  <a href="{$url}">more &gt;&gt;</a> 
+-->
+                  <xsl:value-of select="link" />
+                </link>
+               <pubDate>
+                  <xsl:value-of select="substring(pubDate, 1, 16)" />
+               </pubDate>
+            </item>
+          </xsl:if>
+         </xsl:for-each>
+   </xsl:template>
+</xsl:stylesheet>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"[]>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rei="http://r-effects.com" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<rei:template id="563" name="SB-Head - SECURE" />
+
+<!-- BODY HERE -->
+  <body>
+   <div class="page-wrapper">
+    <div id="sizeTest"></div>
+    <rei:template id="466" name="SB-Header-No-Audience" />
+    <div class="wrapper">
+      <section id="main" class="content">
+<aside class="section-nav sidenav">
+  <a href="#" class="more-toggle">More pages in this section<span aria-hidden="true" data-icon="?"></span></a>
+  <rei:template id="472" name="SB-Side-Navigation" />
+</aside>
+        <div class="main-content secondary-page two-sidebars">
+          <!-- titlebar was here -->
+          <div class="section">
+          <div class="titlebar">
+             <h1><rei:variable type="Page Title" xmlns:rei="http://r-effects.com" /></h1>
+          </div>
+             <div class="flash">
+               
+             </div>
+
+             <span class="intro-text">
+               
+             </span><hr />
+           </div>
+            <rei:control type="HTMLElement" name="Page Body" id="790" />
+            <!-- force break to avoid spillover into footer -->
+            <br />
+         </div>
+
+      <!-- SOCIAL SIDEBAR HERE -->
+      <rei:template id="469" name="SB-Social-Sidebar" />
+
+      </section>    
+      <!-- FOOTER HERE -->   
+      <rei:template id="569" name="SB-Footer-ORIG" />
+      </div>
+  
+      <rei:template id="490" name="SB-Footer-Scripts" />
+
+</div>
+</body>
+</html>
